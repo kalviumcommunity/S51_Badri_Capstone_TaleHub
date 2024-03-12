@@ -4,11 +4,9 @@ const app = express();
 const port = 5000;
 const cors = require("cors");
 
-// Example middleware function
 const myMiddleware = (req, res, next) => {
-    // Do something with the request
+    // Doing something with the request
     console.log('Middleware executed');
-    // Call the next middleware function in the stack
     next();
 };
 
