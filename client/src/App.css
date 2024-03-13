@@ -1,0 +1,19 @@
+
+
+.appJSX{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    grid-area: 1fr  5fr;
+
+}
+
+.navBar{
+    background-color: aquamarine;
+    width: 20%;
+}
+
+.route{
+    background-color: blueviolet;
+    width: 80%;
+}
