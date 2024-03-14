@@ -1,8 +1,10 @@
 // Importing required modules
 const express = require("express");
 const app = express();
-const port = 5000;
+require("dotenv").config()
+const port = process.env.PORT;
 const cors = require("cors");
+const {startDB, dbStatus} = require("./db")
 
 const myMiddleware = (req, res, next) => {
     // Doing something with the request
@@ -22,15 +24,26 @@ app.use(cors());
 app.use(myMiddleware); // Adding example middleware globally
 
 // Route definition
-app.get("/", myMiddleware, (req, res) => {
-  res.send("my capstone project");
+app.get("/", (req, res) => {
+  res.json({ status: dbStatus ? "connected" : "disconnected" });
 });
-
-// Server setup
 if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`🚀 server running on PORT: ${port}`);
+  if (!port) {
+      console.error('PORT environment variable is not set');
+      process.exit(1); 
+  }
+
+  app.listen(port, async () => {
+      if (!process.env.DATABASE_URL) {
+          console.error('DB_URL environment variable is not set');
+          process.exit(1);
+      }
+
+      await startDB()
+      console.log(`🚀 server running on PORT: ${port}`);
+      console.log(`http://localhost:${port}/`)
   });
 }
+
 
 module.exports = app;
