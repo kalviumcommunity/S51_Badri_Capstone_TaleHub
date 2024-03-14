@@ -27,13 +27,23 @@ app.use(myMiddleware); // Adding example middleware globally
 app.get("/", (req, res) => {
   res.json({ status: dbStatus ? "connected" : "disconnected" });
 });
-// Server setup
 if (require.main === module) {
+  if (!port) {
+      console.error('PORT environment variable is not set');
+      process.exit(1); 
+  }
+
   app.listen(port, async () => {
-    await startDB()
-    console.log(`🚀 server running on PORT: ${port}`);
-    console.log(`http://localhost:${port}/`)
+      if (!process.env.DATABASE_URL) {
+          console.error('DB_URL environment variable is not set');
+          process.exit(1);
+      }
+
+      await startDB()
+      console.log(`🚀 server running on PORT: ${port}`);
+      console.log(`http://localhost:${port}/`)
   });
 }
+
 
 module.exports = app;
