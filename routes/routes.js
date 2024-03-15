@@ -16,7 +16,7 @@ router.get("/getUser", async (req, res) => {
     res.status(200).json(profile);
   } catch (error) {
     console.log(error.message);
-    res.status(400).send("Internal Server Error");
+    res.status(400).json(error.message);
   }
 });
 
