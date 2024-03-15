@@ -5,23 +5,12 @@ require("dotenv").config()
 const port = process.env.PORT;
 const cors = require("cors");
 const {startDB, dbStatus} = require("./db")
+const routes = require("./routes/routes")
 
-const myMiddleware = (req, res, next) => {
-    // Doing something with the request
-    console.log('Middleware executed');
-    next();
-};
-
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
-});
-
-// Adding middleware
 app.use(express.json());
 app.use(cors());
-app.use(myMiddleware); // Adding example middleware globally
+app.use("/", routes)
+
 
 // Route definition
 app.get("/", (req, res) => {
