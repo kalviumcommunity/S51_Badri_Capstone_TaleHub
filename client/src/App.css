@@ -9,7 +9,7 @@
 }
 
 .navBar{
-    background-color: aquamarine;
+    background-image: linear-gradient(to bottom, #090b28, #081540, #0b1c5a, #192774, #313892);
     width: 20%;
 }
 
