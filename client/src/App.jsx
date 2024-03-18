@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./App.css";
+import NavBar from "./components/navBar";
 
 function App() {
   
 
   return (
     <div className="appJSX">
-        <div className="navBar">Navbar</div>
+        <NavBar />
         <div className="route">Actual Content</div>
     </div>
   );
