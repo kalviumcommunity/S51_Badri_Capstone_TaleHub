@@ -1,16 +1,15 @@
 import { useState } from "react";
 import "./App.css";
 import NavBar from "./components/navBar";
+import LandingPage from "./components/landingPage";
 
 function App() {
-  
-
   return (
     <div className="appJSX">
-        <NavBar />
-        <div className="route">Actual Content</div>
+      <NavBar />
+      <LandingPage />
     </div>
   );
 }
 
-export default App
+export default App;

@@ -1,0 +1,115 @@
+.landingPage {
+  background-color: #000332;
+  width: 100%;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.searchBar input {
+  border: 0px;
+  background-color: transparent;
+  width: 400px;
+  font-family: "Itim", cursive;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: large;
+  color: white;
+}
+
+.searchBar input:focus {
+  outline: none;
+}
+
+.genre {
+  display: grid;
+  grid-template-areas:
+    "d1 d2 d3"
+    "d4 d4 d4"
+    "d5 d6 d7";
+  margin: 50px 30px;
+  gap: 30px;
+}
+
+.genre div {
+  height: 120px;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Itim", cursive;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 20px;
+  background-position: center;
+  transition: background-size 0.8s ease;
+  transition-delay: 0.2s;
+}
+
+.genre div:hover {
+  background-position: center;
+  background-size: 120%;
+}
+
+.genre div:not(:hover) {
+  background-size: 100%;
+  transition-delay: 0s;
+}
+
+.genre .d1 {
+  grid-area: d1;
+  background: url("../../public/pexels-damir-mijailovic-3695238.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.genre .d2 {
+  grid-area: d2;
+  background: url("../../public/360_F_564671203_9sq2Oj4jh34H2ZVzmK7pDqWT9t4u5W5G.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.genre .d3 {
+  grid-area: d3;
+  background: url("../../public/distressed-halftone-grunge-black-white-vector-texture-texture-concrete-floor-background-creation-abstract-vintage-100679825.webp");
+  background-position: center;
+  background-size: cover;
+}
+
+.genre .d4 {
+  grid-area: d4;
+  background: url("../../public/360_F_617945111_aFEqsC1n3PJkwr0C22VlWLmgEGZ4qTyB.jpg");
+  background-size: cover;
+  height: 150px;
+  background-position: center;
+  font-size: xx-large;
+}
+
+.genre .d5 {
+  grid-area: d5;
+  background: url("../../public/360_F_282158853_VtXRiSiN5eCjPddHobErJewxJ65lYZGt.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.genre .d6 {
+  grid-area: d6;
+  background: url("../../public/1211177165c40aa84673897f4f3b367e.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.genre .d7 {
+  grid-area: d7;
+  background: url("../../public/510162-3D-cube.jpg");
+  background-position: center;
+  background-size: cover;
+}
