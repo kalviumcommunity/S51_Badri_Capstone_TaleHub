@@ -1,0 +1,106 @@
+.booksPage {
+  background-color: #000330;
+  width: 100%;
+}
+
+.searchBar {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.searchBar input {
+  border: 0px;
+  background-color: transparent;
+  width: 400px;
+  font-family: "Itim", cursive;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: large;
+  color: white;
+}
+
+.searchBar input:focus {
+  outline: none;
+}
+
+.genres {
+  display: grid;
+  grid-template-areas:
+    "b1 b2 b3"
+    "b4 b5 b6";
+  gap: 30px;
+  margin: 50px 30px;
+}
+
+.genres div {
+  height: 150px;
+  width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Itim", cursive;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  overflow: hidden;
+  border-radius: 20px;
+  background-position: center;
+  transition: background-size 0.8s ease;
+  transition-delay: 0.2s;
+}
+
+
+.genres div:hover {
+    background-position: center;
+    background-size: 80%;
+  }
+  
+  .genres div:not(:hover) {
+    background-size: 100%;
+    transition-delay: 0s;
+  }
+
+.b1 {
+  background: url("../../public/stacked-steps-haikei.png");
+  grid-area: b1;
+  background-size: cover;
+  background-position: center;
+}
+
+.b2 {
+  background: url("../../public/stacked-steps-haikei\ \(1\).png");
+  grid-area: b2;
+  background-size: cover;
+  background-position: center;
+}
+
+.b3 {
+  background: url("../../public/stacked-steps-haikei\ \(2\).png");
+  grid-area: b3;
+  background-size: cover;
+  background-position: center;
+}
+
+.b4 {
+  background: url("../../public/stacked-steps-haikei\ \(3\).png");
+  grid-area: b4;
+  background-size: cover;
+  background-position: center;
+}
+
+.b5 {
+  background: url("../../public/stacked-steps-haikei\ \(4\).png");
+  grid-area: b5;
+  background-size: cover;
+  background-position: center;
+}
+
+.b6 {
+  background: url("../../public/stacked-steps-haikei\ \(5\).png");
+  grid-area: b6;
+  background-size: cover;
+  background-position: center;
+}
