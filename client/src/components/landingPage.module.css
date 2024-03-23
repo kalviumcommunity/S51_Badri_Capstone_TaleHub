@@ -9,7 +9,7 @@
   margin: 20px;
 }
 
-.searchBar input {
+.input {
   border: 0px;
   background-color: transparent;
   width: 400px;
@@ -20,7 +20,7 @@
   color: white;
 }
 
-.searchBar input:focus {
+.input:focus {
   outline: none;
 }
 
@@ -63,28 +63,28 @@
   transition-delay: 0s;
 }
 
-.genre .d1 {
+.d1 {
   grid-area: d1;
   background: url("../../public/pexels-damir-mijailovic-3695238.jpg");
   background-size: cover;
   background-position: center;
 }
 
-.genre .d2 {
+.d2 {
   grid-area: d2;
   background: url("../../public/360_F_564671203_9sq2Oj4jh34H2ZVzmK7pDqWT9t4u5W5G.jpg");
   background-position: center;
   background-size: cover;
 }
 
-.genre .d3 {
+.d3 {
   grid-area: d3;
   background: url("../../public/distressed-halftone-grunge-black-white-vector-texture-texture-concrete-floor-background-creation-abstract-vintage-100679825.webp");
   background-position: center;
   background-size: cover;
 }
 
-.genre .d4 {
+.d4 {
   grid-area: d4;
   background: url("../../public/360_F_617945111_aFEqsC1n3PJkwr0C22VlWLmgEGZ4qTyB.jpg");
   background-size: cover;
@@ -93,21 +93,21 @@
   font-size: xx-large;
 }
 
-.genre .d5 {
+.d5 {
   grid-area: d5;
   background: url("../../public/360_F_282158853_VtXRiSiN5eCjPddHobErJewxJ65lYZGt.jpg");
   background-position: center;
   background-size: cover;
 }
 
-.genre .d6 {
+.d6 {
   grid-area: d6;
   background: url("../../public/1211177165c40aa84673897f4f3b367e.jpg");
   background-size: cover;
   background-position: center;
 }
 
-.genre .d7 {
+.d7 {
   grid-area: d7;
   background: url("../../public/510162-3D-cube.jpg");
   background-position: center;

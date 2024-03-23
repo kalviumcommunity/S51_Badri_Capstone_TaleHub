@@ -1,36 +1,43 @@
 import React from "react";
-import "./landingPage.css";
+import styles from "./landingPage.module.css"; // Import CSS module
+
 function LandingPage() {
   return (
-    <div className="landingPage">
-      <div className="searchBar">
+    <div className={styles.landingPage}>
+      <div className={styles.searchBar}>
         <input
           type="text"
           placeholder="Search by name, author, genre and etc..."
+          className={styles.input}
         />
         <button>SignIn</button>
       </div>
-      <div className="genre">
-        <div className="d1">
-          <p className="catogories"> Top 50 Manga</p>
+      <div className={styles.genre}>
+        <div className={styles.d1}>
+          <p className={styles.categories}>Top 50 Manga</p>
         </div>
-        <div className="d2">
-          <p className="catogories">Top 50 Manhwa</p>
+        <div className={styles.d2}>
+          <p className={styles.categories}>Top 50 Manhwa</p>
         </div>
-        <div className="d3">
-          <p className="catogories">Latest Books</p>
+        <div className={styles.d3}>
+          <p className={styles.categories}>Latest Books</p>
         </div>
-        <div className="d4">
-          <p className="catogories">Top Rated Books</p>
+        <div className={styles.d4}>
+          <p className={styles.categories}>Top Rated Books</p>
         </div>
-        <div className="d5">
-          <p className="catogories">Most Popular <br /> Manga's</p>
+        <div className={styles.d5}>
+          <p className={styles.categories}>
+            Most Popular <br /> Manga's
+          </p>
         </div>
-        <div className="d6">
-          <p className="catogories">Most Favorite <br />Manga's</p>
+        <div className={styles.d6}>
+          <p className={styles.categories}>
+            Most Favorite <br />
+            Manga's
+          </p>
         </div>
-        <div className="d7">
-          <p className="catogories">Vintage Books</p>
+        <div className={styles.d7}>
+          <p className={styles.categories}>Vintage Books</p>
         </div>
       </div>
     </div>
