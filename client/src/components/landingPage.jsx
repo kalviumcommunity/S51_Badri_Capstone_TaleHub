@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./landingPage.module.css"; // Import CSS module
-
+import { useState } from "react";
+import axios from "axios";
 function LandingPage() {
+  const [topRatedBooks, setTopRatedBooks] = useState([]);
+
+  const getTopRatedBooks = async () => {
+    try {
+      const response = await axios.get(
+        "https://www.googleapis.com/books/v1/volumes?q=*&orderby=rating&maxResults=40"
+      );
+
+      return response.data.items; 
+    } catch (error) {
+      console.error("Error fetching top rated books:", error);
+      return []; 
+    }
+  };
+
+  useEffect(() => {
+    const fetchTopRatedBooks = async () => {
+      const books = await getTopRatedBooks();
+      setTopRatedBooks(books);
+    };
+
+    fetchTopRatedBooks();
+  }, []);
+
   return (
     <div className={styles.landingPage}>
       <div className={styles.searchBar}>
@@ -38,6 +63,34 @@ function LandingPage() {
         </div>
         <div className={styles.d7}>
           <p className={styles.categories}>Vintage Books</p>
+        </div>
+      </div>
+
+      <div>
+        <p className={styles.titles}>Top Rated Books:</p>
+        <div className={styles.booksContainer}>
+          {topRatedBooks.map((book, index) => (
+            <div key={index} className={styles.book}>
+              {book.volumeInfo.imageLinks && (
+                <img
+                  src={book.volumeInfo.imageLinks.thumbnail}
+                  alt="Thumbnail"
+                />
+              )}{" "}
+              <h3>{book.volumeInfo.title}</h3>
+              {book.volumeInfo.subtitle && (
+                <p>
+                  <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
+                </p>
+              )}
+              {book.volumeInfo.authors && (
+                <p>
+                  <strong>Author(s):</strong>
+                  {book.volumeInfo.authors.join(", ")}
+                </p>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     </div>

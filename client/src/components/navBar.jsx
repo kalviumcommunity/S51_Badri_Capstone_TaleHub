@@ -9,7 +9,7 @@ function NavBar() {
       <p className="navText">DISCOVER</p>
       <Link to="/">
         <div className="navBoxes btn-shine">
-          <p>🔍Search🔍</p>
+          <p>Home</p>
         </div>
       </Link>
       <div>

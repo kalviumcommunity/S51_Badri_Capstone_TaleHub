@@ -10,3 +10,21 @@ body{
 a{
     text-decoration: none;
 }
+
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent; /* Color of the track */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #989898; /* Color of the scrollbar */
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #7f7f7f; /* Change color on hover if desired */
+  }

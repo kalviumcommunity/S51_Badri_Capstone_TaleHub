@@ -4,12 +4,8 @@ const bookSchema = new mongoose.Schema({
   title: { type: String, required: true },
   subtitle: String,
   authors: [String],
-  publisher: String,
-  publishedDate: Date,
   description: String,
-  thumbnail: String,
-  infoLink: String,
-  webReaderLink: String
+  thumbnail: String
 });
 
 const mangaSchema = new mongoose.Schema({
