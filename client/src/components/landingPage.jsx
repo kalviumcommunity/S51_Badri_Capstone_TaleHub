@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 function LandingPage() {
   const [topRatedBooks, setTopRatedBooks] = useState([]);
+  const [top50Manga, setTop50Manga] = useState([]);
 
   const getTopRatedBooks = async () => {
     try {
@@ -11,10 +12,29 @@ function LandingPage() {
         "https://www.googleapis.com/books/v1/volumes?q=*&orderby=rating&maxResults=40"
       );
 
-      return response.data.items; 
+      return response.data.items;
     } catch (error) {
       console.error("Error fetching top rated books:", error);
-      return []; 
+      return [];
+    }
+  };
+
+  const getTop50Manga = async () => {
+    try {
+      const options = {
+        method: "GET",
+        url: "https://myanimelist.p.rapidapi.com/manga/top/manga",
+        headers: {
+          "X-RapidAPI-Key":
+            "468b267b84mshe5256b2b59ee957p111078jsn666fc3a3d2fe",
+          "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
+        },
+      };
+      const response = await axios.request(options);
+      console.log(response.data);
+      setTop50Manga(response.data);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -25,6 +45,7 @@ function LandingPage() {
     };
 
     fetchTopRatedBooks();
+    getTop50Manga();
   }, []);
 
   return (
@@ -44,9 +65,7 @@ function LandingPage() {
         <div className={styles.d2}>
           <p className={styles.categories}>Top 50 Manhwa</p>
         </div>
-        <div className={styles.d3}>
-          <p className={styles.categories}>Latest Books</p>
-        </div>
+
         <div className={styles.d4}>
           <p className={styles.categories}>Top Rated Books</p>
         </div>
@@ -60,9 +79,6 @@ function LandingPage() {
             Most Favorite <br />
             Manga's
           </p>
-        </div>
-        <div className={styles.d7}>
-          <p className={styles.categories}>Vintage Books</p>
         </div>
       </div>
 
@@ -84,13 +100,35 @@ function LandingPage() {
                 </p>
               )}
               {book.volumeInfo.authors && (
-                <p>
+                <p className={styles.auth}>
                   <strong>Author(s):</strong>
                   {book.volumeInfo.authors.join(", ")}
                 </p>
               )}
             </div>
           ))}
+        </div>
+
+        <p className={styles.titles}>Top 50 Manga:</p>
+        <div className={styles.booksContainer}>
+          {top50Manga &&
+            top50Manga.map((book, index) => (
+              <div key={index} className={styles.book}>
+                {book.picture_url && (
+                  <a href={book.myanimelist_url} target="_blank">
+                    <img src={book.picture_url} alt="Thumbnail" />
+                  </a>
+                )}
+                <h3>{book.title}</h3>
+                <p>
+                  <b>Rating: </b>
+                  {book.score}
+                </p>
+                <p>
+                  <b>Rank:</b> {book.rank}
+                </p>
+              </div>
+            ))}
         </div>
       </div>
     </div>
