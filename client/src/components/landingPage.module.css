@@ -28,15 +28,15 @@
 .genre {
   display: grid;
   grid-template-areas:
-    "d1 d2 d3"
-    "d4 d4 d4"
-    "d5 d6 d7";
+    "d1 d2"
+    "d4 d4"
+    "d5 d6";
   margin: 50px 30px;
   gap: 30px;
 }
 
 .genre div {
-  height: 120px;
+  height: 140px;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
@@ -78,12 +78,6 @@
   background-size: cover;
 }
 
-.d3 {
-  grid-area: d3;
-  background: url("../../public/distressed-halftone-grunge-black-white-vector-texture-texture-concrete-floor-background-creation-abstract-vintage-100679825.webp");
-  background-position: center;
-  background-size: cover;
-}
 
 .d4 {
   grid-area: d4;
@@ -108,12 +102,6 @@
   background-position: center;
 }
 
-.d7 {
-  grid-area: d7;
-  background: url("../../public/510162-3D-cube.jpg");
-  background-position: center;
-  background-size: cover;
-}
 
 .titles {
   color: #919191;
@@ -143,7 +131,7 @@
 }
 
 .booksContainer::-webkit-scrollbar-thumb:hover {
-  background: #7f7f7f; /* Change color on hover if desired */
+  background: #ffffff; /* Change color on hover if desired */
 }
 
 .book {
@@ -154,19 +142,25 @@
   border-radius: 20px;
   color: white;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
   background-image: linear-gradient(
     to bottom,
     #464555,
     #39343e,
-    #2a242ad1,
-    #19151867,
-    #00000000
+    #2a242a,
+    #191518,
+    #000000
   );
   font-family: "Itim", cursive;
   display: flex;
   flex-direction: column;
 }
 
+.book p::-webkit-scrollbar-thumb, .book p::-webkit-scrollbar-track{
+  background-color: transparent;
+}
 .book h3,.book p {
   margin: 1%;
 }
@@ -177,9 +171,11 @@
   border-radius: 20px;
   margin: 10px 0px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: transform 0.5s;
 }
 
 .book img:hover {
+  animation: name duration timing-function delay iteration-count direction fill-mode;
   animation: topper 0.5s ease forwards; /* Apply the hover animation */
 }
 
