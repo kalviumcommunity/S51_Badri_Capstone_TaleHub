@@ -5,6 +5,9 @@ import axios from "axios";
 function LandingPage() {
   const [topRatedBooks, setTopRatedBooks] = useState([]);
   const [top50Manga, setTop50Manga] = useState([]);
+  const [top50Manhwa, setTop50Manhwa] = useState([]);
+  const [mostPopularManga, setMostPopularManga] = useState([]);
+  const [mostFavoriteManga, setMostFavoriteManga] = useState([]);
 
   const getTopRatedBooks = async () => {
     try {
@@ -26,13 +29,70 @@ function LandingPage() {
         url: "https://myanimelist.p.rapidapi.com/manga/top/manga",
         headers: {
           "X-RapidAPI-Key":
-            "468b267b84mshe5256b2b59ee957p111078jsn666fc3a3d2fe",
+            "e474091566msh4659433272064b9p1de085jsn47379338079a",
           "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
         },
       };
       const response = await axios.request(options);
       console.log(response.data);
       setTop50Manga(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getTop50Manhwa = async () => {
+    const options = {
+      method: "GET",
+      url: "https://myanimelist.p.rapidapi.com/manga/top/manhwa",
+      headers: {
+        "X-RapidAPI-Key": "e474091566msh4659433272064b9p1de085jsn47379338079a",
+        "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+      setTop50Manhwa(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getMostPopularManga = async () => {
+    const options = {
+      method: "GET",
+      url: "https://myanimelist.p.rapidapi.com/manga/top/bypopularity",
+      headers: {
+        "X-RapidAPI-Key": "e474091566msh4659433272064b9p1de085jsn47379338079a",
+        "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+      setMostPopularManga(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getMostFavoriteManga = async () => {
+    const options = {
+      method: "GET",
+      url: "https://myanimelist.p.rapidapi.com/manga/top/favorite",
+      headers: {
+        "X-RapidAPI-Key": "e474091566msh4659433272064b9p1de085jsn47379338079a",
+        "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+      setMostFavoriteManga(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -46,6 +106,9 @@ function LandingPage() {
 
     fetchTopRatedBooks();
     getTop50Manga();
+    getTop50Manhwa();
+    getMostPopularManga();
+    getMostFavoriteManga();
   }, []);
 
   return (
@@ -113,6 +176,75 @@ function LandingPage() {
         <div className={styles.booksContainer}>
           {top50Manga &&
             top50Manga.map((book, index) => (
+              <div key={index} className={styles.book}>
+                {book.picture_url && (
+                  <a href={book.myanimelist_url} target="_blank">
+                    <img src={book.picture_url} alt="Thumbnail" />
+                  </a>
+                )}
+                <h3>{book.title}</h3>
+                <p>
+                  <b>Rating: </b>
+                  {book.score}
+                </p>
+                <p>
+                  <b>Rank:</b> {book.rank}
+                </p>
+              </div>
+            ))}
+        </div>
+
+        <p className={styles.titles}>Top 50 Manhwa:</p>
+
+        <div className={styles.booksContainer}>
+          {top50Manhwa &&
+            top50Manhwa.map((book, index) => (
+              <div key={index} className={styles.book}>
+                {book.picture_url && (
+                  <a href={book.myanimelist_url} target="_blank">
+                    <img src={book.picture_url} alt="Thumbnail" />
+                  </a>
+                )}
+                <h3>{book.title}</h3>
+                <p>
+                  <b>Rating: </b>
+                  {book.score}
+                </p>
+                <p>
+                  <b>Rank:</b> {book.rank}
+                </p>
+              </div>
+            ))}
+        </div>
+
+        <p className={styles.titles}>Most Popular Manga:</p>
+
+        <div className={styles.booksContainer}>
+          {mostPopularManga &&
+            mostPopularManga.map((book, index) => (
+              <div key={index} className={styles.book}>
+                {book.picture_url && (
+                  <a href={book.myanimelist_url} target="_blank">
+                    <img src={book.picture_url} alt="Thumbnail" />
+                  </a>
+                )}
+                <h3>{book.title}</h3>
+                <p>
+                  <b>Rating: </b>
+                  {book.score}
+                </p>
+                <p>
+                  <b>Rank:</b> {book.rank}
+                </p>
+              </div>
+            ))}
+        </div>
+
+        <p className={styles.titles}>Most Favorite Manga:</p>
+
+        <div className={styles.booksContainer}>
+          {mostFavoriteManga &&
+            mostFavoriteManga.map((book, index) => (
               <div key={index} className={styles.book}>
                 {book.picture_url && (
                   <a href={book.myanimelist_url} target="_blank">
