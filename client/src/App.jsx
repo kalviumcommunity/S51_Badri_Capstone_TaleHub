@@ -4,14 +4,15 @@ import { BrowserRouter, Link } from "react-router-dom";
 import NavBar from "./components/navBar";
 import LandingPage from "./components/landingPage";
 import AllRoutes from "./AllRoutes";
-
+import Login from "./components/login";
 function App() {
   return (
     <BrowserRouter>
-      <div className="appJSX">
+      {/* <div className="appJSX">
         <NavBar />
         <AllRoutes />
-      </div>
+      </div> */}
+      <Login/>
     </BrowserRouter>
   );
 }

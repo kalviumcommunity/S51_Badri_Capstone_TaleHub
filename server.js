@@ -6,11 +6,12 @@ const port = process.env.PORT;
 const cors = require("cors");
 const {startDB, dbStatus} = require("./db")
 const routes = require("./routes/routes")
+const login = require("./routes/login")
 
 app.use(express.json());
 app.use(cors());
 app.use("/", routes)
-
+app.use("/", login)
 
 // Route definition
 app.get("/", (req, res) => {

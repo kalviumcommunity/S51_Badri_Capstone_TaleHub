@@ -1,0 +1,19 @@
+meta {
+  name: sign uproute
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:5000/signup
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "heybadrinath22@gmail.com",
+    "password":"badri",
+    "name": "Badri"
+  }
+}
