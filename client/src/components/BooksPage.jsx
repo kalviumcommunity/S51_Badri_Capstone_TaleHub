@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./BooksPage.module.css";
 
-function BooksPage() {
+function BooksPage({ onLoginClick }) {
   return (
     <div className={styles.booksPage}>
       <div className={styles.searchBar}>
@@ -10,7 +10,9 @@ function BooksPage() {
           placeholder="Search for books by title, author, etc..."
           className={styles.input}
         />
-        <button className={styles.button}>SignIn</button>
+        <button className={styles.button} onClick={() => onLoginClick()}>
+          SignIn
+        </button>
       </div>
 
       <div className={styles.genres}>
