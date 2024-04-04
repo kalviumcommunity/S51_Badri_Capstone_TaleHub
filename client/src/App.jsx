@@ -20,7 +20,7 @@ function App() {
           {!isLogin && <AllRoutes onLoginClick={handleLoginClick} />}
         </div>
       )}
-      {isLogin && <Login />}
+      {isLogin && <Login onLoginClick={handleLoginClick}/>}
     </BrowserRouter>
   );
 }
