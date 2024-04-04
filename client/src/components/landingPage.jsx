@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styles from "./landingPage.module.css"; // Import CSS module
 import { useState } from "react";
 import axios from "axios";
-function LandingPage() {
+function LandingPage({ onLoginClick }) {
   const [topRatedBooks, setTopRatedBooks] = useState([]);
   const [top50Manga, setTop50Manga] = useState([]);
   const [top50Manhwa, setTop50Manhwa] = useState([]);
@@ -119,7 +119,7 @@ function LandingPage() {
           placeholder="Search by name, author, genre and etc..."
           className={styles.input}
         />
-        <button>SignIn</button>
+        <button onClick={() => onLoginClick()}>SignIn</button>
       </div>
       <div className={styles.genre}>
         <div className={styles.d1}>
