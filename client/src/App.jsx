@@ -9,7 +9,7 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
 
   const handleLoginClick = () => {
-    setIsLogin(true);
+    setIsLogin(!isLogin);
   };
 
   return (

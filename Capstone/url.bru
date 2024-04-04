@@ -5,7 +5,14 @@ meta {
 }
 
 post {
-  url: http://localhost:5000/request
-  body: none
+  url: http://localhost:5000/google
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "name": "badri",
+    "email":"heybadrinath@gmail.com"
+  }
 }
