@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import styles from "./login.module.css"; // Import the module CSS file
+import React, { useEffect, useState } from "react";
+import styles from "./login.module.css"; 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
-
+import { jwtDecode} from "jwt-decode";
 function Login() {
   const [login, setLogin] = useState(true);
 
@@ -13,6 +13,28 @@ function Login() {
     e.preventDefault();
     setLogin(!login);
   };
+
+
+  function handleCallbackResponse(response) {
+    console.log("jwt:::", response.credential);
+    const userObject = jwtDecode(response.credential);
+    console.log(userObject);
+  }
+
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:
+        "23770285817-oo8pijnvn574cknbdj8k5t17ttnrhhi8.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById("signinbtn"), {
+      theme: "outline",
+      size: "large",
+    });
+  }, []);
+
 
   return (
     <div className={styles.div}>
@@ -62,9 +84,8 @@ function Login() {
               className={styles.input}
             />
           </div>
-          <button className={styles.submit}>
-            Sign in
-          </button>
+          <button className={styles.submit}>Sign in</button>
+          <div id="signinbtn"></div>
           <p className={styles.signupLink}>
             No account?{" "}
             <button onClick={handleButtonClick} className={styles.button}>
@@ -92,9 +113,7 @@ function Login() {
               className={styles.input}
             />
           </div>
-          <button className={styles.submit}>
-            Sign in
-          </button>
+          <button className={styles.submit}>Sign in</button>
           <p className={styles.signupLink}>
             Already have an account?{" "}
             <button onClick={handleButtonClick} className={styles.button}>
