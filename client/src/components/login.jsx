@@ -46,6 +46,10 @@ function Login({ onLoginClick }) {
     } catch (error) {
       console.error("Error signing up:", error);
       setapires2(error);
+      toast.error("Sign-up failed", {
+        position: "top-right",
+        autoClose: 1500,
+      });
     }
   };
 
@@ -65,11 +69,13 @@ function Login({ onLoginClick }) {
           onLoginClick();
         },
       });
-      // Optionally, you can handle successful login (e.g., redirect to a new page)
     } catch (error) {
       console.error("Error logging in:", error);
       setapires1(error);
-      // Optionally, handle login errors (e.g., display error message to the user)
+      toast.error("Login failed", {
+        position: "top-right",
+        autoClose: 1500,
+      });
     }
   };
 
@@ -221,7 +227,7 @@ function Login({ onLoginClick }) {
           </div>
           {signupPassword &&
             confirmPassword &&
-            signupPassword != confirmPassword && (
+            signupPassword !== confirmPassword && (
               <p className={styles.error}>Passwords do not match</p>
             )}
           {apires2 &&
