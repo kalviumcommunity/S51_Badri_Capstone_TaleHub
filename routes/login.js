@@ -12,9 +12,8 @@ router.post("/signin", async (req, res) => {
     if (!user || user.password !== password) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
-
     const token = jwt.sign({ user }, process.env.JWT_SECRET);
-    res.json({ token });
+    res.json({ JWTtoken: token, user: user });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -42,7 +41,7 @@ router.post("/signup", async (req, res) => {
     console.log(newUser);
 
     const token = jwt.sign({ user: newUser }, process.env.JWT_SECRET);
-    res.json({ token });
+    res.json({ JWTtoken: token, user: newUser });
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ message: "Internal server error" });

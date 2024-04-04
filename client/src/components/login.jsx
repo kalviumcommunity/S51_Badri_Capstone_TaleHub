@@ -10,7 +10,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function Login({ onLoginClick }) {
+function Login({ onLoginClick, setUserData }) {
   const [login, setLogin] = useState(true);
   const [signupName, setSignupName] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
@@ -36,6 +36,7 @@ function Login({ onLoginClick }) {
         password: signupPassword,
       });
       console.log("Sign-up successful:", response);
+      setUserData(response.data.user);
       toast.success("Sign-up successful", {
         position: "top-right",
         autoClose: 1500,
@@ -62,6 +63,7 @@ function Login({ onLoginClick }) {
         password,
       });
       console.log("Login successful:", response);
+      setUserData(response.data.user);
       toast.success("Login successful", {
         position: "top-right",
         autoClose: 1500,
@@ -79,17 +81,32 @@ function Login({ onLoginClick }) {
     }
   };
 
-  function handleCallbackResponse(response) {
+  async function handleCallbackResponse(response) {
     console.log("jwt:::", response.credential);
     const userObject = jwtDecode(response.credential);
     console.log(userObject);
-    toast.success("Login successful", {
-      position: "top-right",
-      autoClose: 1500,
-      onClose: () => {
-        onLoginClick();
-      },
-    });
+    try {
+      const response = await axios.post("http://localhost:5000/google", {
+        email: userObject.email,
+        name: userObject.name,
+      });
+      console.log("Login successful:", response);
+      setUserData(response.data);
+      toast.success("Login successful", {
+        position: "top-right",
+        autoClose: 1500,
+        onClose: () => {
+          onLoginClick();
+        },
+      });
+    } catch (error) {
+      console.error("Error logging in:", error);
+      setapires1(error);
+      toast.error("Login failed", {
+        position: "top-right",
+        autoClose: 1500,
+      });
+    }
   }
 
   useEffect(() => {

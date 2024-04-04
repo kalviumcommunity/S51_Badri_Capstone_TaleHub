@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import NavBar from "./components/navBar";
@@ -7,11 +7,11 @@ import Login from "./components/login";
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-
+  const [userData, setUserData] = useState({});
   const handleLoginClick = () => {
     setIsLogin(!isLogin);
   };
-
+  console.log(userData)
   return (
     <BrowserRouter>
       {!isLogin && (
@@ -20,7 +20,9 @@ function App() {
           {!isLogin && <AllRoutes onLoginClick={handleLoginClick} />}
         </div>
       )}
-      {isLogin && <Login onLoginClick={handleLoginClick}/>}
+      {isLogin && (
+        <Login onLoginClick={handleLoginClick} setUserData={setUserData} />
+      )}
     </BrowserRouter>
   );
 }
