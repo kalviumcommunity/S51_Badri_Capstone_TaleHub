@@ -24,75 +24,43 @@ function LandingPage({ onLoginClick }) {
 
   const getTop50Manga = async () => {
     try {
-      const options = {
-        method: "GET",
-        url: "https://myanimelist.p.rapidapi.com/manga/top/manga",
-        headers: {
-          "X-RapidAPI-Key":
-            "e474091566msh4659433272064b9p1de085jsn47379338079a",
-          "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
-        },
-      };
-      const response = await axios.request(options);
-      console.log(response.data);
-      setTop50Manga(response.data);
+      const response = await axios.get(
+        "https://s51-badri-capstone-talehub.onrender.com/getData/topManga"
+      );
+      setTop50Manga(response.data.data);
     } catch (error) {
       console.error(error);
     }
   };
 
   const getTop50Manhwa = async () => {
-    const options = {
-      method: "GET",
-      url: "https://myanimelist.p.rapidapi.com/manga/top/manhwa",
-      headers: {
-        "X-RapidAPI-Key": "e474091566msh4659433272064b9p1de085jsn47379338079a",
-        "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
-      },
-    };
-
     try {
-      const response = await axios.request(options);
-      console.log(response.data);
-      setTop50Manhwa(response.data);
+      const response = await axios.get(
+        "https://s51-badri-capstone-talehub.onrender.com/getData/topManhwa"
+      );
+      setTop50Manhwa(response.data.data);
     } catch (error) {
       console.error(error);
     }
   };
 
   const getMostPopularManga = async () => {
-    const options = {
-      method: "GET",
-      url: "https://myanimelist.p.rapidapi.com/manga/top/bypopularity",
-      headers: {
-        "X-RapidAPI-Key": "e474091566msh4659433272064b9p1de085jsn47379338079a",
-        "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
-      },
-    };
-
     try {
-      const response = await axios.request(options);
-      console.log(response.data);
-      setMostPopularManga(response.data);
+      const response = await axios.get(
+        "https://s51-badri-capstone-talehub.onrender.com/getData/mostPopular"
+      );
+      setMostPopularManga(response.data.data);
     } catch (error) {
       console.error(error);
     }
   };
 
   const getMostFavoriteManga = async () => {
-    const options = {
-      method: "GET",
-      url: "https://myanimelist.p.rapidapi.com/manga/top/favorite",
-      headers: {
-        "X-RapidAPI-Key": "e474091566msh4659433272064b9p1de085jsn47379338079a",
-        "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
-      },
-    };
-
     try {
-      const response = await axios.request(options);
-      console.log(response.data);
-      setMostFavoriteManga(response.data);
+      const response = await axios.get(
+        "https://s51-badri-capstone-talehub.onrender.com/getData/mostFavorite"
+      );
+      setMostFavoriteManga(response.data.data);
     } catch (error) {
       console.error(error);
     }
