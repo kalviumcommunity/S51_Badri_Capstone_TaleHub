@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
 
       await newUser.save();
       console.log(newUser);
+      res.status(200).json(newUser);
     }
 
     res.status(200).json(existingUser);

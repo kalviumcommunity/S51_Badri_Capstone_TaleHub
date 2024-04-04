@@ -7,7 +7,10 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
-function Login() {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function Login({ onLoginClick }) {
   const [login, setLogin] = useState(true);
   const [signupName, setSignupName] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
@@ -33,6 +36,13 @@ function Login() {
         password: signupPassword,
       });
       console.log("Sign-up successful:", response);
+      toast.success("Sign-up successful", {
+        position: "top-right",
+        autoClose: 1500,
+        onClose: () => {
+          onLoginClick();
+        },
+      });
     } catch (error) {
       console.error("Error signing up:", error);
       setapires2(error);
@@ -48,6 +58,13 @@ function Login() {
         password,
       });
       console.log("Login successful:", response);
+      toast.success("Login successful", {
+        position: "top-right",
+        autoClose: 1500,
+        onClose: () => {
+          onLoginClick();
+        },
+      });
       // Optionally, you can handle successful login (e.g., redirect to a new page)
     } catch (error) {
       console.error("Error logging in:", error);
@@ -60,6 +77,13 @@ function Login() {
     console.log("jwt:::", response.credential);
     const userObject = jwtDecode(response.credential);
     console.log(userObject);
+    toast.success("Login successful", {
+      position: "top-right",
+      autoClose: 1500,
+      onClose: () => {
+        onLoginClick();
+      },
+    });
   }
 
   useEffect(() => {
@@ -106,6 +130,7 @@ function Login() {
       </div>
 
       <div className={styles.signupDiv}>
+        <ToastContainer />
         <form
           className={`${styles.form} ${login ? styles.left1 : styles.left2}`}
           onSubmit={handleLoginSubmit}
@@ -131,9 +156,13 @@ function Login() {
               required
             />
           </div>
-          {apires1 && apires1.response.data.message && (
-            <p className={styles.error}>{apires1.response.data.message}</p>
-          )}
+          {apires1 &&
+            apires1.response &&
+            apires1.response.data &&
+            apires1.response.data.message && (
+              <p className={styles.error}>{apires1.response.data.message}</p>
+            )}
+
           <button className={styles.submit}>Sign in</button>
           <div id="signinbtn"></div>
           <p className={styles.signupLink}>
@@ -195,9 +224,12 @@ function Login() {
             signupPassword != confirmPassword && (
               <p className={styles.error}>Passwords do not match</p>
             )}
-          {apires2 && apires2.response.data.message && (
-            <p className={styles.error}>{apires2.response.data.message}</p>
-          )}
+          {apires2 &&
+            apires2.response &&
+            apires2.response.data &&
+            apires2.response.data.message && (
+              <p className={styles.error}>{apires2.response.data.message}</p>
+            )}
           <button type="submit" className={styles.submit}>
             Sign up
           </button>
