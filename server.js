@@ -7,11 +7,14 @@ const cors = require("cors");
 const {startDB, dbStatus} = require("./db")
 const routes = require("./routes/routes")
 const login = require("./routes/login")
+const google = require("./routes/google")
+
 
 app.use(express.json());
 app.use(cors());
 app.use("/", routes)
-app.use("/", login)
+app.use("/login", login)
+app.use("/google", google)
 
 // Route definition
 app.get("/", (req, res) => {
@@ -34,6 +37,5 @@ if (require.main === module) {
       console.log(`http://localhost:${port}/`)
   });
 }
-
 
 module.exports = app;
