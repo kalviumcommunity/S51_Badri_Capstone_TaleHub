@@ -130,7 +130,7 @@ function Login({ onLoginClick, setUserData }) {
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
-            delay: 4000,
+            delay: 5000,
             disableOnInteraction: false,
           }}
           pagination={{
@@ -140,15 +140,63 @@ function Login({ onLoginClick, setUserData }) {
           modules={[Autoplay, Pagination, Navigation]}
           className={styles.mySwiper}
         >
-          <SwiperSlide className={styles.SwiperSlide}>Slide 1</SwiperSlide>
-          <SwiperSlide className={styles.SwiperSlide}>Slide 2</SwiperSlide>
-          <SwiperSlide className={styles.SwiperSlide}>Slide 3</SwiperSlide>
-          <SwiperSlide className={styles.SwiperSlide}>Slide 4</SwiperSlide>
-          <SwiperSlide className={styles.SwiperSlide}>Slide 5</SwiperSlide>
-          <SwiperSlide className={styles.SwiperSlide}>Slide 6</SwiperSlide>
-          <SwiperSlide className={styles.SwiperSlide}>Slide 7</SwiperSlide>
-          <SwiperSlide className={styles.SwiperSlide}>Slide 8</SwiperSlide>
-          <SwiperSlide className={styles.SwiperSlide}>Slide 9</SwiperSlide>
+          <SwiperSlide className={styles.SwiperSlide}>
+            <div>
+              "Books are a uniquely portable magic."
+              <br /> - Stephen King
+            </div>{" "}
+          </SwiperSlide>
+          <SwiperSlide className={styles.SwiperSlide}>
+            <div>
+              "A room without books is like a body without a soul." <br />-
+              Marcus Tullius Cicero
+            </div>{" "}
+          </SwiperSlide>
+          <SwiperSlide className={styles.SwiperSlide}>
+            <div>
+              "The person, be it gentleman or lady, who has not pleasure in a
+              good novel, must be intolerably stupid."
+              <br /> - Jane Austen
+            </div>{" "}
+          </SwiperSlide>
+          <SwiperSlide className={styles.SwiperSlide}>
+            <div>
+              "There is no friend as loyal as a book." <br />- Ernest Hemingway
+            </div>{" "}
+          </SwiperSlide>
+          <SwiperSlide className={styles.SwiperSlide}>
+            <div>
+              "Books are the quietest and most constant of friends; they are the
+              most accessible and wisest of counselors, and the most patient of
+              teachers." <br />- Charles William Eliot
+            </div>{" "}
+          </SwiperSlide>
+          <SwiperSlide className={styles.SwiperSlide}>
+            <div>
+              "I have always imagined that Paradise will be a kind of library."{" "}
+              <br />- Jorge Luis Borges
+            </div>{" "}
+          </SwiperSlide>
+          <SwiperSlide className={styles.SwiperSlide}>
+            <div>
+              "Books are mirrors: you only see in them what you already have
+              inside you."
+              <br /> - Carlos Ruiz Zafón
+            </div>{" "}
+          </SwiperSlide>
+          <SwiperSlide className={styles.SwiperSlide}>
+            <div>
+              "Books are the treasured wealth of the world and the fit
+              inheritance of generations and nations."
+              <br /> - Henry David Thoreau
+            </div>{" "}
+          </SwiperSlide>
+          <SwiperSlide className={styles.SwiperSlide}>
+            <div>
+              "Reading is essential for those who seek to rise above the
+              ordinary." <br />- Jim Rohn
+            </div>{" "}
+          </SwiperSlide>
         </Swiper>
       </div>
 
@@ -187,11 +235,11 @@ function Login({ onLoginClick, setUserData }) {
             )}
 
           <button className={styles.submit}>Sign in</button>
-          <div id="signinbtn"></div>
+          <div id="signinbtn" className={styles.googlebtn}></div>
           <p className={styles.signupLink}>
             No account?{" "}
             <button onClick={handleButtonClick} className={styles.button}>
-              Sign up
+              Sign Up
             </button>
           </p>
         </form>
@@ -259,7 +307,7 @@ function Login({ onLoginClick, setUserData }) {
           <p className={styles.signupLink}>
             Already have an account?{" "}
             <button onClick={handleButtonClick} className={styles.button}>
-              Login
+              Sign In
             </button>
           </p>
         </form>
