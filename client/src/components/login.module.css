@@ -10,7 +10,7 @@
   background-color: #fff;
   display: block;
   padding: 1rem;
-  font-family: "Nunito", sans-serif;
+  font-family: "Itim", cursive;
   max-width: 350px;
   border-radius: 0.5rem;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -164,7 +164,7 @@
   text-align: center;
   font-size: 35px;
   color: white;
-  font-family: "Caveat", cursive;
+  font-family: "Itim", cursive;
   text-shadow: 0.1em 0.1em 0 hsl(0, 0%, 0%);
   font-weight: bold;
 }
@@ -181,7 +181,7 @@
   color: red;
   font-size: small;
   text-align: center;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Itim", cursive;
 }
 
 .googlebtn {
