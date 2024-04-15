@@ -57,7 +57,7 @@
 
 .genre div:hover {
   background-position: center;
-  background-size: 90%;
+  background-size: 110%;
 }
 
 .genre div:not(:hover) {

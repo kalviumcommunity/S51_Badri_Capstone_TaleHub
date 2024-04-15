@@ -147,11 +147,11 @@
   justify-content: start;
   background-image: linear-gradient(
     to bottom,
-    #464555,
-    #39343e,
-    #2a242a,
-    #191518,
-    #000000
+    #46455500,
+    #39343e1d,
+    #2a242a4c,
+    #19151865,
+    #000000bc
   );
   font-family: "Itim", cursive;
   display: flex;

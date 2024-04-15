@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const Profile = require("../models/user.model");
 require("dotenv").config();
 
@@ -9,9 +10,15 @@ router.post("/signin", async (req, res) => {
     const { email, password } = req.body;
     const user = await Profile.findOne({ email });
 
-    if (!user || user.password !== password) {
-      return res.status(401).json({ message: "Invalid email or password" });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid E-Mail " });
     }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Incorrect Password" });
+    }
+
     const token = jwt.sign({ user }, process.env.JWT_SECRET);
     res.json({ JWTtoken: token, user: user });
   } catch (error) {
@@ -26,13 +33,15 @@ router.post("/signup", async (req, res) => {
     const existingUser = await Profile.findOne({ email });
 
     if (existingUser) {
-      return res.status(400).json({ message: "Email is already registered." });
+      return res.status(409).json({ message: "Email is already registered." });
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new Profile({
       name,
       email,
-      password,
+      password: hashedPassword,
       mangaCart: [],
       booksCart: [],
     });
