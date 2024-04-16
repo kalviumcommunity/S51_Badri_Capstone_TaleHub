@@ -19,8 +19,8 @@ router.post("/signin", async (req, res) => {
       return res.status(401).json({ message: "Incorrect Password" });
     }
 
-    const token = jwt.sign({ user }, process.env.JWT_SECRET);
-    res.json({ JWTtoken: token, user: user });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    res.json({ JWTtoken: token, user: user, type: "password"});
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -49,8 +49,8 @@ router.post("/signup", async (req, res) => {
     await newUser.save();
     console.log(newUser);
 
-    const token = jwt.sign({ user: newUser }, process.env.JWT_SECRET);
-    res.json({ JWTtoken: token, user: newUser });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    res.json({ JWTtoken: token, user: newUser, type: "password"});
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ message: "Internal server error" });

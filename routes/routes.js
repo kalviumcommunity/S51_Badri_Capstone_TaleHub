@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const joi = require("joi");
 const jwt = require("jsonwebtoken");
 const Profile = require("../models/user.model");
+const Email = require("../models/email.model")
 const MangaData = require("../models/manga.model");
 require("dotenv").config();
 
