@@ -94,4 +94,56 @@ router.patch("/addToCart", async (req, res) => {
   }
 });
 
+router.patch("/deleteInCart", async (req, res) => {
+  try {
+    const { email, type, whereToDelete, title } = req.body;
+
+    let user;
+
+    if (type === "email") {
+      user = await Email.findOne({ email: email });
+    } else if (type === "password") {
+      user = await Profile.findOne({ email: email });
+    } else {
+      return res.status(400).json({ message: "Invalid 'type' value" });
+    }
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    let cartToUpdate;
+
+    if (whereToDelete === "bookCart") {
+      cartToUpdate = user.bookCart;
+    } else if (whereToDelete === "mangaCart") {
+      cartToUpdate = user.mangaCart;
+    } else {
+      return res.status(400).json({ message: "Invalid 'whereToDelete' value" });
+    }
+
+    // Find the index of the item to delete based on the title
+    const indexToDelete = cartToUpdate.findIndex(
+      (item) => item.title === title
+    );
+
+    if (indexToDelete === -1) {
+      return res
+        .status(404)
+        .json({ message: "Item not found in the cart", user: user });
+    }
+
+    // Remove the item from the cart
+    cartToUpdate.splice(indexToDelete, 1);
+    await user.save();
+
+    res
+      .status(200)
+      .json({ message: "Item deleted from cart successfully", user: user });
+  } catch (error) {
+    console.error("Error deleting item from cart:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
