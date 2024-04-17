@@ -1,0 +1,20 @@
+meta {
+  name: delete from cart
+  type: http
+  seq: 8
+}
+
+patch {
+  url: http://localhost:5000/deleteInCart
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "heybadrinath@gmail.com",
+    "type": "email",
+    "whereToDelete": "mangaCart",
+    "title": "Berserk"
+  }
+}
