@@ -78,7 +78,6 @@
   background-size: cover;
 }
 
-
 .d4 {
   grid-area: d4;
   background: url("/360_F_617945111_aFEqsC1n3PJkwr0C22VlWLmgEGZ4qTyB.jpg");
@@ -101,7 +100,6 @@
   background-size: cover;
   background-position: center;
 }
-
 
 .titles {
   color: #919191;
@@ -158,10 +156,12 @@
   flex-direction: column;
 }
 
-.book p::-webkit-scrollbar-thumb, .book p::-webkit-scrollbar-track{
+.book p::-webkit-scrollbar-thumb,
+.book p::-webkit-scrollbar-track {
   background-color: transparent;
 }
-.book h3,.book p {
+.book h3,
+.book p {
   margin: 1%;
 }
 
@@ -175,7 +175,8 @@
 }
 
 .book img:hover {
-  animation: name duration timing-function delay iteration-count direction fill-mode;
+  animation: name duration timing-function delay iteration-count direction
+    fill-mode;
   animation: topper 0.5s ease forwards; /* Apply the hover animation */
 }
 
@@ -199,4 +200,51 @@
   100% {
     transform: translateY(0px); /* Initial position */
   }
+}
+
+.login {
+  --color: #000000;
+  font-family: inherit;
+  display: inline-block;
+  width: 5em;
+  height: 2.6em;
+  line-height: 2.5em;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  transition: color 0.5s;
+  z-index: 1;
+  border-radius: 6px;
+  font-weight: 500;
+  font-family: "Itim", cursive;
+}
+
+.login:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: var(--color);
+  height: 150px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.login:hover {
+  color: #fff;
+}
+
+.login:before {
+  top: 100%;
+  left: 100%;
+  transition: all 0.7s;
+}
+
+.login:hover:before {
+  top: -30px;
+  left: -30px;
+}
+
+.login:active:before {
+  background: #000000;
+  transition: background 0s;
 }

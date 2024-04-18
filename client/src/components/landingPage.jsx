@@ -2,12 +2,29 @@ import React, { useEffect } from "react";
 import styles from "./landingPage.module.css"; // Import CSS module
 import { useState } from "react";
 import axios from "axios";
-function LandingPage({ onLoginClick }) {
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+function LandingPage({ onLoginClick, userData, setUserData }) {
   const [topRatedBooks, setTopRatedBooks] = useState([]);
   const [top50Manga, setTop50Manga] = useState([]);
   const [top50Manhwa, setTop50Manhwa] = useState([]);
   const [mostPopularManga, setMostPopularManga] = useState([]);
   const [mostFavoriteManga, setMostFavoriteManga] = useState([]);
+
+  const logout = () => {
+    localStorage.clear();
+    setUserData(null);
+    toast.success("Log-Out successful", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
 
   const getTopRatedBooks = async () => {
     try {
@@ -81,13 +98,23 @@ function LandingPage({ onLoginClick }) {
 
   return (
     <div className={styles.landingPage}>
+      <ToastContainer />
+
       <div className={styles.searchBar}>
         <input
           type="text"
           placeholder="Search by name, author, genre and etc..."
           className={styles.input}
         />
-        <button onClick={() => onLoginClick()}>SignIn</button>
+        {userData ? (
+          <button onClick={logout} className={styles.login}>
+            Log-Out
+          </button>
+        ) : (
+          <button onClick={() => onLoginClick()} className={styles.login}>
+            Log-In
+          </button>
+        )}
       </div>
       <div className={styles.genre}>
         <div className={styles.d1}>
