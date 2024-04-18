@@ -49,7 +49,7 @@ router.post("/signup", async (req, res) => {
     await newUser.save();
     console.log(newUser);
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET);
     res.json({ JWTtoken: token, user: newUser, type: "password"});
   } catch (error) {
     console.error("Error:", error);

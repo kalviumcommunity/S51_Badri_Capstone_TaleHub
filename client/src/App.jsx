@@ -11,13 +11,25 @@ function App() {
   const handleLoginClick = () => {
     setIsLogin(!isLogin);
   };
-  console.log(userData)
+  console.log("userData:", userData);
+
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+    const type = localStorage.getItem("type");
+
+    if (email && type) {
+      const Data = { email, type };
+      setUserData(Data);
+      console.log("setted userData from local storage")
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       {!isLogin && (
         <div className="appJSX">
           {!isLogin && <NavBar />}
-          {!isLogin && <AllRoutes onLoginClick={handleLoginClick} />}
+          {!isLogin && <AllRoutes onLoginClick={handleLoginClick} userData={userData}/>}
         </div>
       )}
       {isLogin && (

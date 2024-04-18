@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "./login.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -20,10 +20,27 @@ function Login({ onLoginClick, setUserData }) {
   const [apires2, setapires2] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [keepSignedInLogin, setKeepSignedInLogin] = useState(false);
+  const [keepSignedInSignup, setKeepSignedInSignup] = useState(false);
+  const keepSignedInLoginRef = useRef(keepSignedInLogin);
+
+  useEffect(() => {
+    keepSignedInLoginRef.current = keepSignedInLogin;
+  }, [keepSignedInLogin]);
 
   const handleButtonClick = (e) => {
     e.preventDefault();
     setLogin(!login);
+  };
+
+  const handleCheckboxChangeLogin = (e) => {
+    setKeepSignedInLogin(e.target.checked);
+    console.log("login var changed");
+  };
+
+  const handleCheckboxChangeSignup = (e) => {
+    setKeepSignedInSignup(e.target.checked);
+    console.log("sign up var changed");
   };
 
   const handleSignupSubmit = async (e) => {
@@ -36,7 +53,13 @@ function Login({ onLoginClick, setUserData }) {
         password: signupPassword,
       });
       console.log("Sign-up successful:", response);
-      setUserData(response.data.user);
+      const userData = {
+        email: response.data.user.email,
+        type: response.data.type,
+      };
+      setUserData(userData);
+      keepSignedInSignup ? localStorage.setItem("email", userData.email) : null;
+      keepSignedInSignup ? localStorage.setItem("type", userData.type) : null;
       toast.success("Sign-up successful", {
         position: "top-right",
         autoClose: 1500,
@@ -63,7 +86,13 @@ function Login({ onLoginClick, setUserData }) {
         password,
       });
       console.log("Login successful:", response);
-      setUserData(response.data.user);
+      const userData = {
+        email: response.data.user.email,
+        type: response.data.type,
+      };
+      setUserData(userData);
+      keepSignedInLogin ? localStorage.setItem("email", userData.email) : null;
+      keepSignedInLogin ? localStorage.setItem("type", userData.type) : null;
       toast.success("Login successful", {
         position: "top-right",
         autoClose: 1500,
@@ -91,10 +120,21 @@ function Login({ onLoginClick, setUserData }) {
         name: userObject.name,
       });
       console.log("Login successful:", response);
-      setUserData(response.data);
+      const userData = {
+        email: response.data.user.email,
+        type: response.data.type,
+      };
+      setUserData(userData);
+      console.log("value of tick::::", keepSignedInLoginRef.current);
+      if (keepSignedInLoginRef.current) {
+        localStorage.setItem("email", userData.email);
+        localStorage.setItem("type", userData.type);
+        console.log("---local storage set---");
+      }
+
       toast.success("Login successful", {
         position: "top-right",
-        autoClose: 1500,
+        autoClose: 2500,
         onClose: () => {
           onLoginClick();
         },
@@ -234,6 +274,16 @@ function Login({ onLoginClick, setUserData }) {
               <p className={styles.error}>{apires1.response.data.message}</p>
             )}
 
+          <div className="check">
+            <label>
+              <input
+                type="checkbox"
+                checked={keepSignedInLogin}
+                onChange={handleCheckboxChangeLogin}
+              />
+              Keep me signed in
+            </label>
+          </div>
           <button className={styles.submit}>Sign in</button>
           <div id="signinbtn" className={styles.googlebtn}></div>
           <p className={styles.signupLink}>
@@ -301,6 +351,17 @@ function Login({ onLoginClick, setUserData }) {
             apires2.response.data.message && (
               <p className={styles.error}>{apires2.response.data.message}</p>
             )}
+
+          <div className="check">
+            <label>
+              <input
+                type="checkbox"
+                checked={keepSignedInSignup}
+                onChange={handleCheckboxChangeSignup}
+              />
+              Keep me signed in
+            </label>
+          </div>
           <button type="submit" className={styles.submit}>
             Sign up
           </button>
