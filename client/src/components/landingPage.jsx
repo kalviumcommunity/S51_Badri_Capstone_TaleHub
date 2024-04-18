@@ -12,6 +12,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
   const [mostFavoriteManga, setMostFavoriteManga] = useState([]);
 
   const logout = () => {
+    localStorage.clear();
     setUserData(null);
     toast.success("Log-Out successful", {
       position: "top-right",

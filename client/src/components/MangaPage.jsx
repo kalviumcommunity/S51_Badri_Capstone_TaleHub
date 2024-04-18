@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function MangaPage({ onLoginClick, userData, setUserData }) {
   const logout = () => {
+    localStorage.clear();
     setUserData(null);
     toast.success("Log-Out successful", {
       position: "top-right",
