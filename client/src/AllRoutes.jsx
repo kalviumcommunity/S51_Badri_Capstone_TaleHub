@@ -3,22 +3,38 @@ import { Route, Routes } from "react-router-dom";
 import LandingPage from "./components/landingPage";
 import BooksPage from "./components/BooksPage";
 import MangaPage from "./components/MangaPage";
-function AllRoutes({ onLoginClick, userData }) {
+function AllRoutes({ onLoginClick, userData, setUserData }) {
   return (
     <Routes>
       <Route
         path="/"
         element={
-          <LandingPage onLoginClick={onLoginClick} userData={userData} />
+          <LandingPage
+            onLoginClick={onLoginClick}
+            userData={userData}
+            setUserData={setUserData}
+          />
         }
       ></Route>
       <Route
         path="/books"
-        element={<BooksPage onLoginClick={onLoginClick} userData={userData} />}
+        element={
+          <BooksPage
+            onLoginClick={onLoginClick}
+            userData={userData}
+            setUserData={setUserData}
+          />
+        }
       ></Route>
       <Route
         path="/manga"
-        element={<MangaPage onLoginClick={onLoginClick} userData={userData} />}
+        element={
+          <MangaPage
+            onLoginClick={onLoginClick}
+            userData={userData}
+            setUserData={setUserData}
+          />
+        }
       ></Route>
     </Routes>
   );
