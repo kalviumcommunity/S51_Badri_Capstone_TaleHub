@@ -25,6 +25,12 @@ function NavBar() {
           </div>
         </Link>
       </div>
+      <p className="navText"> Your Books</p>
+      <Link to="/cart">
+        <div className="navBoxes btn-shine">
+          <p>Cart</p>
+        </div>
+      </Link>
 
       <div className="contacts">
         <div className="social-buttons">
