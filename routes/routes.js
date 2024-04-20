@@ -8,16 +8,37 @@ require("dotenv").config();
 
 router.get("/getUser", async (req, res) => {
   try {
-    const profile = await Profile.find();
+    const { email, type } = req.body;
 
-    if (!profile) {
-      return res.status(404).json({ message: "No profiles found" });
+    if (!email || !type) {
+      return res
+        .status(400)
+        .json({ message: "Insufficient data sent to server" });
     }
 
-    res.status(200).json(profile);
+    let profile;
+
+    if (type === "email") {
+      profile = await Email.findOne({ email });
+    } else if (type === "password") {
+      profile = await Profile.findOne({ email });
+    } else {
+      return res.status(400).json({ message: "Invalid type provided" });
+    }
+
+    if (!profile) {
+      return res
+        .status(404)
+        .json({ message: "No user found for the provided email" });
+    }
+
+    res.status(200).json({
+      mangaCart: profile.mangaCart,
+      bookCart: profile.bookCart,
+    });
   } catch (error) {
     console.log(error.message);
-    res.status(400).json(error.message);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 

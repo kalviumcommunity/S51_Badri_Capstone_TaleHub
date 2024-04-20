@@ -1,0 +1,18 @@
+meta {
+  name: get user
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:5000/getUser
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "heybadrinath@gmail.com",
+    "type":"email"
+  }
+}
