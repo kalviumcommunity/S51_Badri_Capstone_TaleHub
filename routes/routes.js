@@ -8,8 +8,8 @@ require("dotenv").config();
 
 router.get("/getUser", async (req, res) => {
   try {
-    const { email, type } = req.body;
-
+    const { email, type } = req.query;
+    console.log(req.query)
     if (!email || !type) {
       return res
         .status(400)
