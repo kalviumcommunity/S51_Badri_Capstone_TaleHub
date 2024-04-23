@@ -139,10 +139,6 @@
   margin: 0px 10px;
   border-radius: 20px;
   color: white;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
   background-image: linear-gradient(
     to bottom,
     #46455500,
@@ -152,8 +148,6 @@
     #000000bc
   );
   font-family: "Itim", cursive;
-  display: flex;
-  flex-direction: column;
 }
 
 .book p::-webkit-scrollbar-thumb,
@@ -171,36 +165,15 @@
   border-radius: 20px;
   margin: 10px 0px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  transition: transform 0.5s;
+  transition: transform 0.5s ease;
 }
 
-.book img:hover {
-  animation: name duration timing-function delay iteration-count direction
-    fill-mode;
-  animation: topper 0.5s ease forwards; /* Apply the hover animation */
+.book img:hover{
+  transform: translateY(-10px);
+  transition: transform 0.5s ease 0.3s;
+
 }
 
-@keyframes topper {
-  0% {
-    transform: translateY(0px); /* Initial position */
-  }
-  100% {
-    transform: translateY(-10px); /* Hover position */
-  }
-}
-
-.book img:not(:hover) {
-  animation: returnToNormal 0.5s ease forwards; /* Apply the return animation */
-}
-
-@keyframes returnToNormal {
-  0% {
-    transform: translateY(-10px); /* Hover position */
-  }
-  100% {
-    transform: translateY(0px); /* Initial position */
-  }
-}
 
 .login {
   --color: #000000;
@@ -247,4 +220,20 @@
 .login:active:before {
   background: #000000;
   transition: background 0s;
+}
+
+
+.Buttons{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+button{
+  cursor: pointer;
+}
+.cartIcon{
+  background-color: transparent;
+  border: none;
+  margin-right: 20px;
+
 }

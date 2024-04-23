@@ -4,6 +4,8 @@ import { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
+
 function LandingPage({ onLoginClick, userData, setUserData }) {
   const [topRatedBooks, setTopRatedBooks] = useState([]);
   const [top50Manga, setTop50Manga] = useState([]);
@@ -107,9 +109,21 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
           className={styles.input}
         />
         {userData ? (
-          <button onClick={logout} className={styles.login}>
-            Log-Out
-          </button>
+          <div className={styles.Buttons}>
+            <Link to="/cart">
+              <button className={styles.cartIcon}>
+                <lord-icon
+                  src="https://cdn.lordicon.com/odavpkmb.json"
+                  trigger="hover"
+                  colors="primary:#ffffff,secondary:#ffffff"
+                  style={{ width: "50px", height: "40px" }}
+                ></lord-icon>
+              </button>
+            </Link>
+            <button onClick={logout} className={styles.login}>
+              Log-Out
+            </button>
+          </div>
         ) : (
           <button onClick={() => onLoginClick()} className={styles.login}>
             Log-In
@@ -163,6 +177,14 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                   {book.volumeInfo.authors.join(", ")}
                 </p>
               )}
+              <button className={styles.cartIcon}>
+                <lord-icon
+                  src="https://cdn.lordicon.com/mfmkufkr.json"
+                  trigger="hover"
+                  colors="primary:#ffffff"
+                  style={{ width: "50px", height: "40px" }}
+                ></lord-icon>
+              </button>
             </div>
           ))}
         </div>
@@ -185,6 +207,14 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
+                <button className={styles.cartIcon}>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/mfmkufkr.json"
+                    trigger="hover"
+                    colors="primary:#ffffff"
+                    style={{ width: "50px", height: "40px" }}
+                  ></lord-icon>
+                </button>
               </div>
             ))}
         </div>
@@ -208,6 +238,14 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
+                <button className={styles.cartIcon}>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/mfmkufkr.json"
+                    trigger="hover"
+                    colors="primary:#ffffff"
+                    style={{ width: "50px", height: "40px" }}
+                  ></lord-icon>
+                </button>
               </div>
             ))}
         </div>
@@ -231,6 +269,14 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
+                <button className={styles.cartIcon}>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/mfmkufkr.json"
+                    trigger="hover"
+                    colors="primary:#ffffff"
+                    style={{ width: "50px", height: "40px" }}
+                  ></lord-icon>
+                </button>
               </div>
             ))}
         </div>
@@ -254,6 +300,14 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
+                <button className={styles.cartIcon}>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/mfmkufkr.json"
+                    trigger="hover"
+                    colors="primary:#ffffff"
+                    style={{ width: "50px", height: "40px" }}
+                  ></lord-icon>
+                </button>
               </div>
             ))}
         </div>

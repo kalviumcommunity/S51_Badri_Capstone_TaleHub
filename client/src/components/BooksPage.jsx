@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./BooksPage.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
+
 function BooksPage({ onLoginClick, userData, setUserData }) {
   const logout = () => {
     localStorage.clear();
@@ -28,9 +30,21 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
           className={styles.input}
         />
         {userData ? (
-          <button onClick={logout} className={styles.login}>
-            Log-Out
-          </button>
+          <div className={styles.Buttons}>
+            <Link to="/cart">
+              <button className={styles.cartIcon}>
+                <lord-icon
+                  src="https://cdn.lordicon.com/odavpkmb.json"
+                  trigger="hover"
+                  colors="primary:#ffffff,secondary:#ffffff"
+                  style={{ width: "50px", height: "40px" }}
+                ></lord-icon>
+              </button>
+            </Link>
+            <button onClick={logout} className={styles.login}>
+              Log-Out
+            </button>
+          </div>
         ) : (
           <button onClick={() => onLoginClick()} className={styles.login}>
             Log-In

@@ -22,16 +22,7 @@ function App() {
       const Data = { email, type };
       setUserData(Data);
       console.log("setted userData from local storage");
-      toast.success("Auto Log-In successful", {
-        position: "top-right",
-        autoClose: 1500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+     
     }
   }, []);
 

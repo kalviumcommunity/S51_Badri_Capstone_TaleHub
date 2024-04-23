@@ -151,3 +151,18 @@
   background: #000000;
   transition: background 0s;
 }
+
+.Buttons{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+button{
+  cursor: pointer;
+}
+.cartIcon{
+  background-color: transparent;
+  border: none;
+  margin-right: 20px;
+
+}
