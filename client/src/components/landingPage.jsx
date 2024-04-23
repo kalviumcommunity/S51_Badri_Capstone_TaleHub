@@ -156,42 +156,52 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
 
       <div>
         <p className={styles.titles}>Top Rated Books:</p>
+
         <div className={styles.booksContainer}>
-          {topRatedBooks.map((book, index) => (
-            <div key={index} className={styles.book}>
-              {book.volumeInfo.imageLinks && (
-                <img
-                  src={book.volumeInfo.imageLinks.thumbnail}
-                  alt="Thumbnail"
-                />
-              )}{" "}
-              <h3>{book.volumeInfo.title}</h3>
-              {book.volumeInfo.subtitle && (
-                <p>
-                  <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
-                </p>
-              )}
-              {book.volumeInfo.authors && (
-                <p className={styles.auth}>
-                  <strong>Author(s):</strong>
-                  {book.volumeInfo.authors.join(", ")}
-                </p>
-              )}
-              <button className={styles.cartIcon}>
-                <lord-icon
-                  src="https://cdn.lordicon.com/mfmkufkr.json"
-                  trigger="hover"
-                  colors="primary:#ffffff"
-                  style={{ width: "50px", height: "40px" }}
-                ></lord-icon>
-              </button>
+          {topRatedBooks.length != 0 ? (
+            topRatedBooks.map((book, index) => (
+              <div key={index} className={styles.book}>
+                {book.volumeInfo.imageLinks && (
+                  <img
+                    src={book.volumeInfo.imageLinks.thumbnail}
+                    alt="Thumbnail"
+                  />
+                )}{" "}
+                <h3>{book.volumeInfo.title}</h3>
+                {book.volumeInfo.subtitle && (
+                  <p>
+                    <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
+                  </p>
+                )}
+                {book.volumeInfo.authors && (
+                  <p className={styles.auth}>
+                    <strong>Author(s):</strong>
+                    {book.volumeInfo.authors.join(", ")}
+                  </p>
+                )}
+                <button className={styles.cartIcon}>
+                  <lord-icon
+                    src="https://cdn.lordicon.com/mfmkufkr.json"
+                    trigger="hover"
+                    colors="primary:#ffffff"
+                    style={{ width: "50px", height: "40px" }}
+                  ></lord-icon>
+                </button>
+              </div>
+            ))
+          ) : (
+            <div className={styles.loader}>
+              <span>&lt;</span>
+              <span>LOADING</span>
+              <span>/&gt;</span>
             </div>
-          ))}
+          )}
         </div>
 
         <p className={styles.titles}>Top 50 Manga:</p>
         <div className={styles.booksContainer}>
-          {top50Manga &&
+          {topRatedBooks.length != 0 ? (
+            top50Manga &&
             top50Manga.map((book, index) => (
               <div key={index} className={styles.book}>
                 {book.picture_url && (
@@ -216,13 +226,21 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                   ></lord-icon>
                 </button>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className={styles.loader}>
+              <span>&lt;</span>
+              <span>LOADING</span>
+              <span>/&gt;</span>
+            </div>
+          )}
         </div>
 
         <p className={styles.titles}>Top 50 Manhwa:</p>
 
         <div className={styles.booksContainer}>
-          {top50Manhwa &&
+          {topRatedBooks.length != 0 ? (
+            top50Manhwa &&
             top50Manhwa.map((book, index) => (
               <div key={index} className={styles.book}>
                 {book.picture_url && (
@@ -247,13 +265,21 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                   ></lord-icon>
                 </button>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className={styles.loader}>
+              <span>&lt;</span>
+              <span>LOADING</span>
+              <span>/&gt;</span>
+            </div>
+          )}
         </div>
 
         <p className={styles.titles}>Most Popular Manga:</p>
 
         <div className={styles.booksContainer}>
-          {mostPopularManga &&
+          {topRatedBooks.length != 0 ? (
+            mostPopularManga &&
             mostPopularManga.map((book, index) => (
               <div key={index} className={styles.book}>
                 {book.picture_url && (
@@ -278,13 +304,21 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                   ></lord-icon>
                 </button>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className={styles.loader}>
+              <span>&lt;</span>
+              <span>LOADING</span>
+              <span>/&gt;</span>
+            </div>
+          )}
         </div>
 
         <p className={styles.titles}>Most Favorite Manga:</p>
 
         <div className={styles.booksContainer}>
-          {mostFavoriteManga &&
+          {topRatedBooks.length != 0 ? (
+            mostFavoriteManga &&
             mostFavoriteManga.map((book, index) => (
               <div key={index} className={styles.book}>
                 {book.picture_url && (
@@ -309,7 +343,14 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                   ></lord-icon>
                 </button>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className={styles.loader}>
+              <span>&lt;</span>
+              <span>LOADING</span>
+              <span>/&gt;</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

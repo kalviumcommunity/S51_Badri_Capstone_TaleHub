@@ -2,7 +2,81 @@
   background-color: #000330;
   width: 100%;
   height: 100vh;
+  overflow-y: scroll;
 }
+
+.titles {
+  color: #919191;
+  font-family: "Itim", cursive;
+  font-size: 1.5rem;
+  margin-left: 30px;
+}
+.booksContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: overlay; /* Changed to overlay */
+  width: 100%;
+}
+
+.booksContainer::-webkit-scrollbar {
+  height: 10px;
+}
+
+.booksContainer::-webkit-scrollbar-track {
+  background: transparent; /* Color of the track */
+}
+
+.booksContainer::-webkit-scrollbar-thumb {
+  background: #989898; /* Color of the scrollbar */
+  border-radius: 10px;
+}
+
+.booksContainer::-webkit-scrollbar-thumb:hover {
+  background: #ffffff; /* Change color on hover if desired */
+}
+
+.book {
+  flex: 0 0 auto;
+  width: 33%;
+  padding: 0px 20px;
+  margin: 0px 10px;
+  border-radius: 20px;
+  color: white;
+  background-image: linear-gradient(
+    to bottom,
+    #46455500,
+    #39343e1d,
+    #2a242a4c,
+    #19151865,
+    #000000bc
+  );
+  font-family: "Itim", cursive;
+}
+
+.book p::-webkit-scrollbar-thumb,
+.book p::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.book h3,
+.book p {
+  margin: 1%;
+}
+
+.book img {
+  height: 200px;
+  width: 150px;
+  border-radius: 20px;
+  margin: 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: transform 0.5s ease;
+}
+
+.book img:hover {
+  transform: translateY(-10px);
+  transition: transform 0.5s ease 0.3s;
+}
+
 .login {
   --color: #000000;
   font-family: inherit;
@@ -55,4 +129,12 @@
   color: white;
   font-family: "Itim", cursive;
   text-align: center;
+}
+button {
+  cursor: pointer;
+}
+.cartIcon {
+  background-color: transparent;
+  border: none;
+  margin-right: 20px;
 }
