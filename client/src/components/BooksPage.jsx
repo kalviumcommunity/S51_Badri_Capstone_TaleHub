@@ -16,7 +16,6 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
   const getBooks = async (type) => {
     try {
       const response = await axios.get(`${apiLink}${type}`);
-      console.log(type, response.data.items);
       return response.data.items;
     } catch (error) {
       console.error("Error fetching top rated books:", error);
