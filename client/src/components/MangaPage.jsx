@@ -321,7 +321,7 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles}>Doujinshis:</p>
+      {/* <p className={styles.titles}>Doujinshis:</p>
 
       <div className={styles.booksContainer}>
         {doujinshiBook.length != 0 ? (
@@ -362,7 +362,7 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
             <span>/&gt;</span>
           </div>
         )}
-      </div>
+      </div> */}
 
       <p className={styles.titles}>Light Novels:</p>
 
