@@ -235,11 +235,9 @@ button {
 }
 
 .loader {
-  font-size: 2em;
-  font-weight: 900;
+  font-size: 1.5em;
   margin: auto;
   font-family: "Itim", cursive;
-
 }
 .loader > * {
   color: rgb(255, 255, 255);
@@ -250,7 +248,7 @@ button {
 .loader span:nth-child(2) {
   letter-spacing: -1em;
   overflow: hidden;
-  animation: reveal 3500ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite
+  animation: reveal 10000ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite
     alternate;
 }
 @keyframes reveal {
