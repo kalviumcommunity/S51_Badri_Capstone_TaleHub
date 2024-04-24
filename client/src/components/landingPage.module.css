@@ -168,12 +168,10 @@
   transition: transform 0.5s ease;
 }
 
-.book img:hover{
+.book img:hover {
   transform: translateY(-10px);
   transition: transform 0.5s ease 0.3s;
-
 }
-
 
 .login {
   --color: #000000;
@@ -222,18 +220,47 @@
   transition: background 0s;
 }
 
-
-.Buttons{
+.Buttons {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 }
-button{
+button {
   cursor: pointer;
 }
-.cartIcon{
+.cartIcon {
   background-color: transparent;
   border: none;
   margin-right: 20px;
+}
 
+.loader {
+  font-size: 2em;
+  font-weight: 900;
+  margin: auto;
+  font-family: "Itim", cursive;
+
+}
+.loader > * {
+  color: rgb(255, 255, 255);
+}
+.loader span {
+  display: inline-flex;
+}
+.loader span:nth-child(2) {
+  letter-spacing: -1em;
+  overflow: hidden;
+  animation: reveal 3500ms cubic-bezier(0.645, 0.045, 0.355, 1) infinite
+    alternate;
+}
+@keyframes reveal {
+  0%,
+  100% {
+    opacity: 0;
+    letter-spacing: -1em;
+  }
+  50% {
+    opacity: 1;
+    letter-spacing: 0.5em;
+  }
 }

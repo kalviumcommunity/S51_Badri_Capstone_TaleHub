@@ -28,6 +28,33 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
     });
   };
 
+  const addToCart = async (data, whereToAdd) => {
+    try {
+      if (whereToAdd == "bookCart") {
+        const dataToAdd = {
+          title: data.volumeInfo.title,
+          subtitle: data.volumeInfo.subtitle ? data.volumeInfo.subtitle : null,
+          authors: data.volumeInfo.authors ? data.volumeInfo.authors : null,
+          description: data.volumeInfo.description
+            ? data.volumeInfo.description
+            : null,
+          thumbnail: data.volumeInfo.imageLinks.thumbnail
+            ? data.volumeInfo.imageLinks.thumbnail
+            : null,
+        };
+      }
+      const response = await axios.patch("http://localhost:5000/addToCart", {
+        email: userData.email,
+        type: userData.type,
+        whereToAdd: whereToAdd,
+        itemToAdd: whereToAdd == "bookCart" ? dataToAdd : data,
+      });
+      console.log("request res::::", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getTopRatedBooks = async () => {
     try {
       const response = await axios.get(
@@ -156,42 +183,57 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
 
       <div>
         <p className={styles.titles}>Top Rated Books:</p>
+
         <div className={styles.booksContainer}>
-          {topRatedBooks.map((book, index) => (
-            <div key={index} className={styles.book}>
-              {book.volumeInfo.imageLinks && (
-                <img
-                  src={book.volumeInfo.imageLinks.thumbnail}
-                  alt="Thumbnail"
-                />
-              )}{" "}
-              <h3>{book.volumeInfo.title}</h3>
-              {book.volumeInfo.subtitle && (
-                <p>
-                  <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
-                </p>
-              )}
-              {book.volumeInfo.authors && (
-                <p className={styles.auth}>
-                  <strong>Author(s):</strong>
-                  {book.volumeInfo.authors.join(", ")}
-                </p>
-              )}
-              <button className={styles.cartIcon}>
-                <lord-icon
-                  src="https://cdn.lordicon.com/mfmkufkr.json"
-                  trigger="hover"
-                  colors="primary:#ffffff"
-                  style={{ width: "50px", height: "40px" }}
-                ></lord-icon>
-              </button>
+          {topRatedBooks.length != 0 ? (
+            topRatedBooks.map((book, index) => (
+              <div key={index} className={styles.book}>
+                {book.volumeInfo.imageLinks && (
+                  <img
+                    src={book.volumeInfo.imageLinks.thumbnail}
+                    alt="Thumbnail"
+                  />
+                )}{" "}
+                <h3>{book.volumeInfo.title}</h3>
+                {book.volumeInfo.subtitle && (
+                  <p>
+                    <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
+                  </p>
+                )}
+                {book.volumeInfo.authors && (
+                  <p className={styles.auth}>
+                    <strong>Author(s):</strong>
+                    {book.volumeInfo.authors.join(", ")}
+                  </p>
+                )}
+                {userData && (
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => addToCart(book, "bookCart")}
+                  >
+                    <lord-icon
+                      src="https://cdn.lordicon.com/mfmkufkr.json"
+                      trigger="click"
+                      colors="primary:#ffffff"
+                      style={{ width: "50px", height: "40px" }}
+                    ></lord-icon>
+                  </button>
+                )}
+              </div>
+            ))
+          ) : (
+            <div className={styles.loader}>
+              <span>&lt;</span>
+              <span>LOADING</span>
+              <span>/&gt;</span>
             </div>
-          ))}
+          )}
         </div>
 
         <p className={styles.titles}>Top 50 Manga:</p>
         <div className={styles.booksContainer}>
-          {top50Manga &&
+          {top50Manga.length != 0 ? (
+            top50Manga &&
             top50Manga.map((book, index) => (
               <div key={index} className={styles.book}>
                 {book.picture_url && (
@@ -207,22 +249,35 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
-                <button className={styles.cartIcon}>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/mfmkufkr.json"
-                    trigger="hover"
-                    colors="primary:#ffffff"
-                    style={{ width: "50px", height: "40px" }}
-                  ></lord-icon>
-                </button>
+                {userData && (
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => addToCart(book, "mangaCart")}
+                  >
+                    <lord-icon
+                      src="https://cdn.lordicon.com/mfmkufkr.json"
+                      trigger="hover"
+                      colors="primary:#ffffff"
+                      style={{ width: "50px", height: "40px" }}
+                    ></lord-icon>
+                  </button>
+                )}
               </div>
-            ))}
+            ))
+          ) : (
+            <div className={styles.loader}>
+              <span>&lt;</span>
+              <span>LOADING</span>
+              <span>/&gt;</span>
+            </div>
+          )}
         </div>
 
         <p className={styles.titles}>Top 50 Manhwa:</p>
 
         <div className={styles.booksContainer}>
-          {top50Manhwa &&
+          {top50Manhwa.length != 0 ? (
+            top50Manhwa &&
             top50Manhwa.map((book, index) => (
               <div key={index} className={styles.book}>
                 {book.picture_url && (
@@ -238,22 +293,35 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
-                <button className={styles.cartIcon}>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/mfmkufkr.json"
-                    trigger="hover"
-                    colors="primary:#ffffff"
-                    style={{ width: "50px", height: "40px" }}
-                  ></lord-icon>
-                </button>
+                {userData && (
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => addToCart(book, "mangaCart")}
+                  >
+                    <lord-icon
+                      src="https://cdn.lordicon.com/mfmkufkr.json"
+                      trigger="hover"
+                      colors="primary:#ffffff"
+                      style={{ width: "50px", height: "40px" }}
+                    ></lord-icon>
+                  </button>
+                )}
               </div>
-            ))}
+            ))
+          ) : (
+            <div className={styles.loader}>
+              <span>&lt;</span>
+              <span>LOADING</span>
+              <span>/&gt;</span>
+            </div>
+          )}
         </div>
 
         <p className={styles.titles}>Most Popular Manga:</p>
 
         <div className={styles.booksContainer}>
-          {mostPopularManga &&
+          {mostPopularManga.length != 0 ? (
+            mostPopularManga &&
             mostPopularManga.map((book, index) => (
               <div key={index} className={styles.book}>
                 {book.picture_url && (
@@ -269,22 +337,35 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
-                <button className={styles.cartIcon}>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/mfmkufkr.json"
-                    trigger="hover"
-                    colors="primary:#ffffff"
-                    style={{ width: "50px", height: "40px" }}
-                  ></lord-icon>
-                </button>
+                {userData && (
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => addToCart(book, "mangaCart")}
+                  >
+                    <lord-icon
+                      src="https://cdn.lordicon.com/mfmkufkr.json"
+                      trigger="hover"
+                      colors="primary:#ffffff"
+                      style={{ width: "50px", height: "40px" }}
+                    ></lord-icon>
+                  </button>
+                )}
               </div>
-            ))}
+            ))
+          ) : (
+            <div className={styles.loader}>
+              <span>&lt;</span>
+              <span>LOADING</span>
+              <span>/&gt;</span>
+            </div>
+          )}
         </div>
 
         <p className={styles.titles}>Most Favorite Manga:</p>
 
         <div className={styles.booksContainer}>
-          {mostFavoriteManga &&
+          {mostFavoriteManga.length != 0 ? (
+            mostFavoriteManga &&
             mostFavoriteManga.map((book, index) => (
               <div key={index} className={styles.book}>
                 {book.picture_url && (
@@ -300,16 +381,28 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
-                <button className={styles.cartIcon}>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/mfmkufkr.json"
-                    trigger="hover"
-                    colors="primary:#ffffff"
-                    style={{ width: "50px", height: "40px" }}
-                  ></lord-icon>
-                </button>
+                {userData && (
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => addToCart(book, "mangaCart")}
+                  >
+                    <lord-icon
+                      src="https://cdn.lordicon.com/mfmkufkr.json"
+                      trigger="hover"
+                      colors="primary:#ffffff"
+                      style={{ width: "50px", height: "40px" }}
+                    ></lord-icon>
+                  </button>
+                )}
               </div>
-            ))}
+            ))
+          ) : (
+            <div className={styles.loader}>
+              <span>&lt;</span>
+              <span>LOADING</span>
+              <span>/&gt;</span>
+            </div>
+          )}
         </div>
       </div>
     </div>

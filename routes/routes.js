@@ -9,7 +9,7 @@ require("dotenv").config();
 router.get("/getUser", async (req, res) => {
   try {
     const { email, type } = req.query;
-    console.log(req.query)
+    console.log(req.query);
     if (!email || !type) {
       return res
         .status(400)
@@ -90,7 +90,9 @@ router.patch("/addToCart", async (req, res) => {
     }
 
     console.log("Items in the cart before adding:", cartToUpdate);
-
+    console.log(
+      "-----------------------------------------------------------------"
+    );
     const itemExists = cartToUpdate.some(
       (item) => item.title === itemToAdd.title
     );
@@ -100,6 +102,10 @@ router.patch("/addToCart", async (req, res) => {
         .status(400)
         .json({ message: "Item already exists in the cart", user: user });
     }
+    console.log("item to add ::: ", itemToAdd);
+    console.log(
+      "-----------------------------------------------------------------"
+    );
 
     cartToUpdate.push(itemToAdd);
     await user.save();
