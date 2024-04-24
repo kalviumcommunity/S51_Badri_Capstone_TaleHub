@@ -28,6 +28,33 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
     });
   };
 
+  const addToCart = async (data, whereToAdd) => {
+    try {
+      if (whereToAdd == "bookCart") {
+        const dataToAdd = {
+          title: data.volumeInfo.title,
+          subtitle: data.volumeInfo.subtitle ? data.volumeInfo.subtitle : null,
+          authors: data.volumeInfo.authors ? data.volumeInfo.authors : null,
+          description: data.volumeInfo.description
+            ? data.volumeInfo.description
+            : null,
+          thumbnail: data.volumeInfo.imageLinks.thumbnail
+            ? data.volumeInfo.imageLinks.thumbnail
+            : null,
+        };
+      }
+      const response = await axios.patch("http://localhost:5000/addToCart", {
+        email: userData.email,
+        type: userData.type,
+        whereToAdd: whereToAdd,
+        itemToAdd: whereToAdd == "bookCart" ? dataToAdd : data,
+      });
+      console.log("request res::::", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getTopRatedBooks = async () => {
     try {
       const response = await axios.get(
@@ -179,14 +206,19 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                     {book.volumeInfo.authors.join(", ")}
                   </p>
                 )}
-                <button className={styles.cartIcon}>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/mfmkufkr.json"
-                    trigger="hover"
-                    colors="primary:#ffffff"
-                    style={{ width: "50px", height: "40px" }}
-                  ></lord-icon>
-                </button>
+                {userData && (
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => addToCart(book, "bookCart")}
+                  >
+                    <lord-icon
+                      src="https://cdn.lordicon.com/mfmkufkr.json"
+                      trigger="click"
+                      colors="primary:#ffffff"
+                      style={{ width: "50px", height: "40px" }}
+                    ></lord-icon>
+                  </button>
+                )}
               </div>
             ))
           ) : (
@@ -200,7 +232,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
 
         <p className={styles.titles}>Top 50 Manga:</p>
         <div className={styles.booksContainer}>
-          {topRatedBooks.length != 0 ? (
+          {top50Manga.length != 0 ? (
             top50Manga &&
             top50Manga.map((book, index) => (
               <div key={index} className={styles.book}>
@@ -217,14 +249,19 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
-                <button className={styles.cartIcon}>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/mfmkufkr.json"
-                    trigger="hover"
-                    colors="primary:#ffffff"
-                    style={{ width: "50px", height: "40px" }}
-                  ></lord-icon>
-                </button>
+                {userData && (
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => addToCart(book, "mangaCart")}
+                  >
+                    <lord-icon
+                      src="https://cdn.lordicon.com/mfmkufkr.json"
+                      trigger="hover"
+                      colors="primary:#ffffff"
+                      style={{ width: "50px", height: "40px" }}
+                    ></lord-icon>
+                  </button>
+                )}
               </div>
             ))
           ) : (
@@ -239,7 +276,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
         <p className={styles.titles}>Top 50 Manhwa:</p>
 
         <div className={styles.booksContainer}>
-          {topRatedBooks.length != 0 ? (
+          {top50Manhwa.length != 0 ? (
             top50Manhwa &&
             top50Manhwa.map((book, index) => (
               <div key={index} className={styles.book}>
@@ -256,14 +293,19 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
-                <button className={styles.cartIcon}>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/mfmkufkr.json"
-                    trigger="hover"
-                    colors="primary:#ffffff"
-                    style={{ width: "50px", height: "40px" }}
-                  ></lord-icon>
-                </button>
+                {userData && (
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => addToCart(book, "mangaCart")}
+                  >
+                    <lord-icon
+                      src="https://cdn.lordicon.com/mfmkufkr.json"
+                      trigger="hover"
+                      colors="primary:#ffffff"
+                      style={{ width: "50px", height: "40px" }}
+                    ></lord-icon>
+                  </button>
+                )}
               </div>
             ))
           ) : (
@@ -278,7 +320,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
         <p className={styles.titles}>Most Popular Manga:</p>
 
         <div className={styles.booksContainer}>
-          {topRatedBooks.length != 0 ? (
+          {mostPopularManga.length != 0 ? (
             mostPopularManga &&
             mostPopularManga.map((book, index) => (
               <div key={index} className={styles.book}>
@@ -295,14 +337,19 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
-                <button className={styles.cartIcon}>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/mfmkufkr.json"
-                    trigger="hover"
-                    colors="primary:#ffffff"
-                    style={{ width: "50px", height: "40px" }}
-                  ></lord-icon>
-                </button>
+                {userData && (
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => addToCart(book, "mangaCart")}
+                  >
+                    <lord-icon
+                      src="https://cdn.lordicon.com/mfmkufkr.json"
+                      trigger="hover"
+                      colors="primary:#ffffff"
+                      style={{ width: "50px", height: "40px" }}
+                    ></lord-icon>
+                  </button>
+                )}
               </div>
             ))
           ) : (
@@ -317,7 +364,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
         <p className={styles.titles}>Most Favorite Manga:</p>
 
         <div className={styles.booksContainer}>
-          {topRatedBooks.length != 0 ? (
+          {mostFavoriteManga.length != 0 ? (
             mostFavoriteManga &&
             mostFavoriteManga.map((book, index) => (
               <div key={index} className={styles.book}>
@@ -334,14 +381,19 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 <p>
                   <b>Rank:</b> {book.rank}
                 </p>
-                <button className={styles.cartIcon}>
-                  <lord-icon
-                    src="https://cdn.lordicon.com/mfmkufkr.json"
-                    trigger="hover"
-                    colors="primary:#ffffff"
-                    style={{ width: "50px", height: "40px" }}
-                  ></lord-icon>
-                </button>
+                {userData && (
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => addToCart(book, "mangaCart")}
+                  >
+                    <lord-icon
+                      src="https://cdn.lordicon.com/mfmkufkr.json"
+                      trigger="hover"
+                      colors="primary:#ffffff"
+                      style={{ width: "50px", height: "40px" }}
+                    ></lord-icon>
+                  </button>
+                )}
               </div>
             ))
           ) : (
