@@ -256,7 +256,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                   >
                     <lord-icon
                       src="https://cdn.lordicon.com/mfmkufkr.json"
-                      trigger="hover"
+                      trigger="click"
                       colors="primary:#ffffff"
                       style={{ width: "50px", height: "40px" }}
                     ></lord-icon>
@@ -300,7 +300,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                   >
                     <lord-icon
                       src="https://cdn.lordicon.com/mfmkufkr.json"
-                      trigger="hover"
+                      trigger="click"
                       colors="primary:#ffffff"
                       style={{ width: "50px", height: "40px" }}
                     ></lord-icon>
@@ -344,7 +344,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                   >
                     <lord-icon
                       src="https://cdn.lordicon.com/mfmkufkr.json"
-                      trigger="hover"
+                      trigger="click"
                       colors="primary:#ffffff"
                       style={{ width: "50px", height: "40px" }}
                     ></lord-icon>
@@ -388,7 +388,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                   >
                     <lord-icon
                       src="https://cdn.lordicon.com/mfmkufkr.json"
-                      trigger="hover"
+                      trigger="click"
                       colors="primary:#ffffff"
                       style={{ width: "50px", height: "40px" }}
                     ></lord-icon>
