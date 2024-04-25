@@ -38,7 +38,7 @@ function CartPage({ onLoginClick, userData, setUserData }) {
       setBookCart(response.data.bookCart);
     } catch (error) {
       console.error("Error logging in:", error);
-      toast.error("Error while getting cart items", {
+      toast.error("Server Error......", {
         position: "top-right",
         autoClose: 1500,
         hideProgressBar: false,
@@ -48,6 +48,22 @@ function CartPage({ onLoginClick, userData, setUserData }) {
         progress: undefined,
         theme: "dark",
       });
+    }
+  };
+
+  const deleteFromCart = async (data, whereToDelete) => {
+    try {
+      console.log(data);
+      const response = await axios.patch("http://localhost:5000/deleteInCart", {
+        email: userData.email,
+        type: userData.type,
+        whereToDelete: whereToDelete,
+        _id: data._id,
+      });
+      console.log("request res::::", response);
+      fetchUserData()
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -94,7 +110,10 @@ function CartPage({ onLoginClick, userData, setUserData }) {
                       {book.authors.join(", ")}
                     </p>
                   )}
-                  <button className={styles.cartIcon}>
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => deleteFromCart(book, "bookCart")}
+                  >
                     <lord-icon
                       src="https://cdn.lordicon.com/wpyrrmcq.json"
                       trigger="hover"
@@ -123,7 +142,10 @@ function CartPage({ onLoginClick, userData, setUserData }) {
                   <p>
                     <b>Rank:</b> {book.rank}
                   </p>
-                  <button className={styles.cartIcon}>
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => deleteFromCart(book, "mangaCart")}
+                  >
                     <lord-icon
                       src="https://cdn.lordicon.com/wpyrrmcq.json"
                       trigger="hover"

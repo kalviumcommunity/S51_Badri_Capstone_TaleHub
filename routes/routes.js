@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const Profile = require("../models/user.model");
 const Email = require("../models/email.model");
 const MangaData = require("../models/manga.model");
+const mongoose = require("mongoose");
 require("dotenv").config();
 
 router.get("/getUser", async (req, res) => {
@@ -123,8 +124,7 @@ router.patch("/addToCart", async (req, res) => {
 
 router.patch("/deleteInCart", async (req, res) => {
   try {
-    const { email, type, whereToDelete, title } = req.body;
-
+    const { email, type, whereToDelete, _id } = req.body;
     let user;
 
     if (type === "email") {
@@ -149,9 +149,9 @@ router.patch("/deleteInCart", async (req, res) => {
       return res.status(400).json({ message: "Invalid 'whereToDelete' value" });
     }
 
-    // Find the index of the item to delete based on the title
+    // Find the index of the item to delete based on the string representation of _id
     const indexToDelete = cartToUpdate.findIndex(
-      (item) => item.title === title
+      (item) => item._id.toString() === _id
     );
 
     if (indexToDelete === -1) {
