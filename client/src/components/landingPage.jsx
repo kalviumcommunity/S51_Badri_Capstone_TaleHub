@@ -12,7 +12,9 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
   const [top50Manhwa, setTop50Manhwa] = useState([]);
   const [mostPopularManga, setMostPopularManga] = useState([]);
   const [mostFavoriteManga, setMostFavoriteManga] = useState([]);
-
+  const [searchBar, setSearchBar] = useState([]);
+  const [searchBarValue, setSearchBarValue] = useState("");
+  const googleApiLink = "https://www.googleapis.com/books/v1/volumes?q=";
   const logout = () => {
     localStorage.clear();
     setUserData(null);
@@ -28,26 +30,41 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
     });
   };
 
+  const ChangeSearchBar = async (data) => {
+    try {
+      setSearchBarValue(data);
+
+      if (data != "") {
+        const response = await axios.get(`${googleApiLink}${data}`);
+        setSearchBar(response.data.items);
+      } else {
+        setSearchBar([]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const addToCart = async (data, whereToAdd) => {
     try {
-      if (whereToAdd == "bookCart") {
+      let itemToAdd = data;
+
+      if (whereToAdd === "bookCart") {
         const dataToAdd = {
           title: data.volumeInfo.title,
-          subtitle: data.volumeInfo.subtitle ? data.volumeInfo.subtitle : null,
-          authors: data.volumeInfo.authors ? data.volumeInfo.authors : null,
-          description: data.volumeInfo.description
-            ? data.volumeInfo.description
-            : null,
-          thumbnail: data.volumeInfo.imageLinks.thumbnail
-            ? data.volumeInfo.imageLinks.thumbnail
-            : null,
+          subtitle: data.volumeInfo.subtitle || null,
+          authors: data.volumeInfo.authors || null,
+          description: data.volumeInfo.description || null,
+          thumbnail: data.volumeInfo.imageLinks?.thumbnail || null,
         };
+        itemToAdd = dataToAdd;
       }
+
       const response = await axios.patch("http://localhost:5000/addToCart", {
         email: userData.email,
         type: userData.type,
         whereToAdd: whereToAdd,
-        itemToAdd: whereToAdd == "bookCart" ? dataToAdd : data,
+        itemToAdd: itemToAdd, // Pass the correct itemToAdd object
       });
       console.log("request res::::", response);
     } catch (error) {
@@ -134,7 +151,10 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
           type="text"
           placeholder="Search by name, author, genre and etc..."
           className={styles.input}
+          value={searchBarValue}
+          onChange={(e) => ChangeSearchBar(e.target.value)}
         />
+
         {userData ? (
           <div className={styles.Buttons}>
             <Link to="/cart">
@@ -157,6 +177,46 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
           </button>
         )}
       </div>
+
+      <div className={styles.booksContainer}>
+        {searchBar.length > 0 &&
+          searchBar.map((book, index) => (
+            <div key={index} className={styles.book}>
+              {book.volumeInfo.imageLinks && (
+                <img
+                  src={book.volumeInfo.imageLinks.thumbnail}
+                  alt="Thumbnail"
+                />
+              )}{" "}
+              <h3>{book.volumeInfo.title}</h3>
+              {book.volumeInfo.subtitle && (
+                <p>
+                  <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
+                </p>
+              )}
+              {book.volumeInfo.authors && (
+                <p className={styles.auth}>
+                  <strong>Author(s):</strong>
+                  {book.volumeInfo.authors.join(", ")}
+                </p>
+              )}
+              {userData && (
+                <button
+                  className={styles.cartIcon}
+                  onClick={() => addToCart(book, "bookCart")}
+                >
+                  <lord-icon
+                    src="https://cdn.lordicon.com/mfmkufkr.json"
+                    trigger="click"
+                    colors="primary:#ffffff"
+                    style={{ width: "50px", height: "40px" }}
+                  ></lord-icon>
+                </button>
+              )}
+            </div>
+          ))}
+      </div>
+
       <div className={styles.genre}>
         <div className={styles.d1}>
           <p className={styles.categories}>Top 50 Manga</p>
