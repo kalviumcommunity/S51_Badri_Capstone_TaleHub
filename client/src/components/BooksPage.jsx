@@ -12,6 +12,9 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
   const [poetryBook, setpoetryBook] = useState([]);
   const [fictionBook, setfictionBook] = useState([]);
   const [fantasyBook, setfantasyBook] = useState([]);
+  const [searchBar, setSearchBar] = useState([]);
+  const [searchBarValue, setSearchBarValue] = useState("");
+  const googleApiLink = "https://www.googleapis.com/books/v1/volumes?q=";
 
   const getBooks = async (type) => {
     try {
@@ -20,6 +23,21 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
     } catch (error) {
       console.error("Error fetching top rated books:", error);
       return [];
+    }
+  };
+
+  const ChangeSearchBar = async (data) => {
+    try {
+      setSearchBarValue(data);
+
+      if (data != "") {
+        const response = await axios.get(`${googleApiLink}${data}`);
+        setSearchBar(response.data.items);
+      } else {
+        setSearchBar([]);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -104,8 +122,10 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
       <div className={styles.searchBar}>
         <input
           type="text"
-          placeholder="Search for books by title, author, etc..."
+          placeholder="Search by name, author, genre and etc..."
           className={styles.input}
+          value={searchBarValue}
+          onChange={(e) => ChangeSearchBar(e.target.value)}
         />
         {userData ? (
           <div className={styles.Buttons}>
@@ -129,6 +149,46 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
           </button>
         )}
       </div>
+
+      <div className={styles.booksContainer}>
+        {searchBar.length > 0 &&
+          searchBar.map((book, index) => (
+            <div key={index} className={styles.book}>
+              {book.volumeInfo.imageLinks && (
+                <img
+                  src={book.volumeInfo.imageLinks.thumbnail}
+                  alt="Thumbnail"
+                />
+              )}{" "}
+              <h3>{book.volumeInfo.title}</h3>
+              {book.volumeInfo.subtitle && (
+                <p>
+                  <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
+                </p>
+              )}
+              {book.volumeInfo.authors && (
+                <p className={styles.auth}>
+                  <strong>Author(s):</strong>
+                  {book.volumeInfo.authors.join(", ")}
+                </p>
+              )}
+              {userData && (
+                <button
+                  className={styles.cartIcon}
+                  onClick={() => addToCart(book, "bookCart")}
+                >
+                  <lord-icon
+                    src="https://cdn.lordicon.com/mfmkufkr.json"
+                    trigger="click"
+                    colors="primary:#ffffff"
+                    style={{ width: "50px", height: "40px" }}
+                  ></lord-icon>
+                </button>
+              )}
+            </div>
+          ))}
+      </div>
+
 
       <div className={styles.genres}>
         <div className={styles.book1}>
