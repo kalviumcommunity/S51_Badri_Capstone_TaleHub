@@ -31,19 +31,25 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
   };
 
   const ChangeSearchBar = async (data) => {
-    try {
-      setSearchBarValue(data);
-
-      if (data != "") {
-        const response = await axios.get(`${googleApiLink}${data}`);
-        setSearchBar(response.data.items);
-      } else {
-        setSearchBar([]);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    setSearchBarValue(data);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (searchBarValue !== "") {
+          const response = await axios.get(`${googleApiLink}${searchBarValue}`);
+          setSearchBar(response.data.items);
+        } else {
+          setSearchBar([]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [searchBarValue]);
 
   const addToCart = async (data, whereToAdd) => {
     try {
