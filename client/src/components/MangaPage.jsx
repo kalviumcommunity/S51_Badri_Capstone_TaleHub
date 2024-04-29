@@ -13,6 +13,8 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
   const [lightNovelBook, setLightNovelBook] = useState([]);
   const [novelBook, setNovelBook] = useState([]);
   const [mangaBook, setMangaBook] = useState([]);
+  const [searchBar, setSearchBar] = useState([]);
+  const [searchBarValue, setSearchBarValue] = useState("");
 
   const getBooks = async (type) => {
     try {
@@ -23,6 +25,43 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       return [];
     }
   };
+
+  const ChangeSearchBar = async (data) => {
+    setSearchBarValue(data);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (searchBarValue !== "") {
+          const options = {
+            method: "GET",
+            url: "https://myanimelist.p.rapidapi.com/v2/manga/search",
+            params: {
+              q: searchBarValue,
+              n: "50",
+              score: "0",
+              genre: "1",
+            },
+            headers: {
+              "X-RapidAPI-Key":
+                "468b267b84mshe5256b2b59ee957p111078jsn666fc3a3d2fe",
+              "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
+            },
+          };
+
+          const response = await axios.request(options);
+          setSearchBar(response.data);
+        } else {
+          setSearchBar([]);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [searchBarValue]);
 
   const addToCart = async (data, whereToAdd) => {
     try {
@@ -101,6 +140,8 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
           type="text"
           placeholder="Search for manga by title"
           className={styles.input}
+          value={searchBarValue}
+          onChange={(e) => ChangeSearchBar(e.target.value)}
         />
         {userData ? (
           <div className={styles.Buttons}>
@@ -123,6 +164,40 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
             Log-In
           </button>
         )}
+      </div>
+
+      <div className={styles.booksContainer}>
+        {searchBar.length > 0 &&
+          searchBar.map((book, index) => (
+            <div key={index} className={styles.book}>
+              {book.picture_url && (
+                <a href={book.myanimelist_url} target="_blank">
+                  <img src={book.picture_url} alt="Thumbnail" />
+                </a>
+              )}
+              <h3>{book.title}</h3>
+              <p>
+                <b>Rating: </b>
+                {book.score}
+              </p>
+              <p>
+                <b>Rank:</b> {book.rank}
+              </p>
+              {userData && (
+                <button
+                  className={styles.cartIcon}
+                  onClick={() => addToCart(book, "mangaCart")}
+                >
+                  <lord-icon
+                    src="https://cdn.lordicon.com/mfmkufkr.json"
+                    trigger="click"
+                    colors="primary:#ffffff"
+                    style={{ width: "50px", height: "40px" }}
+                  ></lord-icon>
+                </button>
+              )}
+            </div>
+          ))}
       </div>
 
       <div className={styles.genre}>
