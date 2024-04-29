@@ -31,9 +31,11 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    let fetched = false;
+
+    const fetchData = async (apiKey) => {
       try {
-        if (searchBarValue !== "") {
+        if (!fetched) {
           const options = {
             method: "GET",
             url: "https://myanimelist.p.rapidapi.com/v2/manga/search",
@@ -44,23 +46,54 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
               genre: "1",
             },
             headers: {
-              "X-RapidAPI-Key":
-                "468b267b84mshe5256b2b59ee957p111078jsn666fc3a3d2fe",
+              "X-RapidAPI-Key": apiKey,
               "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
             },
           };
-
+          console.log("feetc runingn");
           const response = await axios.request(options);
           setSearchBar(response.data);
-        } else {
-          setSearchBar([]);
+          fetched = true; // Update fetched flag
         }
       } catch (error) {
         console.log(error);
       }
     };
 
-    fetchData();
+    const fetchSequentially = async () => {
+      try {
+        if (!fetched && searchBarValue !== "") {
+          await fetchData("468b267b84mshe5256b2b59ee957p111078jsn666fc3a3d2fe");
+        }
+        if (!fetched && searchBarValue !== "") {
+          await fetchData("9e062c46a0msh80df1d40872150fp16a8d0jsndb1e10165494");
+        }
+
+        if (!fetched && searchBarValue !== "") {
+          await fetchData("e474091566msh4659433272064b9p1de085jsn47379338079a");
+        }
+
+        if (!fetched && searchBarValue !== "") {
+          await fetchData("9e062c46a0msh80df1d40872150fp16a8d0jsndb1e10165494");
+        }
+
+        if (!fetched && searchBarValue !== "") {
+          await fetchData("b377a6820amsh32f699556ee6d0fp1c0a47jsnbff6aff83640");
+        }
+
+        if (!fetched && searchBarValue !== "") {
+          await fetchData("656ec1f26cmshece4333fd6bda55p1a5c2fjsnb6b2d6831faa");
+        }
+
+        if (!fetched && searchBarValue !== "") {
+          await fetchData("744a2be11fmsh13d9494e99943b3p1507bejsn1094ef1b8b6d");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchSequentially();
   }, [searchBarValue]);
 
   const addToCart = async (data, whereToAdd) => {
