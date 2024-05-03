@@ -5,6 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+import { animateScroll as scroll } from "react-scroll";
 
 function LandingPage({ onLoginClick, userData, setUserData }) {
   const [topRatedBooks, setTopRatedBooks] = useState([]);
@@ -28,6 +29,13 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
       progress: undefined,
       theme: "dark",
     });
+  };
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const ChangeSearchBar = async (data) => {
@@ -224,31 +232,27 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
       </div>
 
       <div className={styles.genre}>
-        <div className={styles.d1}>
+        <div className={styles.d1} onClick={() => scrollToSection("manga")}>
           <p className={styles.categories}>Top 50 Manga</p>
         </div>
-        <div className={styles.d2}>
+        <div className={styles.d2} onClick={() => scrollToSection("manhwa")}>
           <p className={styles.categories}>Top 50 Manhwa</p>
         </div>
-
-        <div className={styles.d4}>
+        <div className={styles.d4} onClick={() => scrollToSection("books")}>
           <p className={styles.categories}>Top Rated Books</p>
         </div>
-        <div className={styles.d5}>
-          <p className={styles.categories}>
-            Most Popular <br /> Manga's
-          </p>
+        <div className={styles.d5} onClick={() => scrollToSection("popular")}>
+          <p className={styles.categories}>Most Popular Manga</p>
         </div>
-        <div className={styles.d6}>
-          <p className={styles.categories}>
-            Most Favorite <br />
-            Manga's
-          </p>
+        <div className={styles.d6} onClick={() => scrollToSection("favorite")}>
+          <p className={styles.categories}>Most Favorite Manga</p>
         </div>
       </div>
 
       <div>
-        <p className={styles.titles}>Top Rated Books:</p>
+        <p className={styles.titles} id="books">
+          Top Rated Books:
+        </p>
 
         <div className={styles.booksContainer}>
           {topRatedBooks.length != 0 ? (
@@ -296,7 +300,9 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
           )}
         </div>
 
-        <p className={styles.titles}>Top 50 Manga:</p>
+        <p className={styles.titles} id="manga">
+          Top 50 Manga:
+        </p>
         <div className={styles.booksContainer}>
           {top50Manga.length != 0 ? (
             top50Manga &&
@@ -339,7 +345,9 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
           )}
         </div>
 
-        <p className={styles.titles}>Top 50 Manhwa:</p>
+        <p className={styles.titles} id="manhwa">
+          Top 50 Manhwa:
+        </p>
 
         <div className={styles.booksContainer}>
           {top50Manhwa.length != 0 ? (
@@ -383,7 +391,9 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
           )}
         </div>
 
-        <p className={styles.titles}>Most Popular Manga:</p>
+        <p className={styles.titles} id="popular">
+          Most Popular Manga:
+        </p>
 
         <div className={styles.booksContainer}>
           {mostPopularManga.length != 0 ? (
@@ -427,7 +437,9 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
           )}
         </div>
 
-        <p className={styles.titles}>Most Favorite Manga:</p>
+        <p className={styles.titles} id="favorite">
+          Most Favorite Manga:
+        </p>
 
         <div className={styles.booksContainer}>
           {mostFavoriteManga.length != 0 ? (
