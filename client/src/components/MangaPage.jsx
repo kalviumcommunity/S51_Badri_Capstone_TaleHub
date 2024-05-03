@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import VideoBackground from "./VideoBackground";
 function MangaPage({ onLoginClick, userData, setUserData }) {
   const apiLink = "https://s51-badri-capstone-talehub.onrender.com/getData";
   const [manhwaBook, setManhwaBook] = useState([]);
@@ -234,27 +235,32 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       </div>
 
       <div className={styles.genre}>
-        <div className={styles.book1}>
+        <VideoBackground videoSrc="./mangaBack.mp4" className={styles.book1}>
           <p className={styles.catogories}>Manga</p>
-        </div>
-        <div className={styles.book2}>
+        </VideoBackground>
+
+        <VideoBackground videoSrc="./manhwaBack.mp4" className={styles.book2}>
           <p className={styles.catogories}>Manhwa</p>
-        </div>
-        <div className={styles.book3}>
+        </VideoBackground>
+
+        <VideoBackground videoSrc="./manhuaBack.mp4" className={styles.book3}>
           <p className={styles.catogories}>Manhua</p>
-        </div>
-        <div className={styles.book4}>
+        </VideoBackground>
+
+        <VideoBackground videoSrc="./oneShotBack.mp4" className={styles.book4}>
           <p className={styles.catogories}>Oneshot</p>
-        </div>
-        <div className={styles.book5}>
-          <p className={styles.catogories}>Doujinshi</p>
-        </div>
-        <div className={styles.book6}>
+        </VideoBackground>
+
+        <VideoBackground
+          videoSrc="./shortNovelBack.mp4"
+          className={styles.book6}
+        >
           <p className={styles.catogories}>Light Novel</p>
-        </div>
-        <div className={styles.book7}>
+        </VideoBackground>
+
+        <VideoBackground videoSrc="./novelBack.mp4" className={styles.book7}>
           <p className={styles.catogories}>Novel</p>
-        </div>
+        </VideoBackground>
       </div>
 
       <p className={styles.titles}>Manga:</p>
@@ -428,49 +434,6 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
           </div>
         )}
       </div>
-
-      {/* <p className={styles.titles}>Doujinshis:</p>
-
-      <div className={styles.booksContainer}>
-        {doujinshiBook.length != 0 ? (
-          doujinshiBook.map((book, index) => (
-            <div key={index} className={styles.book}>
-              {book.picture_url && (
-                <a href={book.myanimelist_url} target="_blank">
-                  <img src={book.picture_url} alt="Thumbnail" />
-                </a>
-              )}
-              <h3>{book.title}</h3>
-              <p>
-                <b>Rating: </b>
-                {book.score}
-              </p>
-              <p>
-                <b>Rank:</b> {book.rank}
-              </p>
-              {userData && (
-                <button
-                  className={styles.cartIcon}
-                  onClick={() => addToCart(book, "mangaCart")}
-                >
-                  <lord-icon
-                    src="https://cdn.lordicon.com/mfmkufkr.json"
-                    trigger="click"
-                    colors="primary:#ffffff"
-                    style={{ width: "50px", height: "40px" }}
-                  ></lord-icon>
-                </button>
-              )}
-            </div>
-          ))
-        ) : (
-          <div className={styles.loader}>
-            <span>&lt;</span>
-            <span>LOADING</span>
-            <span>/&gt;</span>
-          </div>
-        )}
-      </div> */}
 
       <p className={styles.titles}>Light Novels:</p>
 
