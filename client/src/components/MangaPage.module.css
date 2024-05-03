@@ -27,88 +27,68 @@
 
 .genre {
   display: grid;
-  grid-template-areas:
-    "book2 book3"
-    "book1 book1"
-    "book4 book5"
-    "book6 book7";
-  gap: 30px;
-  margin: 50px 30px;
+  grid-template-columns: 1fr 1fr;
+  margin: 50px 90px;
 }
 
 .genre div {
-  height: 150px;
-  width: 100%;
+  max-width: fit-content;
+  max-height: 240px;
+  min-height: fit-content;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   font-family: "Itim", cursive;
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  overflow: hidden;
-  border-radius: 20px;
-  background-position: center;
-  transition: background-size 0.8s ease;
-  transition-delay: 0.2s;
+  position: relative;
+  margin: 10px;
+  /* background-color: red; */
+}
+.genre div p {
+  position: absolute;
+  top: 45%;
+  left: 50%; 
+  transform: translate(-50%, -50%);
 }
 
-.genre div:hover {
-  background-position: center;
-  background-size: 110%;
-}
-
-.genre div:not(:hover) {
-  background-size: 100%;
-  transition-delay: 0s;
-}
-
-.book1 {
-  grid-area: book1;
+.genre > :nth-child(1){
   background: url("../../public/layered-waves-haikei.png");
   background-size: cover;
   background-position: center;
 }
 
-.book2 {
-  grid-area: book2;
+.genre > :nth-child(2){
   background: url("../../public/stacked-waves-haikei.png");
   background-size: cover;
   background-position: center;
 }
 
-.book3 {
-  grid-area: book3;
+.genre > :nth-child(3){
   background: url("../../public/stacked-waves-haikei\ \(2\).png");
   background-size: cover;
   background-position: center;
 }
 
-.book4 {
-  grid-area: book4;
+.genre > :nth-child(4){
   background: url("../../public/blob-scatter-haikei.png");
   background-size: cover;
   background-position: center;
 }
 
 .book5 {
-  grid-area: book5;
   background: url("../../public/blob-scatter-haikei\ \(1\).png");
   background-size: cover;
   background-position: center;
 }
 
-.book6 {
-  grid-area: book6;
+.genre > :nth-child(5){
   background: url("../../public/blob-scatter-haikei\ \(2\).png");
   background-size: cover;
   background-position: center;
 }
 
-.book7 {
-  grid-area: book7;
+.genre  > :nth-child(6){
   background: url("../../public/blob-scatter-haikei\ \(3\).png");
   background-size: cover;
   background-position: center;
@@ -208,7 +188,7 @@ button {
 
 .book {
   flex: 0 0 auto;
-  width: 33%;
+  width: 200px;
   padding: 0px 20px;
   margin: 0px 10px;
   border-radius: 20px;
@@ -289,5 +269,3 @@ button {
     letter-spacing: 0.5em;
   }
 }
-
-
