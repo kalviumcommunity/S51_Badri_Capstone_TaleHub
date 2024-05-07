@@ -116,7 +116,7 @@
 }
 
 .booksContainer::-webkit-scrollbar {
-  height: 10px;
+  height: 4px;
 }
 
 .booksContainer::-webkit-scrollbar-track {
@@ -124,7 +124,7 @@
 }
 
 .booksContainer::-webkit-scrollbar-thumb {
-  background: #989898; /* Color of the scrollbar */
+  background: #6c6c6c; /* Color of the scrollbar */
   border-radius: 10px;
 }
 
@@ -134,20 +134,17 @@
 
 .book {
   flex: 0 0 auto;
-  width: 33%;
+  width: 210px;
   padding: 0px 20px;
   margin: 0px 10px;
   border-radius: 20px;
   color: white;
-  background-image: linear-gradient(
-    to bottom,
-    #46455500,
-    #39343e1d,
-    #2a242a4c,
-    #19151865,
-    #000000bc
-  );
   font-family: "Itim", cursive;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
 }
 
 .book p::-webkit-scrollbar-thumb,
@@ -157,6 +154,7 @@
 .book h3,
 .book p {
   margin: 1%;
+  text-align: center;
 }
 
 .book img {
@@ -172,6 +170,15 @@
   transform: translateY(-10px);
   transition: transform 0.5s ease 0.3s;
 }
+
+
+.auth,.subs{
+  height: 50px;
+  overflow-y: scroll;
+}
+
+
+
 
 .login {
   --color: #000000;
