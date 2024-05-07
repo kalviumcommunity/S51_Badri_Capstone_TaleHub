@@ -156,6 +156,29 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
     getMostFavoriteManga();
   }, []);
 
+  const fetchColor = () => {
+    const letter = "0123456789ABCDEF";
+    let color1 = "#";
+    let color2 = "#";
+    for (let i = 0; i < 6; i++) {
+      color1 += letter[Math.floor(Math.random() * 16)];
+      color2 += letter[Math.floor(Math.random() * 16)];
+    }
+    // Adjust alpha (opacity) for color1 and color2
+    const alpha1 = 0; // Adjust as needed
+    const alpha2 = 0.4; // Adjust as needed
+    return `linear-gradient(to bottom, rgba(${parseInt(
+      color1.slice(1, 3),
+      16
+    )},${parseInt(color1.slice(3, 5), 16)},${parseInt(
+      color1.slice(5, 7),
+      16
+    )},${alpha1}), rgba(${parseInt(color2.slice(1, 3), 16)},${parseInt(
+      color2.slice(3, 5),
+      16
+    )},${parseInt(color2.slice(5, 7), 16)},${alpha2}))`;
+  };
+
   return (
     <div className={styles.landingPage}>
       <ToastContainer />
@@ -257,7 +280,11 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
         <div className={styles.booksContainer}>
           {topRatedBooks.length != 0 ? (
             topRatedBooks.map((book, index) => (
-              <div key={index} className={styles.book}>
+              <div
+                key={index}
+                className={styles.book}
+                style={{ background: fetchColor() }}
+              >
                 {book.volumeInfo.imageLinks && (
                   <img
                     src={book.volumeInfo.imageLinks.thumbnail}
@@ -266,7 +293,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
                 )}{" "}
                 <h3>{book.volumeInfo.title}</h3>
                 {book.volumeInfo.subtitle && (
-                  <p>
+                  <p className={styles.subs}>
                     <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
                   </p>
                 )}
@@ -307,7 +334,11 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
           {top50Manga.length != 0 ? (
             top50Manga &&
             top50Manga.map((book, index) => (
-              <div key={index} className={styles.book}>
+              <div
+                key={index}
+                className={styles.book}
+                style={{ background: fetchColor() }}
+              >
                 {book.picture_url && (
                   <a href={book.myanimelist_url} target="_blank">
                     <img src={book.picture_url} alt="Thumbnail" />
@@ -353,7 +384,11 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
           {top50Manhwa.length != 0 ? (
             top50Manhwa &&
             top50Manhwa.map((book, index) => (
-              <div key={index} className={styles.book}>
+              <div
+                key={index}
+                className={styles.book}
+                style={{ background: fetchColor() }}
+              >
                 {book.picture_url && (
                   <a href={book.myanimelist_url} target="_blank">
                     <img src={book.picture_url} alt="Thumbnail" />
@@ -399,7 +434,11 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
           {mostPopularManga.length != 0 ? (
             mostPopularManga &&
             mostPopularManga.map((book, index) => (
-              <div key={index} className={styles.book}>
+              <div
+                key={index}
+                className={styles.book}
+                style={{ background: fetchColor() }}
+              >
                 {book.picture_url && (
                   <a href={book.myanimelist_url} target="_blank">
                     <img src={book.picture_url} alt="Thumbnail" />
@@ -445,7 +484,11 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
           {mostFavoriteManga.length != 0 ? (
             mostFavoriteManga &&
             mostFavoriteManga.map((book, index) => (
-              <div key={index} className={styles.book}>
+              <div
+                key={index}
+                className={styles.book}
+                style={{ background: fetchColor() }}
+              >
                 {book.picture_url && (
                   <a href={book.myanimelist_url} target="_blank">
                     <img src={book.picture_url} alt="Thumbnail" />
