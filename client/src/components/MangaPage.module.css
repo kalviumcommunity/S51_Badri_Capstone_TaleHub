@@ -27,13 +27,13 @@
 
 .genre {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 50px 90px;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 50px 60px;
 }
 
 .genre div {
   max-width: fit-content;
-  max-height: 240px;
+  max-height: 150px;
   min-height: fit-content;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
@@ -42,7 +42,7 @@
   font-weight: bold;
   text-align: center;
   position: relative;
-  margin: 10px;
+  margin: 30px;
   border-radius: 20px;
 }
 .genre div p {
@@ -170,7 +170,7 @@ button {
 }
 
 .booksContainer::-webkit-scrollbar {
-  height: 10px;
+  height: 5px;
 }
 
 .booksContainer::-webkit-scrollbar-track {
@@ -208,6 +208,7 @@ button {
 .book h3,
 .book p {
   margin: 1%;
+  text-align: center;
 }
 
 .book img {

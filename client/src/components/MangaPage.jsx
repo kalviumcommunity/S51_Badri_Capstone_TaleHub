@@ -186,6 +186,7 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
     fetchOneshotBooks();
   }, []);
 
+
   return (
     <div className={styles.mangaPage}>
       <ToastContainer />
@@ -260,35 +261,58 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       </div>
 
       <div className={styles.genre}>
-        <VideoBackground videoSrc="./mangaBack.mp4" className={styles.book1}>
+        <VideoBackground
+          videoSrc="./mangaBack.mp4"
+          sectionId="manga"
+          className={styles.book1}
+        >
           <p className={styles.catogories}>Manga</p>
         </VideoBackground>
 
-        <VideoBackground videoSrc="./manhwaBack.mp4" className={styles.book2}>
+        <VideoBackground
+          videoSrc="./manhwaBack.mp4"
+          sectionId="manhwa"
+          className={styles.book2}
+        >
           <p className={styles.catogories}>Manhwa</p>
         </VideoBackground>
 
-        <VideoBackground videoSrc="./manhuaBack.mp4" className={styles.book3}>
+        <VideoBackground
+          videoSrc="./manhuaBack.mp4"
+          sectionId="manhua"
+          className={styles.book3}
+        >
           <p className={styles.catogories}>Manhua</p>
         </VideoBackground>
 
-        <VideoBackground videoSrc="./oneShotBack.mp4" className={styles.book4}>
+        <VideoBackground
+          videoSrc="./oneShotBack.mp4"
+          sectionId="oneshot"
+          className={styles.book4}
+        >
           <p className={styles.catogories}>Oneshot</p>
         </VideoBackground>
 
         <VideoBackground
           videoSrc="./shortNovelBack.mp4"
+          sectionId="lightnovel"
           className={styles.book6}
         >
           <p className={styles.catogories}>Light Novel</p>
         </VideoBackground>
 
-        <VideoBackground videoSrc="./novelBack.mp4" className={styles.book7}>
+        <VideoBackground
+          videoSrc="./novelBack.mp4"
+          sectionId="novel"
+          className={styles.book7}
+        >
           <p className={styles.catogories}>Novel</p>
         </VideoBackground>
       </div>
 
-      <p className={styles.titles}>Manga:</p>
+      <p className={styles.titles} id="manga">
+        Manga:
+      </p>
 
       <div className={styles.booksContainer}>
         {mangaBook.length != 0 ? (
@@ -335,7 +359,9 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles}>Manhwas:</p>
+      <p className={styles.titles} id="manhwa">
+        Manhwas:
+      </p>
 
       <div className={styles.booksContainer}>
         {manhwaBook.length != 0 ? (
@@ -382,7 +408,9 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles}>Manhuas:</p>
+      <p className={styles.titles} id="manhua">
+        Manhuas:
+      </p>
 
       <div className={styles.booksContainer}>
         {manhuaBook.length != 0 ? (
@@ -429,7 +457,9 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles}>Oneshots:</p>
+      <p className={styles.titles} id="oneshot">
+        Oneshots:
+      </p>
 
       <div className={styles.booksContainer}>
         {oneshotBook.length != 0 ? (
@@ -476,7 +506,9 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles}>Light Novels:</p>
+      <p className={styles.titles} id="lightnovel">
+        Light Novels:
+      </p>
 
       <div className={styles.booksContainer}>
         {lightNovelBook.length != 0 ? (
@@ -523,7 +555,9 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles}>Novels:</p>
+      <p className={styles.titles} id="novel">
+        Novels:
+      </p>
 
       <div className={styles.booksContainer}>
         {novelBook.length != 0 ? (

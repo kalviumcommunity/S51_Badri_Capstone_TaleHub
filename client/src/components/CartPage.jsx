@@ -61,7 +61,7 @@ function CartPage({ onLoginClick, userData, setUserData }) {
         _id: data._id,
       });
       console.log("request res::::", response);
-      fetchUserData()
+      fetchUserData();
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +72,29 @@ function CartPage({ onLoginClick, userData, setUserData }) {
       fetchUserData();
     }
   }, [userData]);
+
+  const fetchColor = () => {
+    const letter = "0123456789ABCDEF";
+    let color1 = "#";
+    let color2 = "#";
+    for (let i = 0; i < 6; i++) {
+      color1 += letter[Math.floor(Math.random() * 16)];
+      color2 += letter[Math.floor(Math.random() * 16)];
+    }
+    // Adjust alpha (opacity) for color1 and color2
+    const alpha1 = 0; // Adjust as needed
+    const alpha2 = 0.4; // Adjust as needed
+    return `linear-gradient(to bottom, rgba(${parseInt(
+      color1.slice(1, 3),
+      16
+    )},${parseInt(color1.slice(3, 5), 16)},${parseInt(
+      color1.slice(5, 7),
+      16
+    )},${alpha1}), rgba(${parseInt(color2.slice(1, 3), 16)},${parseInt(
+      color2.slice(3, 5),
+      16
+    )},${parseInt(color2.slice(5, 7), 16)},${alpha2}))`;
+  };
 
   return (
     <div className={styles.CartPage}>
@@ -94,7 +117,11 @@ function CartPage({ onLoginClick, userData, setUserData }) {
           <div className={styles.booksContainer}>
             {bookCart &&
               bookCart.map((book, index) => (
-                <div key={index} className={styles.book}>
+                <div
+                  key={index}
+                  className={styles.book}
+                  style={{ background: fetchColor() }}
+                >
                   {book && book.thumbnail && (
                     <img src={book.thumbnail} alt="Thumbnail" />
                   )}{" "}
@@ -128,7 +155,11 @@ function CartPage({ onLoginClick, userData, setUserData }) {
           <div className={styles.booksContainer}>
             {mangaCart &&
               mangaCart.map((book, index) => (
-                <div key={index} className={styles.book}>
+                <div
+                  key={index}
+                  className={styles.book}
+                  style={{ background: fetchColor() }}
+                >
                   {book.picture_url && (
                     <a href={book.myanimelist_url} target="_blank">
                       <img src={book.picture_url} alt="Thumbnail" />
