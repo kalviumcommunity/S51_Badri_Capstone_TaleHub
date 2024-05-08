@@ -218,7 +218,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
       <div className={styles.booksContainer}>
         {searchBar.length > 0 &&
           searchBar.map((book, index) => (
-            <div key={index} className={styles.book}>
+            <div key={index} className={styles.book} style={{ background: fetchColor() }}>
               {book.volumeInfo.imageLinks && (
                 <img
                   src={book.volumeInfo.imageLinks.thumbnail}

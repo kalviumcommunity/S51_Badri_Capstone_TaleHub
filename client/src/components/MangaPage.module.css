@@ -43,34 +43,34 @@
   text-align: center;
   position: relative;
   margin: 10px;
-  /* background-color: red; */
+  border-radius: 20px;
 }
 .genre div p {
   position: absolute;
   top: 45%;
-  left: 50%; 
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.genre > :nth-child(1){
+.genre > :nth-child(1) {
   background: url("../../public/layered-waves-haikei.png");
   background-size: cover;
   background-position: center;
 }
 
-.genre > :nth-child(2){
+.genre > :nth-child(2) {
   background: url("../../public/stacked-waves-haikei.png");
   background-size: cover;
   background-position: center;
 }
 
-.genre > :nth-child(3){
+.genre > :nth-child(3) {
   background: url("../../public/stacked-waves-haikei\ \(2\).png");
   background-size: cover;
   background-position: center;
 }
 
-.genre > :nth-child(4){
+.genre > :nth-child(4) {
   background: url("../../public/blob-scatter-haikei.png");
   background-size: cover;
   background-position: center;
@@ -82,13 +82,13 @@
   background-position: center;
 }
 
-.genre > :nth-child(5){
+.genre > :nth-child(5) {
   background: url("../../public/blob-scatter-haikei\ \(2\).png");
   background-size: cover;
   background-position: center;
 }
 
-.genre  > :nth-child(6){
+.genre > :nth-child(6) {
   background: url("../../public/blob-scatter-haikei\ \(3\).png");
   background-size: cover;
   background-position: center;
@@ -188,20 +188,17 @@ button {
 
 .book {
   flex: 0 0 auto;
-  width: 200px;
+  width: 210px;
   padding: 0px 20px;
   margin: 0px 10px;
   border-radius: 20px;
   color: white;
-  background-image: linear-gradient(
-    to bottom,
-    #46455500,
-    #39343e1d,
-    #2a242a4c,
-    #19151865,
-    #000000bc
-  );
   font-family: "Itim", cursive;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
 }
 
 .book p::-webkit-scrollbar-thumb,
@@ -225,6 +222,12 @@ button {
 .book img:hover {
   transform: translateY(-10px);
   transition: transform 0.5s ease 0.3s;
+}
+
+.auth,
+.subs {
+  height: 50px;
+  overflow-y: scroll;
 }
 
 .Buttons {

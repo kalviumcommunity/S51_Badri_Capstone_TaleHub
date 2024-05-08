@@ -26,7 +26,28 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       return [];
     }
   };
-
+  const fetchColor = () => {
+    const letter = "0123456789ABCDEF";
+    let color1 = "#";
+    let color2 = "#";
+    for (let i = 0; i < 6; i++) {
+      color1 += letter[Math.floor(Math.random() * 16)];
+      color2 += letter[Math.floor(Math.random() * 16)];
+    }
+    // Adjust alpha (opacity) for color1 and color2
+    const alpha1 = 0; // Adjust as needed
+    const alpha2 = 0.4; // Adjust as needed
+    return `linear-gradient(to bottom, rgba(${parseInt(
+      color1.slice(1, 3),
+      16
+    )},${parseInt(color1.slice(3, 5), 16)},${parseInt(
+      color1.slice(5, 7),
+      16
+    )},${alpha1}), rgba(${parseInt(color2.slice(1, 3), 16)},${parseInt(
+      color2.slice(3, 5),
+      16
+    )},${parseInt(color2.slice(5, 7), 16)},${alpha2}))`;
+  };
   const ChangeSearchBar = async (data) => {
     setSearchBarValue(data);
   };
@@ -203,7 +224,11 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       <div className={styles.booksContainer}>
         {searchBar.length > 0 &&
           searchBar.map((book, index) => (
-            <div key={index} className={styles.book}>
+            <div
+              key={index}
+              className={styles.book}
+              style={{ background: fetchColor() }}
+            >
               {book.picture_url && (
                 <a href={book.myanimelist_url} target="_blank">
                   <img src={book.picture_url} alt="Thumbnail" />
@@ -268,7 +293,11 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       <div className={styles.booksContainer}>
         {mangaBook.length != 0 ? (
           mangaBook.map((book, index) => (
-            <div key={index} className={styles.book}>
+            <div
+              key={index}
+              className={styles.book}
+              style={{ background: fetchColor() }}
+            >
               {book.picture_url && (
                 <a href={book.myanimelist_url} target="_blank">
                   <img src={book.picture_url} alt="Thumbnail" />
@@ -311,7 +340,11 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       <div className={styles.booksContainer}>
         {manhwaBook.length != 0 ? (
           manhwaBook.map((book, index) => (
-            <div key={index} className={styles.book}>
+            <div
+              key={index}
+              className={styles.book}
+              style={{ background: fetchColor() }}
+            >
               {book.picture_url && (
                 <a href={book.myanimelist_url} target="_blank">
                   <img src={book.picture_url} alt="Thumbnail" />
@@ -354,7 +387,11 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       <div className={styles.booksContainer}>
         {manhuaBook.length != 0 ? (
           manhuaBook.map((book, index) => (
-            <div key={index} className={styles.book}>
+            <div
+              key={index}
+              className={styles.book}
+              style={{ background: fetchColor() }}
+            >
               {book.picture_url && (
                 <a href={book.myanimelist_url} target="_blank">
                   <img src={book.picture_url} alt="Thumbnail" />
@@ -397,7 +434,11 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       <div className={styles.booksContainer}>
         {oneshotBook.length != 0 ? (
           oneshotBook.map((book, index) => (
-            <div key={index} className={styles.book}>
+            <div
+              key={index}
+              className={styles.book}
+              style={{ background: fetchColor() }}
+            >
               {book.picture_url && (
                 <a href={book.myanimelist_url} target="_blank">
                   <img src={book.picture_url} alt="Thumbnail" />
@@ -440,7 +481,11 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       <div className={styles.booksContainer}>
         {lightNovelBook.length != 0 ? (
           lightNovelBook.map((book, index) => (
-            <div key={index} className={styles.book}>
+            <div
+              key={index}
+              className={styles.book}
+              style={{ background: fetchColor() }}
+            >
               {book.picture_url && (
                 <a href={book.myanimelist_url} target="_blank">
                   <img src={book.picture_url} alt="Thumbnail" />
@@ -483,7 +528,11 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       <div className={styles.booksContainer}>
         {novelBook.length != 0 ? (
           novelBook.map((book, index) => (
-            <div key={index} className={styles.book}>
+            <div
+              key={index}
+              className={styles.book}
+              style={{ background: fetchColor() }}
+            >
               {book.picture_url && (
                 <a href={book.myanimelist_url} target="_blank">
                   <img src={book.picture_url} alt="Thumbnail" />
