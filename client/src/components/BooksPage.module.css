@@ -168,7 +168,7 @@
 }
 
 .booksContainer::-webkit-scrollbar {
-  height: 10px;
+  height: 5px;
 }
 
 .booksContainer::-webkit-scrollbar-track {

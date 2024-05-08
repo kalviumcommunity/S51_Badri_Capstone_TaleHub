@@ -119,6 +119,7 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
     const fetchRomanceBooks = async () => {
       const books = await getBooks("romance");
       setromanceBook(books);
+      console.log(books);
     };
     const fetchPoetryBooks = async () => {
       const books = await getBooks("poetry");
@@ -144,6 +145,14 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
     fetchRomanceBooks();
     fetchSuspenseBooks();
   }, []);
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className={styles.booksPage}>
       <ToastContainer />
@@ -223,37 +232,49 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
       </div>
 
       <div className={styles.genres}>
-        <div className={styles.book1}>
+        <div
+          className={styles.book1}
+          onClick={() => scrollToSection("fiction")}
+        >
           <p className={styles.categories}>
             Fictional <br />
             Books
           </p>
         </div>
-        <div className={styles.book2}>
+        <div
+          className={styles.book2}
+          onClick={() => scrollToSection("suspense")}
+        >
           <p className={styles.categories}>
             Suspense <br />
             Books
           </p>
         </div>
-        <div className={styles.book3}>
+        <div
+          className={styles.book3}
+          onClick={() => scrollToSection("fantasy")}
+        >
           <p className={styles.categories}>
             Fantasy <br />
             Books
           </p>
         </div>
-        <div className={styles.book4}>
+        <div
+          className={styles.book4}
+          onClick={() => scrollToSection("romance")}
+        >
           <p className={styles.categories}>
             Romance <br />
             Books
           </p>
         </div>
-        <div className={styles.book5}>
+        <div className={styles.book5} onClick={() => scrollToSection("poetry")}>
           <p className={styles.categories}>
             Poetry <br />
             Books
           </p>
         </div>
-        <div className={styles.book6}>
+        <div className={styles.book6} onClick={() => scrollToSection("horror")}>
           <p className={styles.categories}>
             Horror <br />
             Books
@@ -261,7 +282,9 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
         </div>
       </div>
 
-      <p className={styles.titles}>Fictional Books:</p>
+      <p className={styles.titles} id="fiction">
+        Fictional Books:
+      </p>
 
       <div className={styles.booksContainer}>
         {fictionBook.length != 0 ? (
@@ -272,14 +295,16 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
               style={{ background: fetchColor() }}
             >
               {book.volumeInfo.imageLinks && (
-                <img
-                  src={book.volumeInfo.imageLinks.thumbnail}
-                  alt="Thumbnail"
-                />
+                <a href={book.volumeInfo.canonicalVolumeLink}>
+                  <img
+                    src={book.volumeInfo.imageLinks.thumbnail}
+                    alt="Thumbnail"
+                  />
+                </a>
               )}{" "}
               <h3>{book.volumeInfo.title}</h3>
               {book.volumeInfo.subtitle && (
-                <p className={styles.auth}>
+                <p className={styles.subs}>
                   <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
                 </p>
               )}
@@ -313,7 +338,9 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles}>Suspense Books:</p>
+      <p className={styles.titles} id="suspense">
+        Suspense Books:
+      </p>
 
       <div className={styles.booksContainer}>
         {suspenseBook.length != 0 ? (
@@ -324,14 +351,16 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
               style={{ background: fetchColor() }}
             >
               {book.volumeInfo.imageLinks && (
-                <img
-                  src={book.volumeInfo.imageLinks.thumbnail}
-                  alt="Thumbnail"
-                />
+                <a href={book.volumeInfo.canonicalVolumeLink}>
+                  <img
+                    src={book.volumeInfo.imageLinks.thumbnail}
+                    alt="Thumbnail"
+                  />
+                </a>
               )}{" "}
               <h3>{book.volumeInfo.title}</h3>
               {book.volumeInfo.subtitle && (
-                <p>
+                <p className={styles.subs}>
                   <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
                 </p>
               )}
@@ -365,7 +394,9 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles}>Fantasy Books:</p>
+      <p className={styles.titles} id="fantasy">
+        Fantasy Books:
+      </p>
 
       <div className={styles.booksContainer}>
         {fantasyBook.length != 0 ? (
@@ -376,14 +407,16 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
               style={{ background: fetchColor() }}
             >
               {book.volumeInfo.imageLinks && (
-                <img
-                  src={book.volumeInfo.imageLinks.thumbnail}
-                  alt="Thumbnail"
-                />
+                <a href={book.volumeInfo.canonicalVolumeLink}>
+                  <img
+                    src={book.volumeInfo.imageLinks.thumbnail}
+                    alt="Thumbnail"
+                  />
+                </a>
               )}{" "}
               <h3>{book.volumeInfo.title}</h3>
               {book.volumeInfo.subtitle && (
-                <p className={styles.auth}>
+                <p className={styles.subs}>
                   <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
                 </p>
               )}
@@ -417,7 +450,9 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles}>Romance Books:</p>
+      <p className={styles.titles} id="romance">
+        Romance Books:
+      </p>
 
       <div className={styles.booksContainer}>
         {romanceBook.length != 0 ? (
@@ -428,14 +463,16 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
               style={{ background: fetchColor() }}
             >
               {book.volumeInfo.imageLinks && (
-                <img
-                  src={book.volumeInfo.imageLinks.thumbnail}
-                  alt="Thumbnail"
-                />
+                <a href={book.volumeInfo.canonicalVolumeLink}>
+                  <img
+                    src={book.volumeInfo.imageLinks.thumbnail}
+                    alt="Thumbnail"
+                  />
+                </a>
               )}{" "}
               <h3>{book.volumeInfo.title}</h3>
               {book.volumeInfo.subtitle && (
-                <p className={styles.auth}>
+                <p className={styles.subs}>
                   <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
                 </p>
               )}
@@ -469,7 +506,9 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles}>Poetry Books:</p>
+      <p className={styles.titles} id="poetry">
+        Poetry Books:
+      </p>
 
       <div className={styles.booksContainer}>
         {poetryBook.length != 0 ? (
@@ -480,14 +519,16 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
               style={{ background: fetchColor() }}
             >
               {book.volumeInfo.imageLinks && (
-                <img
-                  src={book.volumeInfo.imageLinks.thumbnail}
-                  alt="Thumbnail"
-                />
+                <a href={book.volumeInfo.canonicalVolumeLink}>
+                  <img
+                    src={book.volumeInfo.imageLinks.thumbnail}
+                    alt="Thumbnail"
+                  />
+                </a>
               )}{" "}
               <h3>{book.volumeInfo.title}</h3>
               {book.volumeInfo.subtitle && (
-                <p className={styles.auth}>
+                <p className={styles.subs}>
                   <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
                 </p>
               )}
@@ -521,7 +562,9 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles}>Horror Books:</p>
+      <p className={styles.titles} id="horror">
+        Horror Books:
+      </p>
 
       <div className={styles.booksContainer}>
         {horrorBook.length != 0 ? (
@@ -532,14 +575,16 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
               style={{ background: fetchColor() }}
             >
               {book.volumeInfo.imageLinks && (
-                <img
-                  src={book.volumeInfo.imageLinks.thumbnail}
-                  alt="Thumbnail"
-                />
+                <a href={book.volumeInfo.canonicalVolumeLink}>
+                  <img
+                    src={book.volumeInfo.imageLinks.thumbnail}
+                    alt="Thumbnail"
+                  />
+                </a>
               )}{" "}
               <h3>{book.volumeInfo.title}</h3>
               {book.volumeInfo.subtitle && (
-                <p className={styles.auth}>
+                <p className={styles.subs}>
                   <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
                 </p>
               )}
