@@ -24,6 +24,11 @@ function NavBar() {
             <p>Manga's</p>
           </div>
         </Link>
+        <Link to="/story">
+          <div className="navBoxes btn-shine">
+            <p>Story Teller</p>
+          </div>
+        </Link>
       </div>
       <p className="navText"> Your Books</p>
       <Link to="/cart">
