@@ -1,0 +1,17 @@
+meta {
+  name: AI story
+  type: http
+  seq: 10
+}
+
+post {
+  url: http://localhost:5000/generateStory
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "prompt": "I have a user who provided a one-sentence description of a Story: 'hero goes from good to bad'.Based on this description, can you write a story of 300-500 words please repsond with story only"
+  }
+}

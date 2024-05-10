@@ -5,6 +5,7 @@ const Profile = require("../models/user.model");
 const Email = require("../models/email.model");
 const MangaData = require("../models/manga.model");
 const mongoose = require("mongoose");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 require("dotenv").config();
 
 router.get("/getUser", async (req, res) => {
@@ -170,6 +171,46 @@ router.patch("/deleteInCart", async (req, res) => {
   } catch (error) {
     console.error("Error deleting item from cart:", error);
     res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+async function generateSummary(prompt) {
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const result = await model.generateContent(prompt);
+  const response = await result.response;
+  const text = await response.text();
+  return text;
+}
+
+router.post("/generateStory", async (req, res) => {
+  try {
+    const prompt = req.body.prompt;
+    const summary = await generateSummary(prompt);
+    res.json({ summary });
+  } catch (error) {
+    console.error("Error generating story:", error.response);
+    if (error.response && error.response.candidates) {
+      const candidates = error.response.candidates;
+      if (candidates && candidates.length > 0) {
+        const safetyRatings = candidates[0].safetyRatings;
+        const highProbabilityCategories = safetyRatings.filter(
+          (rating) =>
+            rating.probability === "HIGH" || rating.probability === "MEDIUM"
+        );
+        if (highProbabilityCategories.length > 0) {
+          const category = highProbabilityCategories[0].category;
+          res
+            .status(400)
+            .json({
+              error: `The story was not generated because your story description was in this category : ${category}.`,
+            });
+          return;
+        }
+      }
+    }
+    res.status(500).json({ error: error });
   }
 });
 
