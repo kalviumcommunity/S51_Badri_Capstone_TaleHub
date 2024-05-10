@@ -1,19 +1,28 @@
-
-
-.appJSX{
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    grid-area: 1fr  5fr;
-
+.appJSX {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  grid-area: 1fr 5fr;
 }
 
-.navBar{
-    background-image: linear-gradient(to bottom, #090b28, #081540, #0b1c5a, #192774, #313892);
-    width: 20%;
+.navBar {
+  background-image: linear-gradient(
+    to bottom,
+    #090b28,
+    #081540,
+    #0b1c5a,
+    #192774,
+    #313892
+  );
+  width: 20%;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
-.route{
-    background-color: #000332;
-    width: 80%;
+.navBar::-webkit-scrollbar {
+  width: 0px;
+}
+.route {
+  background-color: #000332;
+  width: 80%;
 }

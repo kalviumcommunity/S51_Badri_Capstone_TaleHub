@@ -4,6 +4,8 @@ import LandingPage from "./components/landingPage";
 import BooksPage from "./components/BooksPage";
 import MangaPage from "./components/MangaPage";
 import CartPage from "./components/CartPage";
+import StoryTeller from "./components/StoryTeller";
+
 function AllRoutes({ onLoginClick, userData, setUserData }) {
   return (
     <Routes>
@@ -47,6 +49,7 @@ function AllRoutes({ onLoginClick, userData, setUserData }) {
           />
         }
       ></Route>
+      <Route path="/story" element={<StoryTeller />}></Route>
     </Routes>
   );
 }
