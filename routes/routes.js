@@ -202,9 +202,9 @@ router.post("/generateStory", async (req, res) => {
         if (highProbabilityCategories.length > 0) {
           const category = highProbabilityCategories[0].category;
           res
-            .status(400)
+            .status(200)
             .json({
-              error: `The story was not generated because your story description was in this category : ${category}.`,
+              summary: `The story was not generated because your story description was in this category : ${category}.`,
             });
           return;
         }

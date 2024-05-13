@@ -205,7 +205,7 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
               )}{" "}
               <h3>{book.volumeInfo.title}</h3>
               {book.volumeInfo.subtitle && (
-                <p>
+                <p className={styles.subs}>
                   <strong>Subtitle:</strong> {book.volumeInfo.subtitle}
                 </p>
               )}

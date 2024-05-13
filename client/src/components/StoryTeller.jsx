@@ -1,16 +1,33 @@
 import React, { useState } from "react";
 import styles from "./story.module.css";
-
+import axios from "axios";
 function StoryTeller() {
   const [selectedOption, setSelectedOption] = useState("Fiction");
+  const [story, setStory] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [generatedStory, setGeneratedStory] = useState("");
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
 
+  const sendPrompt = async () => {
+    if (story != "") {
+      setLoading(!loading);
+      console.log("loading:", loading);
+      const response = await axios.post("http://localhost:5000/generateStory", {
+        prompt: `I have a user who provided a one-sentence description of a Story: ${story}. The genre in which the story should be generated is ${selectedOption}.Based on this description, can you write a story as big as possible. In case the user provided story description is not enough to generate a good story please respond as  'Insufficient details to generate a good story. Please provide a more fleshed-out description with characters, setting, plot, and themes.'.please repsond with story only`,
+      });
+      console.log(response.data.summary);
+      setGeneratedStory(response.data.summary);
+      setLoading(!loading);
+      console.log("loading:", loading);
+    }
+  };
+
   return (
     <div className={styles.CartPage}>
-        <h1 className={styles.titles}>Select a genre</h1>
+      <h1 className={styles.titles}>Select a genre</h1>
       <div className={styles.wrapper}>
         <div className={styles.option}>
           <input
@@ -94,10 +111,34 @@ function StoryTeller() {
 
       <h1 className={styles.titles}>Describe the story</h1>
 
-    <div className={styles.textBox}>
-        <textarea className={styles.textarea} placeholder="Describe here..."></textarea>
-    </div>
+      <div className={styles.textBox}>
+        <textarea
+          className={styles.textarea}
+          value={story}
+          onChange={(e) => setStory(e.target.value)}
+          placeholder="Describe here...
 
+        To ensure the AI can create a fantastic story, please avoid including any explicit content, profanity, or overly mature themes in your description.
+        
+
+        "
+        ></textarea>
+      </div>
+      <button className={styles.btns} onClick={() => sendPrompt()}>
+        <svg
+          height="24"
+          width="24"
+          fill="#FFFFFF"
+          viewBox="0 0 24 24"
+          data-name="Layer 1"
+          id="Layer_1"
+          className={styles.sparkle}
+        >
+          <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
+        </svg>
+
+        <span className={styles.text}>Generate</span>
+      </button>
     </div>
   );
 }
