@@ -190,6 +190,7 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
 
       <div className={styles.booksContainer}>
         {searchBar.length > 0 &&
+          searchBarValue &&
           searchBar.map((book, index) => (
             <div
               key={index}
