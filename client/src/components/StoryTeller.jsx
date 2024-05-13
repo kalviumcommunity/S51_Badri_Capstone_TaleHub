@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./story.module.css";
 import axios from "axios";
 function StoryTeller() {
@@ -6,27 +6,46 @@ function StoryTeller() {
   const [story, setStory] = useState("");
   const [loading, setLoading] = useState(false);
   const [generatedStory, setGeneratedStory] = useState("");
+  const outputRef = useRef(null);
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
 
+  const scrollToOutput = () => {
+    if (outputRef.current) {
+      outputRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    if (loading) {
+      scrollToOutput();
+    }
+  }, [loading]);
+
   const sendPrompt = async () => {
     if (story != "") {
-      setLoading(!loading);
-      console.log("loading:", loading);
-      const response = await axios.post("http://localhost:5000/generateStory", {
-        prompt: `I have a user who provided a one-sentence description of a Story: ${story}. The genre in which the story should be generated is ${selectedOption}.Based on this description, can you write a story as big as possible. In case the user provided story description is not enough to generate a good story please respond as  'Insufficient details to generate a good story. Please provide a more fleshed-out description with characters, setting, plot, and themes.'.please repsond with story only`,
-      });
-      console.log(response.data.summary);
-      setGeneratedStory(response.data.summary);
-      setLoading(!loading);
-      console.log("loading:", loading);
+      setLoading(true);
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/generateStory",
+          {
+            prompt: `I have a user who provided a one-sentence description of a Story: ${story}. The genre in which the story should be generated is ${selectedOption}.Based on this description, can you write a story as big as possible. In case the user provided story description is not enough to generate a good story please respond as  'Insufficient details to generate a good story. Please provide a more fleshed-out description with characters, setting, plot, and themes.'.please repsond with story only`,
+          }
+        );
+        console.log(response.data.summary);
+        setGeneratedStory(response.data.summary);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
   return (
-    <div className={styles.CartPage}>
+    <div className={styles.StoryPage}>
       <h1 className={styles.titles}>Select a genre</h1>
       <div className={styles.wrapper}>
         <div className={styles.option}>
@@ -53,19 +72,6 @@ function StoryTeller() {
           />
           <div className={styles.btn}>
             <span className={styles.span}>Horror</span>
-          </div>
-        </div>
-        <div className={styles.option}>
-          <input
-            type="radio"
-            className={styles.input}
-            value="Romance"
-            name="btn"
-            checked={selectedOption === "Romance"}
-            onChange={handleOptionChange}
-          />
-          <div className={styles.btn}>
-            <span className={styles.span}>Romance</span>
           </div>
         </div>
         <div className={styles.option}>
@@ -139,6 +145,26 @@ function StoryTeller() {
 
         <span className={styles.text}>Generate</span>
       </button>
+
+      {loading ? (
+        <div className={styles.loadingAni} ref={outputRef}>
+          <div className={styles.typewriter}>
+            <div className={styles.slide}>
+              <i></i>
+            </div>
+            <div className={styles.paper}></div>
+            <div className={styles.keyboard}></div>
+          </div>
+        </div>
+      ) : (
+        generatedStory != "" && (
+          <div className={styles.output}>
+            {generatedStory.split("\n").map((line, index) => (
+              <p key={index}>{line}</p>
+            ))}
+          </div>
+        )
+      )}
     </div>
   );
 }
