@@ -52,13 +52,13 @@
   transform: translate(-50%, -50%);
 }
 
-.genre > :nth-child(1) {
+.genre > :nth-child(2) {
   background: url("../../public/layered-waves-haikei.png");
   background-size: cover;
   background-position: center;
 }
 
-.genre > :nth-child(2) {
+.genre > :nth-child(1) {
   background: url("../../public/stacked-waves-haikei.png");
   background-size: cover;
   background-position: center;
