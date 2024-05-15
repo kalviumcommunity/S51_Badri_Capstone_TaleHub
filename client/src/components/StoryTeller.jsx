@@ -3,6 +3,7 @@ import styles from "./story.module.css";
 import axios from "axios";
 function StoryTeller() {
   const [selectedOption, setSelectedOption] = useState("Fiction");
+  const [selectedWritingStyle, setSelectedWritingStyle] = useState("Narrative");
   const [story, setStory] = useState("");
   const [loading, setLoading] = useState(false);
   const [generatedStory, setGeneratedStory] = useState("");
@@ -10,6 +11,10 @@ function StoryTeller() {
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
+  };
+
+  const handlewritingStyleChange = (e) => {
+    setSelectedWritingStyle(e.target.value);
   };
 
   const scrollToOutput = () => {
@@ -31,7 +36,11 @@ function StoryTeller() {
         const response = await axios.post(
           "http://localhost:5000/generateStory",
           {
-            prompt: `I have a user who provided a one-sentence description of a Story: ${story}. The genre in which the story should be generated is ${selectedOption}.Based on this description, can you write a story as big as possible. In case the user provided story description is not enough to generate a good story please respond as  'Insufficient details to generate a good story. Please provide a more fleshed-out description with characters, setting, plot, and themes.'.please repsond with story only`,
+            prompt: `I have a user who provided a one-sentence description of a Story: ${story}. 
+            The genre in which the story should be generated is ${selectedOption}. 
+            The desired writing style is ${selectedWritingStyle}. 
+            Based on this description, can you write a story as big as possible. 
+            In case the user provided story description is not enough to generate a good story please respond as 'Insufficient details to generate a good story. Please provide a more fleshed-out description with characters, setting, plot, and themes.'. Please respond with story only`,
           }
         );
         console.log(response.data.summary);
@@ -111,6 +120,75 @@ function StoryTeller() {
           />
           <div className={styles.btn}>
             <span className={styles.span}>Poetry</span>
+          </div>
+        </div>
+      </div>
+      <h1 className={styles.titles}>Select a writing style</h1>
+
+      <div className={styles.wrapper}>
+        <div className={styles.option}>
+          <input
+            type="radio"
+            className={styles.input}
+            value="Narrative"
+            name="btn2"
+            checked={selectedWritingStyle === "Narrative"}
+            onChange={handlewritingStyleChange}
+          />
+          <div className={styles.btn}>
+            <span className={styles.span}>Narrative</span>
+          </div>
+        </div>
+        <div className={styles.option}>
+          <input
+            type="radio"
+            className={styles.input}
+            value="Descriptive"
+            name="btn2"
+            checked={selectedWritingStyle === "Descriptive"}
+            onChange={handlewritingStyleChange}
+          />
+          <div className={styles.btn}>
+            <span className={styles.span}>Descriptive</span>
+          </div>
+        </div>
+        <div className={styles.option}>
+          <input
+            type="radio"
+            className={styles.input}
+            value="Expository"
+            name="btn2"
+            checked={selectedWritingStyle === "Expository"}
+            onChange={handlewritingStyleChange}
+          />
+          <div className={styles.btn}>
+            <span className={styles.span}>Expository</span>
+          </div>
+        </div>
+        <div className={styles.option}>
+          <input
+            type="radio"
+            className={styles.input}
+            value="Persuasive"
+            name="btn2"
+            checked={selectedWritingStyle === "Persuasive"}
+            onChange={handlewritingStyleChange}
+          />
+          <div className={styles.btn}>
+            <span className={styles.span}>Persuasive</span>
+          </div>
+        </div>
+        <div className={styles.option}>
+          <input
+            type="radio"
+            className={styles.input}
+            value="SimpleEnglish"
+            name="btn2"
+            checked={selectedWritingStyle === "SimpleEnglish"}
+            onChange={handlewritingStyleChange}
+          />
+          <div className={styles.btn}>
+            <span className={styles.span}>Simple</span>
           </div>
         </div>
       </div>
