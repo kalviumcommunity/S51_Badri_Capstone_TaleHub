@@ -29,6 +29,11 @@ function NavBar() {
             <p>Story Teller</p>
           </div>
         </Link>
+        <Link to="/bookFinder">
+          <div className="navBoxes btn-shine">
+            <p>AI Book Finder</p>
+          </div>
+        </Link>
       </div>
       <p className="navText"> Your Books</p>
       <Link to="/cart">

@@ -17,6 +17,7 @@
     "express": "^4.18.3",
     "firebase": "^10.8.1",
     "google-auth-library": "^9.7.0",
+    "ioredis": "^5.4.1",
     "joi": "^17.12.2",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.5.0",
