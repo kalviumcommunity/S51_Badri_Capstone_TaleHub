@@ -1,0 +1,17 @@
+meta {
+  name: Book recommendations
+  type: http
+  seq: 11
+}
+
+post {
+  url: http://localhost:5000/recommendBooks
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "story":"hero goes from poor to super rich"
+  }
+}

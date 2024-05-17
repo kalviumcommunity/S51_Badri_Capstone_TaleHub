@@ -218,39 +218,37 @@ async function generateBooks(userSentence) {
   const prompt = `
   I have a user who provided a one-sentence description of a book: "${userSentence}".
 
-  Based on this description, can you recommend 3-5 books with similar themes, plots, or genres that are also available through the Google Books API?
+  Based on this description, can you recommend 5-10 books with similar themes, plots, or genres that are also available through the Google Books API?
 
-  For each recommendation, please provide the following information:
+  For each recommendation, please provide the following information in the format specified below, using unique delimiters to separate each book and each property:
 
-  Title: The title of the book.
-  Author(s): The author(s) of the book.
-  Genre(s): The primary genre(s) of the book.
-  Description: A small description of the book.
-  Google Books Link: The link to the book's information page on Google Books (if available).
-  Thumbnail Image Link: The link to a thumbnail image of the book cover (if available through the Google Books API).
+  BOOK START
+  Title: [Book Title]
+  Author: [Author Name]
+  Genre: [Genre]
+  Description: [Description]
+  BOOK END
+
+  Ensure each book's details are enclosed within "BOOK START" and "BOOK END" markers.
   `;
 
   const result = await model.generateContent(prompt);
   const response = result.response.candidates[0].content.parts[0].text;
   console.log(response);
-  // Split the response into individual book descriptions
-  const bookDescriptions = response.split("\n\n");
 
-  // Parsing the response into an array of book objects
+  // Split the response into individual book descriptions
+  const bookDescriptions = response.split("BOOK START").slice(1); // split by "BOOK START" and ignore the first empty entry
   const books = bookDescriptions.map((book) => {
-    const lines = book.split("\n").filter((line) => line);
+    const lines = book.split("BOOK END")[0].trim(); // split by "BOOK END" and take the first part
     const bookObject = {};
 
-    try {
-      bookObject.title = lines[0]?.split(". ")[1]?.trim() || null;
-      bookObject.author = lines[1]?.split(": ")[1]?.trim() || null;
-      bookObject.genre = lines[2]?.split(": ")[1]?.trim() || null;
-      bookObject.Description = lines[3]?.split(": ")[1]?.trim() || null;
-      bookObject.googleBooksLink = lines[4]?.split(": ")[1]?.trim() || null;
-      bookObject.thumbnailImageLink = lines[5]?.split(": ")[1]?.trim() || null;
-    } catch (error) {
-      console.error("Error parsing book:", book, error);
-    }
+    lines.split("\n").forEach(line => {
+      const [key, ...value] = line.split(": ");
+      if (key && value) {
+        const formattedKey = key.trim().toLowerCase().replace(/ /g, '');
+        bookObject[formattedKey] = value.join(": ").trim();
+      }
+    });
 
     return bookObject;
   });
@@ -258,6 +256,18 @@ async function generateBooks(userSentence) {
   console.log(books);
   return books;
 }
+
+router.post("/recommendBooks", async (req, res) => {
+  try {
+    const { story } = req.body;
+    const books = await generateBooks(story);
+    res.json({ books });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+});
+
 
 
 module.exports = router;
