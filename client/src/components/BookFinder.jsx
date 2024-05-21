@@ -1,29 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./booksFinder.module.css";
 import axios from "axios";
 
 function BookFinder() {
   const [story, setStory] = useState("");
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const outputRef = useRef(null);
+
   const fetchBooks = async (data) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/recommendBooks",
-        {
-          story: data,
-        }
-      );
-      setBooks(response.data.books.books);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+    if (data !== "") {
+      setLoading(true);
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/recommendBooks",
+          {
+            story: data,
+          }
+        );
+        setBooks(response.data.books.books);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
   const handleGenerateClick = () => {
     fetchBooks(story);
   };
+  const scrollToOutput = () => {
+    if (outputRef.current) {
+      outputRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
+  useEffect(() => {
+    if (loading) {
+      scrollToOutput();
+    }
+  }, [loading]);
   return (
     <div className={styles.StoryPage}>
       <h1 className={styles.titles}>Describe the story</h1>
@@ -35,10 +53,7 @@ function BookFinder() {
           onChange={(e) => setStory(e.target.value)}
           placeholder="Describe here...
 
-        Please mention the story as detailed as possible for the best results. Try not to use any inappropriate language.
-        
-
-        "
+          Please mention the story as detailed as possible for the best results. Try not to use any inappropriate language."
         ></textarea>
       </div>
 
@@ -57,6 +72,26 @@ function BookFinder() {
 
         <span className={styles.text}>Generate</span>
       </button>
+
+      {loading ? (
+        <div className={styles.loadingAni} ref={outputRef}>
+          <div className={styles.typewriter}>
+            <div className={styles.slide}>
+              <i></i>
+            </div>
+            <div className={styles.paper}></div>
+            <div className={styles.keyboard}></div>
+          </div>
+        </div>
+      ) : (
+        books.length > 0 && (
+          <div className={styles.output}>
+            {books.map((item, index) => (
+              <p key={index}>{item.title}</p>
+            ))}
+          </div>
+        )
+      )}
     </div>
   );
 }
