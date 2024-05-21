@@ -1,8 +1,28 @@
 import React, { useState } from "react";
 import styles from "./booksFinder.module.css";
+import axios from "axios";
 
 function BookFinder() {
   const [story, setStory] = useState("");
+  const [books, , setBooks] = useState([]);
+  const fetchBooks = async (data) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/recommendBooks",
+        {
+          story: data,
+        }
+      );
+      setBooks(response.data.books.books);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleGenerateClick = () => {
+    fetchBooks(story);
+  };
 
   return (
     <div className={styles.StoryPage}>
@@ -22,7 +42,7 @@ function BookFinder() {
         ></textarea>
       </div>
 
-      <button className={styles.btns}>
+      <button className={styles.btns} onClick={handleGenerateClick}>
         <svg
           height="24"
           width="24"
