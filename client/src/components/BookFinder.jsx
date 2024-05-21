@@ -4,7 +4,7 @@ import axios from "axios";
 
 function BookFinder() {
   const [story, setStory] = useState("");
-  const [books, , setBooks] = useState([]);
+  const [books, setBooks] = useState([]);
   const fetchBooks = async (data) => {
     try {
       const response = await axios.post(
