@@ -225,8 +225,6 @@ async function generateBooks(userSentence) {
   BOOK START
   Title: [Book Title]
   Author: [Author Name]
-  Genre: [Genre]
-  Description: [Description]
   BOOK END
 
   Ensure each book's details are enclosed within "BOOK START" and "BOOK END" markers.
@@ -234,7 +232,7 @@ async function generateBooks(userSentence) {
 
   const result = await model.generateContent(prompt);
   const response = result.response.candidates[0].content.parts[0].text;
-  console.log(response);
+  console.log(result);
 
   // Split the response into individual book descriptions
   const bookDescriptions = response.split("BOOK START").slice(1); // split by "BOOK START" and ignore the first empty entry
@@ -242,10 +240,10 @@ async function generateBooks(userSentence) {
     const lines = book.split("BOOK END")[0].trim(); // split by "BOOK END" and take the first part
     const bookObject = {};
 
-    lines.split("\n").forEach(line => {
+    lines.split("\n").forEach((line) => {
       const [key, ...value] = line.split(": ");
       if (key && value) {
-        const formattedKey = key.trim().toLowerCase().replace(/ /g, '');
+        const formattedKey = key.trim().toLowerCase().replace(/ /g, "");
         bookObject[formattedKey] = value.join(": ").trim();
       }
     });
@@ -254,7 +252,7 @@ async function generateBooks(userSentence) {
   });
 
   console.log(books);
-  return books;
+  return { response, books };
 }
 
 router.post("/recommendBooks", async (req, res) => {
@@ -267,7 +265,5 @@ router.post("/recommendBooks", async (req, res) => {
     res.status(500).send(error);
   }
 });
-
-
 
 module.exports = router;
