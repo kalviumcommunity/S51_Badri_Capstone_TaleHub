@@ -50,17 +50,48 @@
 
 .output {
   margin: 20px auto;
-  width: 60%;
+  width: 90%;
   height: fit-content;
-  background-color: #0c0c0c;
-  border-radius: 20px;
-  padding: 10px 30px;
 }
-.output p {
-  font-family: "Itim", cursive;
+
+.book{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px auto;
+  border-radius: 20px;
+  font-family: itim, cursive;
   color: white;
 }
 
+
+
+.bookInside{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
+  
+}
+.book img{
+  height: 300px;
+  border-radius: 20px;
+  margin: 10px;
+}
+
+.book p{
+  font-size: small;
+}
+
+.des{
+  height: 100px;
+  overflow-y: scroll;
+}
+
+.des::-webkit-scrollbar {
+  width: 2px;
+}
 /* ----------------------------------------------------------------------- */
 .btns {
   border: none;
