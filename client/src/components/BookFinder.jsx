@@ -79,8 +79,8 @@ function BookFinder({ userData }) {
       color1 += letter[Math.floor(Math.random() * 16)];
       color2 += letter[Math.floor(Math.random() * 16)];
     }
-    const alpha1 = 0.3; // Adjust as needed
-    const alpha2 = 0.6; // Adjust as needed
+    const alpha1 = 0.2; // Adjust as needed
+    const alpha2 = 0.2; // Adjust as needed
     return `linear-gradient(to left, rgba(${parseInt(
       color1.slice(1, 3),
       16
