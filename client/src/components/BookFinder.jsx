@@ -7,24 +7,51 @@ function BookFinder() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const outputRef = useRef(null);
+  const googleApiLink = "https://www.googleapis.com/books/v1/volumes?q=";
 
   const fetchBooks = async (data) => {
     if (data !== "") {
       setLoading(true);
       try {
+        setBooks([]);
         const response = await axios.post(
           "http://localhost:5000/recommendBooks",
           {
             story: data,
           }
         );
-        setBooks(response.data.books.books);
         console.log(response);
+        for (let i = 0; i < response.data.books.books.length; i++) {
+          await getBooks(response.data.books.books[i], 3);
+        }
       } catch (error) {
         console.log(error);
       } finally {
         setLoading(false);
       }
+    }
+  };
+
+  const getBooks = async (data, maxResults) => {
+    try {
+      const title = encodeURIComponent(data.title);
+      const authorsArray = data.author ? data.author.split(" and ") : [];
+      const authors =
+        authorsArray.length > 0
+          ? encodeURIComponent(authorsArray.join(", "))
+          : "";
+      const query = authors
+        ? `intitle:${title}+inauthor:${authors}`
+        : `intitle:${title}`;
+      const response = await axios.get(
+        `${googleApiLink}${query}&maxResults=${maxResults}`
+      );
+      console.log(response.data.items);
+
+      const newBooks = response.data.items.map((ele) => ele.volumeInfo);
+      setBooks((prevBooks) => [...prevBooks, ...newBooks]);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -36,7 +63,6 @@ function BookFinder() {
       outputRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-
   useEffect(() => {
     if (loading) {
       scrollToOutput();
