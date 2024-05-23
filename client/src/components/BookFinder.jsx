@@ -13,17 +13,17 @@ function BookFinder() {
     if (data !== "") {
       setLoading(true);
       try {
-        setBooks([]);
         const response = await axios.post(
           "http://localhost:5000/recommendBooks",
-          {
-            story: data,
-          }
+          { story: data }
         );
         console.log(response);
-        for (let i = 0; i < response.data.books.books.length; i++) {
-          await getBooks(response.data.books.books[i], 3);
-        }
+        setBooks([]);
+
+        const bookFetchPromises = response.data.books.books.map((book) =>
+          getBooks(book, 3)
+        ); 
+        await Promise.all(bookFetchPromises);
       } catch (error) {
         console.log(error);
       } finally {
