@@ -4,7 +4,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import VideoBackground from "./VideoBackground";
 function MangaPage({ onLoginClick, userData, setUserData }) {
   const apiLink = "https://s51-badri-capstone-talehub.onrender.com/getData";
   const [manhwaBook, setManhwaBook] = useState([]);
@@ -26,28 +25,7 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       return [];
     }
   };
-  const fetchColor = () => {
-    const letter = "0123456789ABCDEF";
-    let color1 = "#";
-    let color2 = "#";
-    for (let i = 0; i < 6; i++) {
-      color1 += letter[Math.floor(Math.random() * 16)];
-      color2 += letter[Math.floor(Math.random() * 16)];
-    }
-    // Adjust alpha (opacity) for color1 and color2
-    const alpha1 = 0; // Adjust as needed
-    const alpha2 = 0.4; // Adjust as needed
-    return `linear-gradient(to bottom, rgba(${parseInt(
-      color1.slice(1, 3),
-      16
-    )},${parseInt(color1.slice(3, 5), 16)},${parseInt(
-      color1.slice(5, 7),
-      16
-    )},${alpha1}), rgba(${parseInt(color2.slice(1, 3), 16)},${parseInt(
-      color2.slice(3, 5),
-      16
-    )},${parseInt(color2.slice(5, 7), 16)},${alpha2}))`;
-  };
+
   const ChangeSearchBar = async (data) => {
     setSearchBarValue(data);
   };
@@ -186,6 +164,36 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
     fetchOneshotBooks();
   }, []);
 
+  const fetchColor = () => {
+    const letter = "0123456789ABCDEF";
+    let color1 = "#";
+    let color2 = "#";
+    for (let i = 0; i < 6; i++) {
+      color1 += letter[Math.floor(Math.random() * 16)];
+      color2 += letter[Math.floor(Math.random() * 16)];
+    }
+    // Adjust alpha (opacity) for color1 and color2
+    const alpha1 = 0; // Adjust as needed
+    const alpha2 = 0.4; // Adjust as needed
+    return `linear-gradient(to bottom, rgba(${parseInt(
+      color1.slice(1, 3),
+      16
+    )},${parseInt(color1.slice(3, 5), 16)},${parseInt(
+      color1.slice(5, 7),
+      16
+    )},${alpha1}), rgba(${parseInt(color2.slice(1, 3), 16)},${parseInt(
+      color2.slice(3, 5),
+      16
+    )},${parseInt(color2.slice(5, 7), 16)},${alpha2}))`;
+  };
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className={styles.mangaPage}>
       <ToastContainer />
@@ -223,7 +231,6 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
 
       <div className={styles.booksContainer}>
         {searchBar.length > 0 &&
-          searchBarValue &&
           searchBar.map((book, index) => (
             <div
               key={index}
@@ -261,58 +268,28 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
       </div>
 
       <div className={styles.genre}>
-        <VideoBackground
-          videoSrc="./mangaBack.mp4"
-          sectionId="manga"
-          className={styles.book1}
-        >
+        <div className={styles.book1}  onClick={() => scrollToSection("Manga")}>
           <p className={styles.catogories}>Manga</p>
-        </VideoBackground>
-
-        <VideoBackground
-          videoSrc="./manhwaBack.mp4"
-          sectionId="manhwa"
-          className={styles.book2}
-        >
+        </div>
+        <div className={styles.book2}  onClick={() => scrollToSection("Manhwa")}>
           <p className={styles.catogories}>Manhwa</p>
-        </VideoBackground>
-
-        <VideoBackground
-          videoSrc="./manhuaBack.mp4"
-          sectionId="manhua"
-          className={styles.book3}
-        >
+        </div>
+        <div className={styles.book3}  onClick={() => scrollToSection("Manhua")}>
           <p className={styles.catogories}>Manhua</p>
-        </VideoBackground>
-
-        <VideoBackground
-          videoSrc="./oneShotBack.mp4"
-          sectionId="oneshot"
-          className={styles.book4}
-        >
+        </div>
+        <div className={styles.book4}  onClick={() => scrollToSection("Oneshot")}>
           <p className={styles.catogories}>Oneshot</p>
-        </VideoBackground>
+        </div>
 
-        <VideoBackground
-          videoSrc="./shortNovelBack.mp4"
-          sectionId="lightnovel"
-          className={styles.book6}
-        >
+        <div className={styles.book6}  onClick={() => scrollToSection("Light Novel")}>
           <p className={styles.catogories}>Light Novel</p>
-        </VideoBackground>
-
-        <VideoBackground
-          videoSrc="./novelBack.mp4"
-          sectionId="novel"
-          className={styles.book7}
-        >
+        </div>
+        <div className={styles.book7}  onClick={() => scrollToSection("Novel")}>
           <p className={styles.catogories}>Novel</p>
-        </VideoBackground>
+        </div>
       </div>
 
-      <p className={styles.titles} id="manga">
-        Manga:
-      </p>
+      <p className={styles.titles} id="Manga">Manga:</p>
 
       <div className={styles.booksContainer}>
         {mangaBook.length != 0 ? (
@@ -359,9 +336,7 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles} id="manhwa">
-        Manhwas:
-      </p>
+      <p className={styles.titles} id="Manhwa">Manhwas:</p>
 
       <div className={styles.booksContainer}>
         {manhwaBook.length != 0 ? (
@@ -408,9 +383,7 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles} id="manhua">
-        Manhuas:
-      </p>
+      <p className={styles.titles} id="Manhua">Manhuas:</p>
 
       <div className={styles.booksContainer}>
         {manhuaBook.length != 0 ? (
@@ -457,9 +430,7 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles} id="oneshot">
-        Oneshots:
-      </p>
+      <p className={styles.titles} id="Oneshot">Oneshots:</p>
 
       <div className={styles.booksContainer}>
         {oneshotBook.length != 0 ? (
@@ -506,9 +477,7 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles} id="lightnovel">
-        Light Novels:
-      </p>
+      <p className={styles.titles} id="Light Novel">Light Novels:</p>
 
       <div className={styles.booksContainer}>
         {lightNovelBook.length != 0 ? (
@@ -555,9 +524,7 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles} id="novel">
-        Novels:
-      </p>
+      <p className={styles.titles} id="Novel">Novels:</p>
 
       <div className={styles.booksContainer}>
         {novelBook.length != 0 ? (

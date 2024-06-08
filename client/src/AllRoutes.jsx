@@ -50,7 +50,16 @@ function AllRoutes({ onLoginClick, userData, setUserData }) {
         }
       ></Route>
       <Route path="/story" element={<StoryTeller />}></Route>
-      <Route path="/bookFinder" element={<BookFinder userData={userData}/>}></Route>
+      <Route
+        path="/bookFinder"
+        element={
+          <BookFinder
+            onLoginClick={onLoginClick}
+            userData={userData}
+            setUserData={setUserData}
+          />
+        }
+      ></Route>
     </Routes>
   );
 }
