@@ -56,7 +56,7 @@
 
 .genres div:hover {
   background-position: center;
-  background-size: 80%;
+  background-size: 150%;
 }
 
 .genres div:not(:hover) {
@@ -65,45 +65,75 @@
 }
 
 .book1 {
-  background: url("../../public/stacked-steps-haikei.png");
   grid-area: book1;
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #78ABA8 11px,
+    #ffffff 55px
+  );
 }
 
 .book2 {
-  background: url("../../public/stacked-steps-haikei\ \(1\).png");
   grid-area: book2;
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #FF7F3E 11px,
+    #ffffff 55px
+  );
 }
 
 .book3 {
-  background: url("../../public/stacked-steps-haikei\ \(2\).png");
   grid-area: book3;
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #83B4FF 11px,
+    #ffffff 55px
+  );
 }
 
 .book4 {
-  background: url("../../public/stacked-steps-haikei\ \(3\).png");
   grid-area: book4;
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #AF47D2 11px,
+    #ffffff 55px
+  );
 }
 
 .book5 {
-  background: url("../../public/stacked-steps-haikei\ \(4\).png");
   grid-area: book5;
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #FFBF00 11px,
+    #ffffff 55px
+  );
 }
 
 .book6 {
-  background: url("../../public/stacked-steps-haikei\ \(5\).png");
   grid-area: book6;
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #240750 11px,
+    #ffffff 55px
+  );
 }
 
 .login {
