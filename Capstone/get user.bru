@@ -5,9 +5,14 @@ meta {
 }
 
 get {
-  url: http://localhost:5000/getUser
+  url: http://localhost:5000/getUser?email=heybadrinath@gmail.com&type=email
   body: json
   auth: none
+}
+
+query {
+  email: heybadrinath@gmail.com
+  type: email
 }
 
 body:json {

@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./booksFinder.module.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
-function BookFinder({ userData }) {
+function BookFinder({ onLoginClick, userData, setUserData }) {
   const [story, setStory] = useState("");
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -14,10 +17,9 @@ function BookFinder({ userData }) {
       setLoading(true);
       try {
         const response = await axios.post(
-          "http://localhost:5000/recommendBooks",
+          "https://s51-badri-capstone-talehub.onrender.com/recommendBooks",
           { story: data }
         );
-        console.log(response);
         setBooks([]);
 
         const bookFetchPromises = response.data.books.books.map((book) =>
@@ -30,6 +32,21 @@ function BookFinder({ userData }) {
         setLoading(false);
       }
     }
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    setUserData(null);
+    toast.success("Log-Out successful", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   const getBooks = async (data, maxResults) => {
@@ -48,7 +65,6 @@ function BookFinder({ userData }) {
       );
 
       const newBooks = response.data.items.map((ele) => ele.volumeInfo);
-      console.log(newBooks);
       setBooks((prevBooks) => [...prevBooks, ...newBooks]);
     } catch (error) {
       console.log(error);
@@ -93,8 +109,56 @@ function BookFinder({ userData }) {
     )},${parseInt(color2.slice(5, 7), 16)},${alpha2}))`;
   };
 
+  const addToCart = async (data, whereToAdd) => {
+    try {
+      const dataToAdd = {
+        title: data.title,
+        subtitle: data.subtitle ? data.subtitle : null,
+        authors: data.authors ? data.authors : null,
+        description: data.description
+          ? data.description
+          : null,
+        thumbnail: data.imageLinks.thumbnail
+          ? data.imageLinks.thumbnail
+          : null,
+      };
+
+      const response = await axios.patch("https://s51-badri-capstone-talehub.onrender.com/addToCart", {
+        email: userData.email,
+        type: userData.type,
+        whereToAdd: whereToAdd,
+        itemToAdd: dataToAdd,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={styles.StoryPage}>
+      <ToastContainer />
+
+      {userData ? (
+        <div className={styles.Buttons}>
+          <Link to="/cart">
+            <button className={styles.cartIcon}>
+              <lord-icon
+                src="https://cdn.lordicon.com/odavpkmb.json"
+                trigger="hover"
+                colors="primary:#ffffff,secondary:#ffffff"
+                style={{ width: "50px", height: "40px" }}
+              ></lord-icon>
+            </button>
+          </Link>
+          <button onClick={logout} className={styles.login}>
+            Log-Out
+          </button>
+        </div>
+      ) : (
+        <button onClick={() => onLoginClick()} className={styles.login}>
+          Log-In
+        </button>
+      )}
       <h1 className={styles.titles}>Describe the story</h1>
 
       <div className={styles.textBox}>
@@ -167,11 +231,13 @@ function BookFinder({ userData }) {
                           {book.authors.join(", ")}
                         </p>
                       )}
-                      {book && book.description && <p className={styles.des}>{book.description}</p>}
+                      {book && book.description && (
+                        <p className={styles.des}>{book.description}</p>
+                      )}
                       {userData && (
                         <button
                           className={styles.cartIcon}
-                          // onClick={() => addToCart(book, "bookCart")}
+                          onClick={() => addToCart(book, "bookCart")}
                         >
                           <lord-icon
                             src="https://cdn.lordicon.com/mfmkufkr.json"

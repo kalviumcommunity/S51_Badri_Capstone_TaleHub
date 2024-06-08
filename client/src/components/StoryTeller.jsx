@@ -34,7 +34,7 @@ function StoryTeller() {
       setLoading(true);
       try {
         const response = await axios.post(
-          "http://localhost:5000/generateStory",
+          "https://s51-badri-capstone-talehub.onrender.com/generateStory",
           {
             prompt: `I have a user who provided a one-sentence description of a Story: ${story}. 
             The genre in which the story should be generated is ${selectedOption}. 
@@ -43,7 +43,6 @@ function StoryTeller() {
             In case the user provided story description is not enough to generate a good story please respond as 'Insufficient details to generate a good story. Please provide a more fleshed-out description with characters, setting, plot, and themes.'. Please respond with story only`,
           }
         );
-        console.log(response.data.summary);
         setGeneratedStory(response.data.summary);
       } catch (error) {
         console.log(error);

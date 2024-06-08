@@ -12,7 +12,6 @@ function App() {
   const handleLoginClick = () => {
     setIsLogin(!isLogin);
   };
-  console.log("userData:", userData);
 
   useEffect(() => {
     const email = localStorage.getItem("email");
@@ -21,7 +20,6 @@ function App() {
     if (email && type) {
       const Data = { email, type };
       setUserData(Data);
-      console.log("setted userData from local storage");
      
     }
   }, []);

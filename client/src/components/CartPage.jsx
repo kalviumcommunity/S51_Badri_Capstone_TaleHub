@@ -27,13 +27,12 @@ function CartPage({ onLoginClick, userData, setUserData }) {
 
   const fetchUserData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/getUser", {
+      const response = await axios.get("https://s51-badri-capstone-talehub.onrender.com/getUser", {
         params: {
           email: userData.email,
           type: userData.type,
         },
       });
-      console.log("Login successful:", response);
       setMangaCart(response.data.mangaCart);
       setBookCart(response.data.bookCart);
     } catch (error) {
@@ -54,13 +53,12 @@ function CartPage({ onLoginClick, userData, setUserData }) {
   const deleteFromCart = async (data, whereToDelete) => {
     try {
       console.log(data);
-      const response = await axios.patch("http://localhost:5000/deleteInCart", {
+      const response = await axios.patch("https://s51-badri-capstone-talehub.onrender.com/deleteInCart", {
         email: userData.email,
         type: userData.type,
         whereToDelete: whereToDelete,
         _id: data._id,
       });
-      console.log("request res::::", response);
       fetchUserData();
     } catch (error) {
       console.log(error);
