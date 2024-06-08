@@ -115,20 +115,19 @@ function BookFinder({ onLoginClick, userData, setUserData }) {
         title: data.title,
         subtitle: data.subtitle ? data.subtitle : null,
         authors: data.authors ? data.authors : null,
-        description: data.description
-          ? data.description
-          : null,
-        thumbnail: data.imageLinks.thumbnail
-          ? data.imageLinks.thumbnail
-          : null,
+        description: data.description ? data.description : null,
+        thumbnail: data.imageLinks.thumbnail ? data.imageLinks.thumbnail : null,
       };
 
-      const response = await axios.patch("https://s51-badri-capstone-talehub.onrender.com/addToCart", {
-        email: userData.email,
-        type: userData.type,
-        whereToAdd: whereToAdd,
-        itemToAdd: dataToAdd,
-      });
+      const response = await axios.patch(
+        "https://s51-badri-capstone-talehub.onrender.com/addToCart",
+        {
+          email: userData.email,
+          type: userData.type,
+          whereToAdd: whereToAdd,
+          itemToAdd: dataToAdd,
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -155,9 +154,11 @@ function BookFinder({ onLoginClick, userData, setUserData }) {
           </button>
         </div>
       ) : (
-        <button onClick={() => onLoginClick()} className={styles.login}>
-          Log-In
-        </button>
+        <div className={styles.Buttons}>
+          <button onClick={() => onLoginClick()} className={styles.login}>
+            Log-In
+          </button>
+        </div>
       )}
       <h1 className={styles.titles}>Describe the story</h1>
 
