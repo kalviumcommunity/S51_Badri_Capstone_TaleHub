@@ -55,7 +55,7 @@
 
 .genre div:hover {
   background-position: center;
-  background-size: 110%;
+  background-size: 150%;
 }
 
 .genre div:not(:hover) {
@@ -65,44 +65,74 @@
 
 .book1 {
   grid-area: book1;
-  background: url("../../public/layered-waves-haikei.png");
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #FF204E 11px,
+    #ffffff 55px
+  );
 }
 
 .book2 {
   grid-area: book2;
-  background: url("../../public/stacked-waves-haikei.png");
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #1B1A55 11px,
+    #ffffff 55px
+  );
 }
 
 .book3 {
   grid-area: book3;
-  background: url("../../public/stacked-waves-haikei\ \(2\).png");
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #005B41 11px,
+    #ffffff 55px
+  );
 }
 
 .book4 {
   grid-area: book4;
-  background: url("../../public/blob-scatter-haikei.png");
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #FF0000 11px,
+    #ffffff 55px
+  );
 }
 
 .book6 {
   grid-area: book6;
-  background: url("../../public/blob-scatter-haikei\ \(2\).png");
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #8B9A46 11px,
+    #ffffff 55px
+  );
 }
 
 .book7 {
   grid-area: book7;
-  background: url("../../public/blob-scatter-haikei\ \(3\).png");
-  background-size: cover;
-  background-position: center;
+  background-color: #ffffff;
+  background: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 11px,
+    #735F32 11px,
+    #ffffff 55px
+  );
 }
 
 .login {
