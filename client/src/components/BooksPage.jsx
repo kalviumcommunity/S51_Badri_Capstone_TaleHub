@@ -84,13 +84,12 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
           : null,
       };
 
-      const response = await axios.patch("http://localhost:5000/addToCart", {
+      const response = await axios.patch("https://s51-badri-capstone-talehub.onrender.com/addToCart", {
         email: userData.email,
         type: userData.type,
         whereToAdd: whereToAdd,
         itemToAdd: dataToAdd,
       });
-      console.log("request res::::", response);
     } catch (error) {
       console.log(error);
     }

@@ -17,10 +17,9 @@ function BookFinder({ onLoginClick, userData, setUserData }) {
       setLoading(true);
       try {
         const response = await axios.post(
-          "http://localhost:5000/recommendBooks",
+          "https://s51-badri-capstone-talehub.onrender.com/recommendBooks",
           { story: data }
         );
-        console.log(response);
         setBooks([]);
 
         const bookFetchPromises = response.data.books.books.map((book) =>
@@ -66,7 +65,6 @@ function BookFinder({ onLoginClick, userData, setUserData }) {
       );
 
       const newBooks = response.data.items.map((ele) => ele.volumeInfo);
-      console.log(newBooks);
       setBooks((prevBooks) => [...prevBooks, ...newBooks]);
     } catch (error) {
       console.log(error);
@@ -113,7 +111,6 @@ function BookFinder({ onLoginClick, userData, setUserData }) {
 
   const addToCart = async (data, whereToAdd) => {
     try {
-      console.log(data)
       const dataToAdd = {
         title: data.title,
         subtitle: data.subtitle ? data.subtitle : null,
@@ -126,13 +123,12 @@ function BookFinder({ onLoginClick, userData, setUserData }) {
           : null,
       };
 
-      const response = await axios.patch("http://localhost:5000/addToCart", {
+      const response = await axios.patch("https://s51-badri-capstone-talehub.onrender.com/addToCart", {
         email: userData.email,
         type: userData.type,
         whereToAdd: whereToAdd,
         itemToAdd: dataToAdd,
       });
-      console.log("request res::::", response);
     } catch (error) {
       console.log(error);
     }

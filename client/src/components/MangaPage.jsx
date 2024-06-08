@@ -50,7 +50,6 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
               "X-RapidAPI-Host": "myanimelist.p.rapidapi.com",
             },
           };
-          console.log("feetc runingn");
           const response = await axios.request(options);
           setSearchBar(response.data);
           fetched = true; // Update fetched flag
@@ -98,13 +97,12 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
 
   const addToCart = async (data, whereToAdd) => {
     try {
-      const response = await axios.patch("http://localhost:5000/addToCart", {
+      const response = await axios.patch("https://s51-badri-capstone-talehub.onrender.com/addToCart", {
         email: userData.email,
         type: userData.type,
         whereToAdd: whereToAdd,
         itemToAdd: data,
       });
-      console.log("request res::::", response);
     } catch (error) {
       console.log(error);
     }

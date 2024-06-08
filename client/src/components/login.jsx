@@ -35,24 +35,21 @@ function Login({ onLoginClick, setUserData }) {
 
   const handleCheckboxChangeLogin = (e) => {
     setKeepSignedInLogin(e.target.checked);
-    console.log("login var changed");
   };
 
   const handleCheckboxChangeSignup = (e) => {
     setKeepSignedInSignup(e.target.checked);
-    console.log("sign up var changed");
   };
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/login/signup", {
+      const response = await axios.post("https://s51-badri-capstone-talehub.onrender.com/login/signup", {
         name: signupName,
         email: signupEmail,
         password: signupPassword,
       });
-      console.log("Sign-up successful:", response);
       const userData = {
         email: response.data.user.email,
         type: response.data.type,
@@ -81,11 +78,10 @@ function Login({ onLoginClick, setUserData }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/login/signin", {
+      const response = await axios.post("https://s51-badri-capstone-talehub.onrender.com/login/signin", {
         email,
         password,
       });
-      console.log("Login successful:", response);
       const userData = {
         email: response.data.user.email,
         type: response.data.type,
@@ -101,7 +97,6 @@ function Login({ onLoginClick, setUserData }) {
         },
       });
     } catch (error) {
-      console.error("Error logging in:", error);
       setapires1(error);
       toast.error("Login failed", {
         position: "top-right",
@@ -111,25 +106,20 @@ function Login({ onLoginClick, setUserData }) {
   };
 
   async function handleCallbackResponse(response) {
-    console.log("jwt:::", response.credential);
     const userObject = jwtDecode(response.credential);
-    console.log(userObject);
     try {
       const response = await axios.post("http://localhost:5000/google", {
         email: userObject.email,
         name: userObject.name,
       });
-      console.log("Login successful:", response);
       const userData = {
         email: response.data.user.email,
         type: response.data.type,
       };
       setUserData(userData);
-      console.log("value of tick::::", keepSignedInLoginRef.current);
       if (keepSignedInLoginRef.current) {
         localStorage.setItem("email", userData.email);
         localStorage.setItem("type", userData.type);
-        console.log("---local storage set---");
       }
 
       toast.success("Login successful", {
@@ -140,7 +130,6 @@ function Login({ onLoginClick, setUserData }) {
         },
       });
     } catch (error) {
-      console.error("Error logging in:", error);
       setapires1(error);
       toast.error("Login failed", {
         position: "top-right",
