@@ -149,7 +149,7 @@ function CartPage({ onLoginClick, userData, setUserData }) {
                 </div>
               ))}
           </div>
-          <p className={styles.titles}>Added Books:</p>
+          <p className={styles.titles}>Added Manga:</p>
           <div className={styles.booksContainer}>
             {mangaCart &&
               mangaCart.map((book, index) => (

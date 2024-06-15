@@ -9,6 +9,8 @@ import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { IconContext } from "react-icons";
 
 function Login({ onLoginClick, setUserData }) {
   const [login, setLogin] = useState(true);
@@ -45,11 +47,14 @@ function Login({ onLoginClick, setUserData }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://s51-badri-capstone-talehub.onrender.com/login/signup", {
-        name: signupName,
-        email: signupEmail,
-        password: signupPassword,
-      });
+      const response = await axios.post(
+        "https://s51-badri-capstone-talehub.onrender.com/login/signup",
+        {
+          name: signupName,
+          email: signupEmail,
+          password: signupPassword,
+        }
+      );
       const userData = {
         email: response.data.user.email,
         type: response.data.type,
@@ -78,10 +83,13 @@ function Login({ onLoginClick, setUserData }) {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://s51-badri-capstone-talehub.onrender.com/login/signin", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://s51-badri-capstone-talehub.onrender.com/login/signin",
+        {
+          email,
+          password,
+        }
+      );
       const userData = {
         email: response.data.user.email,
         type: response.data.type,
@@ -108,10 +116,13 @@ function Login({ onLoginClick, setUserData }) {
   async function handleCallbackResponse(response) {
     const userObject = jwtDecode(response.credential);
     try {
-      const response = await axios.post("https://s51-badri-capstone-talehub.onrender.com/google", {
-        email: userObject.email,
-        name: userObject.name,
-      });
+      const response = await axios.post(
+        "https://s51-badri-capstone-talehub.onrender.com/google",
+        {
+          email: userObject.email,
+          name: userObject.name,
+        }
+      );
       const userData = {
         email: response.data.user.email,
         type: response.data.type,
@@ -154,6 +165,13 @@ function Login({ onLoginClick, setUserData }) {
 
   return (
     <div className={styles.div}>
+      <div className={styles.abso} onClick={() => onLoginClick()}>
+        <IconContext.Provider
+          value={{ color: "white", size: "2em"}}
+        >
+          <IoMdArrowRoundBack />
+        </IconContext.Provider>
+      </div>
       <div className={login ? styles.absoluteRight : styles.absoluteLeft}>
         <Swiper
           spaceBetween={30}
