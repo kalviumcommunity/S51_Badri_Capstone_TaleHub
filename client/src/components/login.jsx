@@ -108,7 +108,7 @@ function Login({ onLoginClick, setUserData }) {
   async function handleCallbackResponse(response) {
     const userObject = jwtDecode(response.credential);
     try {
-      const response = await axios.post("http://localhost:5000/google", {
+      const response = await axios.post("https://s51-badri-capstone-talehub.onrender.com/google", {
         email: userObject.email,
         name: userObject.name,
       });
