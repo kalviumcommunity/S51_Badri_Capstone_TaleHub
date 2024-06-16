@@ -97,12 +97,15 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
 
   const addToCart = async (data, whereToAdd) => {
     try {
-      const response = await axios.patch("https://s51-badri-capstone-talehub.onrender.com/addToCart", {
-        email: userData.email,
-        type: userData.type,
-        whereToAdd: whereToAdd,
-        itemToAdd: data,
-      });
+      const response = await axios.patch(
+        "https://s51-badri-capstone-talehub.onrender.com/addToCart",
+        {
+          email: userData.email,
+          type: userData.type,
+          whereToAdd: whereToAdd,
+          itemToAdd: data,
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -227,67 +230,77 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <div className={styles.booksContainer}>
-        {searchBar.length > 0 &&
-          searchBar.map((book, index) => (
-            <div
-              key={index}
-              className={styles.book}
-              style={{ background: fetchColor() }}
-            >
-              {book.picture_url && (
-                <a href={book.myanimelist_url} target="_blank">
-                  <img src={book.picture_url} alt="Thumbnail" />
-                </a>
-              )}
-              <h3>{book.title}</h3>
-              <p>
-                <b>Rating: </b>
-                {book.score}
-              </p>
-              <p>
-                <b>Rank:</b> {book.rank}
-              </p>
-              {userData && (
-                <button
-                  className={styles.cartIcon}
-                  onClick={() => addToCart(book, "mangaCart")}
-                >
-                  <lord-icon
-                    src="https://cdn.lordicon.com/mfmkufkr.json"
-                    trigger="click"
-                    colors="primary:#ffffff"
-                    style={{ width: "50px", height: "40px" }}
-                  ></lord-icon>
-                </button>
-              )}
-            </div>
-          ))}
-      </div>
+      {searchBarValue && (
+        <div className={styles.booksContainer}>
+          {searchBar.length > 0 &&
+            searchBar.map((book, index) => (
+              <div
+                key={index}
+                className={styles.book}
+                style={{ background: fetchColor() }}
+              >
+                {book.picture_url && (
+                  <a href={book.myanimelist_url} target="_blank">
+                    <img src={book.picture_url} alt="Thumbnail" />
+                  </a>
+                )}
+                <h3>{book.title}</h3>
+                <p>
+                  <b>Rating: </b>
+                  {book.score}
+                </p>
+                <p>
+                  <b>Rank:</b> {book.rank}
+                </p>
+                {userData && (
+                  <button
+                    className={styles.cartIcon}
+                    onClick={() => addToCart(book, "mangaCart")}
+                  >
+                    <lord-icon
+                      src="https://cdn.lordicon.com/mfmkufkr.json"
+                      trigger="click"
+                      colors="primary:#ffffff"
+                      style={{ width: "50px", height: "40px" }}
+                    ></lord-icon>
+                  </button>
+                )}
+              </div>
+            ))}
+        </div>
+      )}
 
       <div className={styles.genre}>
-        <div className={styles.book1}  onClick={() => scrollToSection("Manga")}>
+        <div className={styles.book1} onClick={() => scrollToSection("Manga")}>
           <p className={styles.catogories}>Manga</p>
         </div>
-        <div className={styles.book2}  onClick={() => scrollToSection("Manhwa")}>
+        <div className={styles.book2} onClick={() => scrollToSection("Manhwa")}>
           <p className={styles.catogories}>Manhwa</p>
         </div>
-        <div className={styles.book3}  onClick={() => scrollToSection("Manhua")}>
+        <div className={styles.book3} onClick={() => scrollToSection("Manhua")}>
           <p className={styles.catogories}>Manhua</p>
         </div>
-        <div className={styles.book4}  onClick={() => scrollToSection("Oneshot")}>
+        <div
+          className={styles.book4}
+          onClick={() => scrollToSection("Oneshot")}
+        >
           <p className={styles.catogories}>Oneshot</p>
         </div>
 
-        <div className={styles.book6}  onClick={() => scrollToSection("Light Novel")}>
+        <div
+          className={styles.book6}
+          onClick={() => scrollToSection("Light Novel")}
+        >
           <p className={styles.catogories}>Light Novel</p>
         </div>
-        <div className={styles.book7}  onClick={() => scrollToSection("Novel")}>
+        <div className={styles.book7} onClick={() => scrollToSection("Novel")}>
           <p className={styles.catogories}>Novel</p>
         </div>
       </div>
 
-      <p className={styles.titles} id="Manga">Manga:</p>
+      <p className={styles.titles} id="Manga">
+        Manga:
+      </p>
 
       <div className={styles.booksContainer}>
         {mangaBook.length != 0 ? (
@@ -334,7 +347,9 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles} id="Manhwa">Manhwas:</p>
+      <p className={styles.titles} id="Manhwa">
+        Manhwas:
+      </p>
 
       <div className={styles.booksContainer}>
         {manhwaBook.length != 0 ? (
@@ -381,7 +396,9 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles} id="Manhua">Manhuas:</p>
+      <p className={styles.titles} id="Manhua">
+        Manhuas:
+      </p>
 
       <div className={styles.booksContainer}>
         {manhuaBook.length != 0 ? (
@@ -428,7 +445,9 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles} id="Oneshot">Oneshots:</p>
+      <p className={styles.titles} id="Oneshot">
+        Oneshots:
+      </p>
 
       <div className={styles.booksContainer}>
         {oneshotBook.length != 0 ? (
@@ -475,7 +494,9 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles} id="Light Novel">Light Novels:</p>
+      <p className={styles.titles} id="Light Novel">
+        Light Novels:
+      </p>
 
       <div className={styles.booksContainer}>
         {lightNovelBook.length != 0 ? (
@@ -522,7 +543,9 @@ function MangaPage({ onLoginClick, userData, setUserData }) {
         )}
       </div>
 
-      <p className={styles.titles} id="Novel">Novels:</p>
+      <p className={styles.titles} id="Novel">
+        Novels:
+      </p>
 
       <div className={styles.booksContainer}>
         {novelBook.length != 0 ? (
