@@ -126,7 +126,7 @@ function BookFinder({ onLoginClick, userData, setUserData }) {
           type: userData.type,
           whereToAdd: whereToAdd,
           itemToAdd: dataToAdd,
-        }
+        }   
       );
     } catch (error) {
       console.log(error);
@@ -173,7 +173,11 @@ function BookFinder({ onLoginClick, userData, setUserData }) {
         ></textarea>
       </div>
 
-      <button className={styles.btns} onClick={handleGenerateClick}>
+      <button
+        className={styles.btns}
+        onClick={handleGenerateClick}
+        disabled={loading}
+      >
         <svg
           height="24"
           width="24"
