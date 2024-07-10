@@ -207,7 +207,11 @@ function StoryTeller() {
         "
         ></textarea>
       </div>
-      <button className={styles.btns} onClick={() => sendPrompt()}>
+      <button
+        className={styles.btns}
+        onClick={() => sendPrompt()}
+        disabled={loading}
+      >
         <svg
           height="24"
           width="24"
