@@ -47,7 +47,7 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
       try {
         if (searchBarValue !== "") {
           const response = await axios.get(`${googleApiLink}${searchBarValue}`);
-          setSearchBar(response.data.items);
+          setSearchBar(response.data.items || []);
         } else {
           setSearchBar([]);
         }
@@ -74,12 +74,15 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
         itemToAdd = dataToAdd;
       }
 
-      const response = await axios.patch("https://s51-badri-capstone-talehub.onrender.com/addToCart", {
-        email: userData.email,
-        type: userData.type,
-        whereToAdd: whereToAdd,
-        itemToAdd: itemToAdd, // Pass the correct itemToAdd object
-      });
+      const response = await axios.patch(
+        "https://s51-badri-capstone-talehub.onrender.com/addToCart",
+        {
+          email: userData.email,
+          type: userData.type,
+          whereToAdd: whereToAdd,
+          itemToAdd: itemToAdd, // Pass the correct itemToAdd object
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -217,7 +220,11 @@ function LandingPage({ onLoginClick, userData, setUserData }) {
       <div className={styles.booksContainer}>
         {searchBar.length > 0 &&
           searchBar.map((book, index) => (
-            <div key={index} className={styles.book} style={{ background: fetchColor() }}>
+            <div
+              key={index}
+              className={styles.book}
+              style={{ background: fetchColor() }}
+            >
               {book.volumeInfo.imageLinks && (
                 <img
                   src={book.volumeInfo.imageLinks.thumbnail}
