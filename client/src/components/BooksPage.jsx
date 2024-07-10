@@ -58,7 +58,7 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
       try {
         if (searchBarValue !== "") {
           const response = await axios.get(`${googleApiLink}${searchBarValue}`);
-          setSearchBar(response.data.items);
+          setSearchBar(response.data.items || []);
         } else {
           setSearchBar([]);
         }
@@ -118,7 +118,6 @@ function BooksPage({ onLoginClick, userData, setUserData }) {
     const fetchRomanceBooks = async () => {
       const books = await getBooks("romance");
       setromanceBook(books);
-      console.log(books);
     };
     const fetchPoetryBooks = async () => {
       const books = await getBooks("poetry");
